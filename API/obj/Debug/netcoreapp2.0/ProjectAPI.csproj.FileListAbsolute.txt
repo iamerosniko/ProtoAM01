@@ -1,0 +1,11 @@
+C:\Users\alverer\source\repos\ArchTemp\API\bin\Debug\netcoreapp2.0\ProjectAPI.deps.json
+C:\Users\alverer\source\repos\ArchTemp\API\bin\Debug\netcoreapp2.0\ProjectAPI.runtimeconfig.json
+C:\Users\alverer\source\repos\ArchTemp\API\bin\Debug\netcoreapp2.0\ProjectAPI.runtimeconfig.dev.json
+C:\Users\alverer\source\repos\ArchTemp\API\bin\Debug\netcoreapp2.0\ProjectAPI.dll
+C:\Users\alverer\source\repos\ArchTemp\API\bin\Debug\netcoreapp2.0\ProjectAPI.pdb
+C:\Users\alverer\source\repos\ArchTemp\API\obj\Debug\netcoreapp2.0\ProjectAPI.csprojResolveAssemblyReference.cache
+C:\Users\alverer\source\repos\ArchTemp\API\obj\Debug\netcoreapp2.0\ProjectAPI.csproj.CoreCompileInputs.cache
+C:\Users\alverer\source\repos\ArchTemp\API\obj\Debug\netcoreapp2.0\ProjectAPI.AssemblyInfoInputs.cache
+C:\Users\alverer\source\repos\ArchTemp\API\obj\Debug\netcoreapp2.0\ProjectAPI.AssemblyInfo.cs
+C:\Users\alverer\source\repos\ArchTemp\API\obj\Debug\netcoreapp2.0\ProjectAPI.dll
+C:\Users\alverer\source\repos\ArchTemp\API\obj\Debug\netcoreapp2.0\ProjectAPI.pdb
