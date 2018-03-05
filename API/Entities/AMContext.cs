@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using API.Entities;
 
 namespace API.Entities
 {
@@ -18,6 +17,6 @@ namespace API.Entities
         public DbSet<AM_User> Users { get; set; }
         public DbSet<AM_UserApp> UserApps { get; set; }
         public DbSet<AM_UserAppService> UserAppServices { get; set; }
-        public DbSet<API.Entities.AM_ServiceAttribute> AM_ServiceAttribute { get; set; }
+        public DbSet<AM_ServiceAttribute> AM_ServiceAttribute { get; set; }
     }
 }

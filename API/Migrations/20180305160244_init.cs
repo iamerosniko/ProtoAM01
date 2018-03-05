@@ -67,6 +67,20 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AM_ServiceAttributes",
+                columns: table => new
+                {
+                    ServiceAttributeID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AttribID = table.Column<int>(nullable: false),
+                    ServiceID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AM_ServiceAttributes", x => x.ServiceAttributeID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AM_Services",
                 columns: table => new
                 {
@@ -138,6 +152,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AM_Roles");
+
+            migrationBuilder.DropTable(
+                name: "AM_ServiceAttributes");
 
             migrationBuilder.DropTable(
                 name: "AM_Services");

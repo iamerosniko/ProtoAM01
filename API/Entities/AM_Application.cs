@@ -11,6 +11,6 @@ namespace API.Entities
         public int AppID { get; set; }
         public string AppName { get; set; }
         public string AppMemberName { get; set; }
-
+        public int Status { get; set; }
     }
 }

@@ -11,8 +11,8 @@ using System;
 namespace API.Migrations
 {
     [DbContext(typeof(AMContext))]
-    [Migration("20180305153906_init")]
-    partial class init
+    [Migration("20180305164042_m001")]
+    partial class m001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,8 @@ namespace API.Migrations
                     b.Property<string>("AppMemberName");
 
                     b.Property<string>("AppName");
+
+                    b.Property<int>("Status");
 
                     b.HasKey("AppID");
 
@@ -93,6 +95,20 @@ namespace API.Migrations
                     b.HasKey("ServiceID");
 
                     b.ToTable("AM_Services");
+                });
+
+            modelBuilder.Entity("API.Entities.AM_ServiceAttribute", b =>
+                {
+                    b.Property<int>("ServiceAttributeID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AttribID");
+
+                    b.Property<int>("ServiceID");
+
+                    b.HasKey("ServiceAttributeID");
+
+                    b.ToTable("AM_ServiceAttributes");
                 });
 
             modelBuilder.Entity("API.Entities.AM_User", b =>
