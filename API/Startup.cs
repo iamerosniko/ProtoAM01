@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using API.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Serialization;
+using System;
 
 namespace API
 {
@@ -18,12 +16,28 @@ namespace API
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(o =>
+                {
+                    if (o.SerializerSettings.ContractResolver != null)
+                    {
+                        var castedResolver = o.SerializerSettings.ContractResolver
+                                as DefaultContractResolver;
+                        castedResolver.NamingStrategy = null;
+                    }
+                });
+
+            var connectionString = Configuration["ConnectionStrings:DefaultConnection"];
+
+            services.AddDbContext<AMContext>(cfg =>
+            {
+                cfg.UseSqlServer(connectionString);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,6 +46,20 @@ namespace API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+
+            try
+            {
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+                {
+                    serviceScope.ServiceProvider.GetService<AMContext>().Database.Migrate();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                System.Diagnostics.Debug.WriteLine(ex, "Failed to migrate or seed database");
             }
 
             app.UseMvc();
