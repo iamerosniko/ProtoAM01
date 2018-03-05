@@ -8,16 +8,13 @@ namespace BusinessWorkflow.Controllers
     [Route("api/Users")]
     public class UsersController : Controller
     {
-        public UsersController()
-        {
-            _api = new ApiAccess("Users1");
-        }
-        private ApiAccess _api;
+        private ApiServices _api;
+
         // GET: api/Users
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = _api.GetRequest().Result;
+            var result = _api.Get().Result;
             if (result == null)
             {
                 return Unauthorized();
@@ -26,7 +23,7 @@ namespace BusinessWorkflow.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
