@@ -21,15 +21,14 @@ export class ClientApiService {
     this.headers=new Headers({'Content-Type': 'application/json'});
   }
 
-  async getAll() :Promise<MyHttpResponse> {  
-    var response =<MyHttpResponse> await this.http
-      .get(this.apiUrl, {headers: this.headers})
-      .toPromise()
-      .then(res=>res.json());
-      return response;
+  async getAll() {  
+   return await this.http
+    .get(this.apiUrl, {headers: this.headers})
+    .toPromise()
+    .then(res=>res.json());
   }
 
-  async getOne(id:string):Promise<MyHttpResponse>{
+  async getOne(id:string){
     var apiurl= this.apiUrl +'/'+id
     return this.http
       .get(apiurl, {headers: this.headers})
@@ -37,14 +36,14 @@ export class ClientApiService {
       .then(res=>res.json());
   }  
 
-  async postData(body:string):Promise<MyHttpResponse>{
+  async postData(body:string){
     return this.http
       .post(this.apiUrl, body, {headers: this.headers})
       .toPromise()
       .then(res=>res.json());
   }
 
-  async putData(body:string,ID:string):Promise<MyHttpResponse>{
+  async putData(body:string,ID:string){
     const url = `${this.apiUrl}/${ID}`;
     return this.http
       .put(url, body, {headers: this.headers})

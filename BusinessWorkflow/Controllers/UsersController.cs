@@ -18,22 +18,17 @@ namespace BusinessWorkflow.Controllers
         public async Task<IActionResult> Get()
         {
             _userSvc = new UserServices(HttpContext.Session.GetString("authorizationToken"));
-            var user = await _userSvc.get();
-            return Ok(user);
+            var users = await _userSvc.get();
+            return Ok(users);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            bindApiServices();
-
-            var result = await _api.Get(id);
-            if (result == null)
-            {
-                return Ok(Unauthorized());
-            }
-            return Ok(result);
+            _userSvc = new UserServices(HttpContext.Session.GetString("authorizationToken"));
+            var user = await _userSvc.get(id);
+            return Ok(user);
         }
 
         // POST: api/Users

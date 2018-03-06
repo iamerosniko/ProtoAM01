@@ -16,10 +16,11 @@ namespace BusinessWorkflow.Controllers
         }
 
         // GET api/values/5
-        [HttpPost("getvalues/{id}")]
+        [HttpGet("getvalues/{id}")]
         public string Get([FromRoute]string id)
         {
-            return HttpContext.Session.GetString("sample");
+            HttpContext.Session.SetString("authorizationToken", "saaaaaaam");
+            return HttpContext.Session.GetString("authorizationToken");
         }
 
 

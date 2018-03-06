@@ -7,38 +7,39 @@ namespace BusinessWorkflow.Utility
     public class ApiServices : Controller
     {
         private ApiAccess _api;
+        private MyResult _myResult;
         public ApiServices(string controller, string authorizationToken)
         {
             _api = new ApiAccess(controller);
             _api.AssignAuthorization(authorizationToken);
         }
 
-        public async Task<MyResult> Get()
+        public async Task<MyResult> GetConfirmation()
         {
+            _myResult = new MyResult();
             var result = await _api.GetRequest();
+
             if (result == null)
             {
-                return new MyResult
-                {
-                    Value = "",
-                    StatusCode = 401
-                };
+                _myResult.StatusCode = 401;
             }
-            return new MyResult
+            else
             {
-                Value = result,
-                StatusCode = 200
-            }; 
+                _myResult.Value = result;
+            }
+            return _myResult;
         }
 
-        public async Task<IActionResult> Get(string id)
+        public async Task<string> Get()
+        {
+            var result = await _api.GetRequest();
+            return result;
+        }
+
+        public async Task<string> Get(string id)
         {
             var result = await _api.GetRequest(id);
-            if (result == null)
-            {
-                return Unauthorized();
-            }
-            return Ok(result);
+            return result;
         }
 
         public async Task<IActionResult> Post(string body)

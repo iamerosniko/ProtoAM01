@@ -25,7 +25,7 @@ namespace BusinessWorkflow.Services
             var result = await _api.Get();
             try
             {
-                users = JsonConvert.DeserializeObject<List<AM_User>>(result.Value);
+                users = result == null ? null : JsonConvert.DeserializeObject<List<AM_User>>(result);
 
             }
             catch
@@ -35,6 +35,26 @@ namespace BusinessWorkflow.Services
 
 
             return users;
+        }
+
+        public async Task<AM_User> get(string id)
+        {
+            AM_User user = new AM_User();
+            bindApiServices();
+
+            var result = await _api.Get(id);
+            try
+            {
+                user = result == null ? null : JsonConvert.DeserializeObject<AM_User>(result);
+
+            }
+            catch
+            {
+                return user;
+            }
+
+
+            return user;
         }
 
         private void bindApiServices()

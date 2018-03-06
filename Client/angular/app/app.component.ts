@@ -10,11 +10,11 @@ import { MyHttpResponse } from './services/httpresponse';
 export class AppComponent implements OnInit {
   
   resp: MyHttpResponse;
+  a:any;
   async ngOnInit(){
   //   this.get();
-   this.resp=<MyHttpResponse>await this.api.getCompanyProfiles();
-   var a = (await this.api.getCompanyProfiles()).Value;
-   console.log(this.resp.Value);
+   this.resp=await this.api.getCompanyProfiles();
+   this.a=await this.api.getCompanyProfile("2");
   }
 
   constructor(private api : CompanyProfilesService){
