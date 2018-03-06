@@ -1,4 +1,5 @@
 ﻿using BusinessWorkflow.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -14,19 +15,28 @@ namespace BusinessWorkflow.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = _api.Get().Result;
+            bindApiServices();
+
+            var result = await _api.Get();
             if (result == null)
             {
                 return Unauthorized();
             }
-            return Ok(result);// new string[] { "value1", "value2" };
+            return Ok(result);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(string id)
         {
-            return "value";
+            bindApiServices();
+
+            var result = await _api.Get(id);
+            if (result == null)
+            {
+                return Unauthorized();
+            }
+            return Ok(result);
         }
 
         // POST: api/Users
@@ -48,6 +58,11 @@ namespace BusinessWorkflow.Controllers
         public string Delete(int id)
         {
             return "value";
+        }
+
+        private void bindApiServices()
+        {
+            _api = new ApiServices("Users", HttpContext.Session.GetString("authorizationToken"));
         }
     }
 }
