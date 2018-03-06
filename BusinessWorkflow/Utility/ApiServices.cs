@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessWorkflow.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Utility
@@ -12,14 +13,22 @@ namespace BusinessWorkflow.Utility
             _api.AssignAuthorization(authorizationToken);
         }
 
-        public async Task<IActionResult> Get()
+        public async Task<MyResult> Get()
         {
             var result = await _api.GetRequest();
             if (result == null)
             {
-                return Unauthorized();
+                return new MyResult
+                {
+                    Value = "",
+                    StatusCode = 401
+                };
             }
-            return Ok(result);
+            return new MyResult
+            {
+                Value = result,
+                StatusCode = 200
+            }; 
         }
 
         public async Task<IActionResult> Get(string id)

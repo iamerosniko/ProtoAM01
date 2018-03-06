@@ -1,4 +1,5 @@
-﻿using BusinessWorkflow.Utility;
+﻿using BusinessWorkflow.Services;
+using BusinessWorkflow.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,19 +11,15 @@ namespace BusinessWorkflow.Controllers
     public class UsersController : Controller
     {
         private ApiServices _api;
+        private UserServices _userSvc;
 
         // GET: api/Users
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            bindApiServices();
-
-            var result = await _api.Get();
-            if (result == null)
-            {
-                return Unauthorized();
-            }
-            return Ok(result);
+            _userSvc = new UserServices(HttpContext.Session.GetString("authorizationToken"));
+            var user = await _userSvc.get();
+            return Ok(user);
         }
 
         // GET: api/Users/5
@@ -34,7 +31,7 @@ namespace BusinessWorkflow.Controllers
             var result = await _api.Get(id);
             if (result == null)
             {
-                return Unauthorized();
+                return Ok(Unauthorized());
             }
             return Ok(result);
         }

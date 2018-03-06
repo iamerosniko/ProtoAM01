@@ -13,12 +13,12 @@ const routes: Routes = [
   // { path: 'Survey', component : SurveysComponent},
  
 
-  { path: '', redirectTo:'/Login', pathMatch:"full" },
-  { path: 'Login', component:LoginComponent},
-  { path: 'Redirecting', component : RedirectingComponent},
-  { path: 'Logout', component:LogoutComponent},
-  { path: 'Noaccess', component:NoaccessComponent},
-  { path: '**', redirectTo :'/Survey' },
+  // { path: '', redirectTo:'/Login', pathMatch:"full" },
+  // { path: 'Login', component:LoginComponent},
+  // { path: 'Redirecting', component : RedirectingComponent},
+  // { path: 'Logout', component:LogoutComponent},
+  // { path: 'Noaccess', component:NoaccessComponent},
+  // { path: '**', redirectTo :'/Survey' },
   // { path: 'Survey', component : SurveysComponent, canActivate:[AuthGuard] },
   // { path: 'Reports', component : ReportsComponent, canActivate:[AuthGuard] },
 

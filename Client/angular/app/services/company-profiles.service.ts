@@ -7,7 +7,7 @@ export class CompanyProfilesService {
 
   constructor(private api:ClientApiService) {
     api.authorizedHeader();
-    api.apiUrl=ClientApiSettings.GETAPIURL("CompanyProfiles")
+    api.apiUrl=ClientApiSettings.GETAPIURL("Users")
   }
 
   getCompanyProfiles(){
