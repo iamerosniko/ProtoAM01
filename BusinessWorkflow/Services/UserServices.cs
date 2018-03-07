@@ -17,6 +17,9 @@ namespace BusinessWorkflow.Services
             _authorizationtoken = token;
         }
 
+        #region API
+
+        #region GET
         public async Task<List<AM_User>> get()
         {
             List<AM_User> users = new List<AM_User>();
@@ -56,6 +59,55 @@ namespace BusinessWorkflow.Services
 
             return user;
         }
+        #endregion
+
+        #region POST
+        public async Task<AM_User> Post(AM_User user)
+        {
+            bindApiServices();
+
+            user.Status = 1;
+
+            string body = JsonConvert.SerializeObject(user);
+
+            var result = await _api.Post(body);
+
+            user = result != null ? JsonConvert.DeserializeObject<AM_User>(result) : null;
+
+            return user;
+        }
+
+        #endregion
+
+        #region PUT
+        public async Task<AM_User> Put(string id, AM_User user)
+        {
+            bindApiServices();
+            string body = JsonConvert.SerializeObject(user);
+
+            var result = await _api.Put(id, body);
+
+            user = result != null ? JsonConvert.DeserializeObject<AM_User>(result) : null;
+
+            return user;
+        }
+
+        #endregion
+
+        #region DELETE
+        public async Task<bool> Delete(string id)
+        {
+            bindApiServices();
+
+            var result = await _api.Delete(id);
+            return result;
+        }
+
+        #endregion
+
+        #endregion
+
+
 
         private void bindApiServices()
         {

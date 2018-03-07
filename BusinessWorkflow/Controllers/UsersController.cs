@@ -1,4 +1,5 @@
-﻿using BusinessWorkflow.Services;
+﻿using BusinessWorkflow.Models;
+using BusinessWorkflow.Services;
 using BusinessWorkflow.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,23 +34,32 @@ namespace BusinessWorkflow.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public string Post([FromBody]string value)
+        public async Task<AM_User> Post([FromBody]AM_User user)
         {
-            return "value";
+            _userSvc = new UserServices(HttpContext.Session.GetString("authorizationToken"));
+
+            var result = await _userSvc.Post(user);
+
+            return result;
         }
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public string Put(int id, [FromBody]string value)
+        public async Task<AM_User> Put(string id, [FromBody]AM_User user)
         {
-            return "value";
+            _userSvc = new UserServices(HttpContext.Session.GetString("authorizationToken"));
+
+            var result = await _userSvc.Put(id, user);
+
+            return result;
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public async void Delete(string id)
         {
-            return "value";
+            _userSvc = new UserServices(HttpContext.Session.GetString("authorizationToken"));
+            await _userSvc.Delete(id);
         }
 
         private void bindApiServices()

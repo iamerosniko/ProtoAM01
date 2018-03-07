@@ -42,34 +42,22 @@ namespace BusinessWorkflow.Utility
             return result;
         }
 
-        public async Task<IActionResult> Post(string body)
+        public async Task<string> Post(string body)
         {
             var result = await _api.PostRequest(body);
-            if (result == null)
-            {
-                return Unauthorized();
-            }
-            return Ok(result);
+            return result;
         }
 
-        public async Task<IActionResult> Put(string id, string body)
+        public async Task<string> Put(string id, string body)
         {
             var result = await _api.PutRequest(id, body);
-            if (result == null)
-            {
-                return Unauthorized();
-            }
-            return Ok(result);
+            return result;
         }
 
-        public async Task<IActionResult> Put(string id)
+        public async Task<bool> Delete(string id)
         {
             var result = await _api.DeleteRequest(id);
-            if (result == false)
-            {
-                return Unauthorized();
-            }
-            return Ok(result);
+            return result;
         }
     }
 }
