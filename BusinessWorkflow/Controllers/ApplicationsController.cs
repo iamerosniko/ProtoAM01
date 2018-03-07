@@ -10,12 +10,12 @@ namespace BusinessWorkflow.Controllers
     [Route("api/Applications")]
     public class ApplicationsController : Controller
     {
-        private ApplicationServices _appSvc;
+        private ApplicationProviders _appSvc;
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            _appSvc = new ApplicationServices(HttpContext.Session.GetString("authorizationToken"));
+            _appSvc = new ApplicationProviders(HttpContext.Session.GetString("authorizationToken"));
             var apps = await _appSvc.get();
             return Ok(apps);
         }
@@ -23,7 +23,7 @@ namespace BusinessWorkflow.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            _appSvc = new ApplicationServices(HttpContext.Session.GetString("authorizationToken"));
+            _appSvc = new ApplicationProviders(HttpContext.Session.GetString("authorizationToken"));
             var user = await _appSvc.get(id);
             return Ok(user);
         }
@@ -31,7 +31,7 @@ namespace BusinessWorkflow.Controllers
         [HttpPost]
         public async Task<AM_Application> Post([FromBody]AM_Application value)
         {
-            _appSvc = new ApplicationServices(HttpContext.Session.GetString("authorizationToken"));
+            _appSvc = new ApplicationProviders(HttpContext.Session.GetString("authorizationToken"));
 
             var result = await _appSvc.Post(value);
 
@@ -41,7 +41,7 @@ namespace BusinessWorkflow.Controllers
         [HttpPut("{id}")]
         public async Task<AM_Application> Put(string id, [FromBody]AM_Application value)
         {
-            _appSvc = new ApplicationServices(HttpContext.Session.GetString("authorizationToken"));
+            _appSvc = new ApplicationProviders(HttpContext.Session.GetString("authorizationToken"));
 
             var result = await _appSvc.Put(id, value);
 
@@ -51,7 +51,7 @@ namespace BusinessWorkflow.Controllers
         [HttpDelete("{id}")]
         public async void Delete(string id)
         {
-            _appSvc = new ApplicationServices(HttpContext.Session.GetString("authorizationToken"));
+            _appSvc = new ApplicationProviders(HttpContext.Session.GetString("authorizationToken"));
             await _appSvc.Delete(id);
         }
 
