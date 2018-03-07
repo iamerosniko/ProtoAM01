@@ -1,6 +1,5 @@
 ﻿using BusinessWorkflow.Models;
 using BusinessWorkflow.Services;
-using BusinessWorkflow.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -11,10 +10,8 @@ namespace BusinessWorkflow.Controllers
     [Route("api/Users")]
     public class UsersController : Controller
     {
-        private ApiServices _api;
         private UserServices _userSvc;
 
-        // GET: api/Users
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -23,7 +20,6 @@ namespace BusinessWorkflow.Controllers
             return Ok(users);
         }
 
-        // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
@@ -32,7 +28,6 @@ namespace BusinessWorkflow.Controllers
             return Ok(user);
         }
 
-        // POST: api/Users
         [HttpPost]
         public async Task<AM_User> Post([FromBody]AM_User user)
         {
@@ -43,7 +38,6 @@ namespace BusinessWorkflow.Controllers
             return result;
         }
 
-        // PUT: api/Users/5
         [HttpPut("{id}")]
         public async Task<AM_User> Put(string id, [FromBody]AM_User user)
         {
@@ -54,7 +48,6 @@ namespace BusinessWorkflow.Controllers
             return result;
         }
 
-        // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public async void Delete(string id)
         {
@@ -62,9 +55,5 @@ namespace BusinessWorkflow.Controllers
             await _userSvc.Delete(id);
         }
 
-        private void bindApiServices()
-        {
-            _api = new ApiServices("Users", HttpContext.Session.GetString("authorizationToken"));
-        }
     }
 }
