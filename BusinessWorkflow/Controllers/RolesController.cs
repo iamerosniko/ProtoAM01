@@ -16,16 +16,16 @@ namespace BusinessWorkflow.Controllers
         public async Task<IActionResult> Get()
         {
             _appSvc = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
-            var apps = await _appSvc.get();
-            return Ok(apps);
+            var roles = await _appSvc.get();
+            return Ok(roles);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
             _appSvc = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
-            var user = await _appSvc.get(id);
-            return Ok(user);
+            var role = await _appSvc.get(id);
+            return Ok(role);
         }
 
         [HttpPost]
@@ -33,9 +33,9 @@ namespace BusinessWorkflow.Controllers
         {
             _appSvc = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _appSvc.Post(value);
+            var role = await _appSvc.Post(value);
 
-            return result;
+            return role;
         }
 
         [HttpPut("{id}")]
@@ -43,9 +43,9 @@ namespace BusinessWorkflow.Controllers
         {
             _appSvc = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _appSvc.Put(id, value);
+            var role = await _appSvc.Put(id, value);
 
-            return result;
+            return role;
         }
 
         [HttpDelete("{id}")]

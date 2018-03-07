@@ -24,8 +24,8 @@ namespace BusinessWorkflow.Controllers
         public async Task<IActionResult> Get(string id)
         {
             _appSvc = new ApplicationProviders(HttpContext.Session.GetString("authorizationToken"));
-            var user = await _appSvc.get(id);
-            return Ok(user);
+            var app = await _appSvc.get(id);
+            return Ok(app);
         }
 
         [HttpPost]
@@ -33,9 +33,9 @@ namespace BusinessWorkflow.Controllers
         {
             _appSvc = new ApplicationProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _appSvc.Post(value);
+            var app = await _appSvc.Post(value);
 
-            return result;
+            return app;
         }
 
         [HttpPut("{id}")]
@@ -43,9 +43,9 @@ namespace BusinessWorkflow.Controllers
         {
             _appSvc = new ApplicationProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _appSvc.Put(id, value);
+            var app = await _appSvc.Put(id, value);
 
-            return result;
+            return app;
         }
 
         [HttpDelete("{id}")]
