@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Services
 {
-    public class ApplicationServices : Controller
+    public class RoleServices : Controller
     {
         private ApiServices _api;
         private string _authorizationtoken;
 
-        public ApplicationServices(string token)
+        public RoleServices(string token)
         {
             _authorizationtoken = token;
         }
@@ -20,76 +20,74 @@ namespace BusinessWorkflow.Services
         #region API
 
         #region GET
-        public async Task<List<AM_Application>> get()
+        public async Task<List<AM_Role>> get()
         {
-            List<AM_Application> applications = new List<AM_Application>();
+            List<AM_Role> entities = new List<AM_Role>();
             bindApiServices();
 
             var result = await _api.Get();
             try
             {
-                applications = result == null ? null : JsonConvert.DeserializeObject<List<AM_Application>>(result);
+                entities = result == null ? null : JsonConvert.DeserializeObject<List<AM_Role>>(result);
 
             }
             catch
             {
-                return applications;
+                return entities;
             }
 
 
-            return applications;
+            return entities;
         }
 
-        public async Task<AM_Application> get(string id)
+        public async Task<AM_Role> get(string id)
         {
-            AM_Application application = new AM_Application();
+            AM_Role entity = new AM_Role();
             bindApiServices();
 
             var result = await _api.Get(id);
             try
             {
-                application = result == null ? null : JsonConvert.DeserializeObject<AM_Application>(result);
+                entity = result == null ? null : JsonConvert.DeserializeObject<AM_Role>(result);
 
             }
             catch
             {
-                return application;
+                return entity;
             }
 
 
-            return application;
+            return entity;
         }
         #endregion
 
         #region POST
-        public async Task<AM_Application> Post(AM_Application application)
+        public async Task<AM_Role> Post(AM_Role entity)
         {
             bindApiServices();
 
-            application.Status = 1;
-
-            string body = JsonConvert.SerializeObject(application);
+            string body = JsonConvert.SerializeObject(entity);
 
             var result = await _api.Post(body);
 
-            application = result != null ? JsonConvert.DeserializeObject<AM_Application>(result) : null;
+            entity = result != null ? JsonConvert.DeserializeObject<AM_Role>(result) : null;
 
-            return application;
+            return entity;
         }
 
         #endregion
 
         #region PUT
-        public async Task<AM_Application> Put(string id, AM_Application application)
+        public async Task<AM_Role> Put(string id, AM_Role entity)
         {
             bindApiServices();
-            string body = JsonConvert.SerializeObject(application);
+            string body = JsonConvert.SerializeObject(entity);
 
             var result = await _api.Put(id, body);
 
-            application = result != null ? JsonConvert.DeserializeObject<AM_Application>(result) : null;
+            entity = result != null ? JsonConvert.DeserializeObject<AM_Role>(result) : null;
 
-            return application;
+            return entity;
         }
 
         #endregion
@@ -111,7 +109,7 @@ namespace BusinessWorkflow.Services
 
         private void bindApiServices()
         {
-            _api = new ApiServices("Applications", _authorizationtoken);
+            _api = new ApiServices("Roles", _authorizationtoken);
         }
     }
 }
