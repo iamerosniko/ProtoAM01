@@ -2,6 +2,7 @@
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
@@ -10,30 +11,30 @@ namespace BusinessWorkflow.Controllers
     [Route("api/Attributes")]
     public class AttributesController : Controller
     {
-        private AttributeProviders _userSvc;
+        private AttributeProviders _attributeProviders;
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<AM_Attribute>> Get()
         {
-            _userSvc = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
-            var users = await _userSvc.get();
-            return Ok(users);
+            _attributeProviders = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
+            var atributes = await _attributeProviders.get();
+            return atributes;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<AM_Attribute> Get(string id)
         {
-            _userSvc = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
-            var user = await _userSvc.get(id);
-            return Ok(user);
+            _attributeProviders = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
+            var atribute = await _attributeProviders.get(id);
+            return atribute;
         }
 
         [HttpPost]
         public async Task<AM_Attribute> Post([FromBody]AM_Attribute value)
         {
-            _userSvc = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
+            _attributeProviders = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _userSvc.Post(value);
+            var result = await _attributeProviders.Post(value);
 
             return result;
         }
@@ -41,9 +42,9 @@ namespace BusinessWorkflow.Controllers
         [HttpPut("{id}")]
         public async Task<AM_Attribute> Put(string id, [FromBody]AM_Attribute value)
         {
-            _userSvc = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
+            _attributeProviders = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _userSvc.Put(id, value);
+            var result = await _attributeProviders.Put(id, value);
 
             return result;
         }
@@ -51,8 +52,8 @@ namespace BusinessWorkflow.Controllers
         [HttpDelete("{id}")]
         public async void Delete(string id)
         {
-            _userSvc = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
-            await _userSvc.Delete(id);
+            _attributeProviders = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
+            await _attributeProviders.Delete(id);
         }
 
     }

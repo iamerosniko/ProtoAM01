@@ -2,6 +2,7 @@
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
@@ -13,19 +14,19 @@ namespace BusinessWorkflow.Controllers
         private UserAppServiceProviders _userAppServiceProviders;
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<AM_UserAppService>> Get()
         {
             _userAppServiceProviders = new UserAppServiceProviders(HttpContext.Session.GetString("authorizationToken"));
-            var users = await _userAppServiceProviders.get();
-            return Ok(users);
+            var userAppServices = await _userAppServiceProviders.get();
+            return userAppServices;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<AM_UserAppService> Get(string id)
         {
             _userAppServiceProviders = new UserAppServiceProviders(HttpContext.Session.GetString("authorizationToken"));
-            var user = await _userAppServiceProviders.get(id);
-            return Ok(user);
+            var userAppService = await _userAppServiceProviders.get(id);
+            return userAppService;
         }
 
         [HttpPost]
@@ -38,15 +39,15 @@ namespace BusinessWorkflow.Controllers
             return result;
         }
 
-        [HttpPut("{id}")]
-        public async Task<AM_UserAppService> Put(string id, [FromBody]AM_UserAppService value)
-        {
-            _userAppServiceProviders = new UserAppServiceProviders(HttpContext.Session.GetString("authorizationToken"));
+        //[HttpPut("{id}")]
+        //public async Task<AM_UserAppService> Put(string id, [FromBody]AM_UserAppService value)
+        //{
+        //    _userAppServiceProviders = new UserAppServiceProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _userAppServiceProviders.Put(id, value);
+        //    var result = await _userAppServiceProviders.Put(id, value);
 
-            return result;
-        }
+        //    return result;
+        //}
 
         [HttpDelete("{id}")]
         public async void Delete(string id)

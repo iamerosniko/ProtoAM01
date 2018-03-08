@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessWorkflow.Models;
+﻿using BusinessWorkflow.Models;
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
 {
@@ -16,19 +14,19 @@ namespace BusinessWorkflow.Controllers
         private ServiceAttributeProviders _serviceAttributeProvider;
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<AM_ServiceAttribute>> Get()
         {
             _serviceAttributeProvider = new ServiceAttributeProviders(HttpContext.Session.GetString("authorizationToken"));
-            var users = await _serviceAttributeProvider.get();
-            return Ok(users);
+            var serviceAttributes = await _serviceAttributeProvider.get();
+            return serviceAttributes;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<AM_ServiceAttribute> Get(string id)
         {
             _serviceAttributeProvider = new ServiceAttributeProviders(HttpContext.Session.GetString("authorizationToken"));
-            var user = await _serviceAttributeProvider.get(id);
-            return Ok(user);
+            var serviceAttribute = await _serviceAttributeProvider.get(id);
+            return serviceAttribute;
         }
 
         [HttpPost]
@@ -37,19 +35,18 @@ namespace BusinessWorkflow.Controllers
             _serviceAttributeProvider = new ServiceAttributeProviders(HttpContext.Session.GetString("authorizationToken"));
 
             var result = await _serviceAttributeProvider.Post(value);
-
             return result;
         }
 
-        [HttpPut("{id}")]
-        public async Task<AM_ServiceAttribute> Put(string id, [FromBody]AM_ServiceAttribute value)
-        {
-            _serviceAttributeProvider = new ServiceAttributeProviders(HttpContext.Session.GetString("authorizationToken"));
+        //[HttpPut("{id}")]
+        //public async Task<AM_ServiceAttribute> Put(string id, [FromBody]AM_ServiceAttribute value)
+        //{
+        //    _serviceAttributeProvider = new ServiceAttributeProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _serviceAttributeProvider.Put(id, value);
+        //    var result = await _serviceAttributeProvider.Put(id, value);
 
-            return result;
-        }
+        //    return result;
+        //}
 
         [HttpDelete("{id}")]
         public async void Delete(string id)

@@ -2,6 +2,7 @@
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
@@ -13,19 +14,19 @@ namespace BusinessWorkflow.Controllers
         private AppRoleProviders _appRoleProvider;
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<AM_AppRole>> Get()
         {
             _appRoleProvider = new AppRoleProviders(HttpContext.Session.GetString("authorizationToken"));
-            var users = await _appRoleProvider.get();
-            return Ok(users);
+            var appRoles = await _appRoleProvider.get();
+            return appRoles;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<AM_AppRole> Get(string id)
         {
             _appRoleProvider = new AppRoleProviders(HttpContext.Session.GetString("authorizationToken"));
-            var user = await _appRoleProvider.get(id);
-            return Ok(user);
+            var appRole = await _appRoleProvider.get(id);
+            return appRole;
         }
 
         [HttpPost]
@@ -38,15 +39,15 @@ namespace BusinessWorkflow.Controllers
             return result;
         }
 
-        [HttpPut("{id}")]
-        public async Task<AM_AppRole> Put(string id, [FromBody]AM_AppRole value)
-        {
-            _appRoleProvider = new AppRoleProviders(HttpContext.Session.GetString("authorizationToken"));
+        //[HttpPut("{id}")]
+        //public async Task<AM_AppRole> Put(string id, [FromBody]AM_AppRole value)
+        //{
+        //    _appRoleProvider = new AppRoleProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _appRoleProvider.Put(id, value);
+        //    var result = await _appRoleProvider.Put(id, value);
 
-            return result;
-        }
+        //    return result;
+        //}
 
         [HttpDelete("{id}")]
         public async void Delete(string id)

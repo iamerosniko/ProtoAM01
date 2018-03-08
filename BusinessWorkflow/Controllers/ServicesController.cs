@@ -2,6 +2,7 @@
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
@@ -10,30 +11,30 @@ namespace BusinessWorkflow.Controllers
     [Route("api/Services")]
     public class ServicesController : Controller
     {
-        private ServiceProviders _ServiceProvider;
+        private ServiceProviders _serviceProvider;
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<AM_Service>> Get()
         {
-            _ServiceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
-            var users = await _ServiceProvider.get();
-            return Ok(users);
+            _serviceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
+            var services = await _serviceProvider.get();
+            return services;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<AM_Service> Get(string id)
         {
-            _ServiceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
-            var user = await _ServiceProvider.get(id);
-            return Ok(user);
+            _serviceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
+            var service = await _serviceProvider.get(id);
+            return service;
         }
 
         [HttpPost]
         public async Task<AM_Service> Post([FromBody]AM_Service value)
         {
-            _ServiceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
+            _serviceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _ServiceProvider.Post(value);
+            var result = await _serviceProvider.Post(value);
 
             return result;
         }
@@ -41,9 +42,9 @@ namespace BusinessWorkflow.Controllers
         [HttpPut("{id}")]
         public async Task<AM_Service> Put(string id, [FromBody]AM_Service value)
         {
-            _ServiceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
+            _serviceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var result = await _ServiceProvider.Put(id, value);
+            var result = await _serviceProvider.Put(id, value);
 
             return result;
         }
@@ -51,8 +52,8 @@ namespace BusinessWorkflow.Controllers
         [HttpDelete("{id}")]
         public async void Delete(string id)
         {
-            _ServiceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
-            await _ServiceProvider.Delete(id);
+            _serviceProvider = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
+            await _serviceProvider.Delete(id);
         }
     }
 }

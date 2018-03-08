@@ -2,6 +2,7 @@
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
@@ -10,40 +11,39 @@ namespace BusinessWorkflow.Controllers
     [Route("api/Roles")]
     public class RolesController : Controller
     {
-        private RoleProviders _appSvc;
+        private RoleProviders _roleProviders;
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<AM_Role>> Get()
         {
-            _appSvc = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
-            var roles = await _appSvc.get();
-            return Ok(roles);
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            var roles = await _roleProviders.get();
+            return roles;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<AM_Role> Get(string id)
         {
-            _appSvc = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
-            var role = await _appSvc.get(id);
-            return Ok(role);
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            var role = await _roleProviders.get(id);
+            return role;
         }
 
         [HttpPost]
         public async Task<AM_Role> Post([FromBody]AM_Role value)
         {
-            _appSvc = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var role = await _appSvc.Post(value);
-
+            var role = await _roleProviders.Post(value);
             return role;
         }
 
         [HttpPut("{id}")]
         public async Task<AM_Role> Put(string id, [FromBody]AM_Role value)
         {
-            _appSvc = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var role = await _appSvc.Put(id, value);
+            var role = await _roleProviders.Put(id, value);
 
             return role;
         }
@@ -51,8 +51,8 @@ namespace BusinessWorkflow.Controllers
         [HttpDelete("{id}")]
         public async void Delete(string id)
         {
-            _appSvc = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
-            await _appSvc.Delete(id);
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            await _roleProviders.Delete(id);
         }
     }
 }
