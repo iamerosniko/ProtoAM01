@@ -20,15 +20,15 @@ namespace BusinessWorkflow.Services
         #region API
 
         #region GET
-        public async Task<List<AM_Role>> get()
+        public async Task<List<AM_UserApp>> get()
         {
-            List<AM_Role> entities = new List<AM_Role>();
+            List<AM_UserApp> entities = new List<AM_UserApp>();
             bindApiServices();
 
             var result = await _api.Get();
             try
             {
-                entities = result == null ? null : JsonConvert.DeserializeObject<List<AM_Role>>(result);
+                entities = result == null ? null : JsonConvert.DeserializeObject<List<AM_UserApp>>(result);
 
             }
             catch
@@ -40,15 +40,15 @@ namespace BusinessWorkflow.Services
             return entities;
         }
 
-        public async Task<AM_Role> get(string id)
+        public async Task<AM_UserApp> get(string id)
         {
-            AM_Role entity = new AM_Role();
+            AM_UserApp entity = new AM_UserApp();
             bindApiServices();
 
             var result = await _api.Get(id);
             try
             {
-                entity = result == null ? null : JsonConvert.DeserializeObject<AM_Role>(result);
+                entity = result == null ? null : JsonConvert.DeserializeObject<AM_UserApp>(result);
 
             }
             catch
@@ -62,7 +62,7 @@ namespace BusinessWorkflow.Services
         #endregion
 
         #region POST
-        public async Task<AM_Role> Post(AM_Role entity)
+        public async Task<AM_UserApp> Post(AM_UserApp entity)
         {
             bindApiServices();
 
@@ -70,7 +70,7 @@ namespace BusinessWorkflow.Services
 
             var result = await _api.Post(body);
 
-            entity = result != null ? JsonConvert.DeserializeObject<AM_Role>(result) : null;
+            entity = result != null ? JsonConvert.DeserializeObject<AM_UserApp>(result) : null;
 
             return entity;
         }
@@ -78,14 +78,14 @@ namespace BusinessWorkflow.Services
         #endregion
 
         #region PUT
-        public async Task<AM_Role> Put(string id, AM_Role entity)
+        public async Task<AM_UserApp> Put(string id, AM_UserApp entity)
         {
             bindApiServices();
             string body = JsonConvert.SerializeObject(entity);
 
             var result = await _api.Put(id, body);
 
-            entity = result != null ? JsonConvert.DeserializeObject<AM_Role>(result) : null;
+            entity = result != null ? JsonConvert.DeserializeObject<AM_UserApp>(result) : null;
 
             return entity;
         }
