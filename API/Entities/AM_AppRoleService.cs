@@ -3,13 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
 {
-    [Table("AM_UserAppServices")]
-    public class AM_UserAppService
+
+    [Table("AM_AppRoleServices")]
+    public class AM_AppRoleService
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UserAppServicesID { get; set; }
-        public int UserID { get; set; }
+        public int AppRoleID { get; set; }
+        public int AppID { get; set; }
         public int RoleID { get; set; }
         public int ServiceID { get; set; }
     }

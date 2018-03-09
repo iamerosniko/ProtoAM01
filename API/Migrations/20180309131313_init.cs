@@ -16,7 +16,8 @@ namespace API.Migrations
                     AppID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AppMemberName = table.Column<string>(nullable: true),
-                    AppName = table.Column<string>(nullable: true)
+                    AppName = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -24,19 +25,18 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AM_AppRoles",
+                name: "AM_AppRoleServices",
                 columns: table => new
                 {
                     AppRoleID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AppID = table.Column<int>(nullable: false),
-                    AttribID = table.Column<int>(nullable: false),
                     RoleID = table.Column<int>(nullable: false),
                     ServiceID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AM_AppRoles", x => x.AppRoleID);
+                    table.PrimaryKey("PK_AM_AppRoleServices", x => x.AppRoleID);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,6 +96,20 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AM_UserAppRoleServices",
+                columns: table => new
+                {
+                    UserAppRoleServiceID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AppRoleServiceID = table.Column<int>(nullable: false),
+                    UserAppID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AM_UserAppRoleServices", x => x.UserAppRoleServiceID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AM_UserApps",
                 columns: table => new
                 {
@@ -107,21 +121,6 @@ namespace API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AM_UserApps", x => x.UserAppID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AM_UserAppServices",
-                columns: table => new
-                {
-                    UserAppServicesID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoleID = table.Column<int>(nullable: false),
-                    ServiceID = table.Column<int>(nullable: false),
-                    UserID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AM_UserAppServices", x => x.UserAppServicesID);
                 });
 
             migrationBuilder.CreateTable(
@@ -145,7 +144,7 @@ namespace API.Migrations
                 name: "AM_Applications");
 
             migrationBuilder.DropTable(
-                name: "AM_AppRoles");
+                name: "AM_AppRoleServices");
 
             migrationBuilder.DropTable(
                 name: "AM_Attributes");
@@ -160,10 +159,10 @@ namespace API.Migrations
                 name: "AM_Services");
 
             migrationBuilder.DropTable(
-                name: "AM_UserApps");
+                name: "AM_UserAppRoleServices");
 
             migrationBuilder.DropTable(
-                name: "AM_UserAppServices");
+                name: "AM_UserApps");
 
             migrationBuilder.DropTable(
                 name: "AM_Users");

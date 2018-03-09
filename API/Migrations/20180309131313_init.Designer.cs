@@ -11,7 +11,7 @@ using System;
 namespace API.Migrations
 {
     [DbContext(typeof(AMContext))]
-    [Migration("20180305160244_init")]
+    [Migration("20180309131313_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,19 +30,19 @@ namespace API.Migrations
 
                     b.Property<string>("AppName");
 
+                    b.Property<int>("Status");
+
                     b.HasKey("AppID");
 
                     b.ToTable("AM_Applications");
                 });
 
-            modelBuilder.Entity("API.Entities.AM_AppRole", b =>
+            modelBuilder.Entity("API.Entities.AM_AppRoleService", b =>
                 {
                     b.Property<int>("AppRoleID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AppID");
-
-                    b.Property<int>("AttribID");
 
                     b.Property<int>("RoleID");
 
@@ -50,7 +50,7 @@ namespace API.Migrations
 
                     b.HasKey("AppRoleID");
 
-                    b.ToTable("AM_AppRoles");
+                    b.ToTable("AM_AppRoleServices");
                 });
 
             modelBuilder.Entity("API.Entities.AM_Attribute", b =>
@@ -137,20 +137,18 @@ namespace API.Migrations
                     b.ToTable("AM_UserApps");
                 });
 
-            modelBuilder.Entity("API.Entities.AM_UserAppService", b =>
+            modelBuilder.Entity("API.Entities.AM_UserAppRoleServices", b =>
                 {
-                    b.Property<int>("UserAppServicesID")
+                    b.Property<int>("UserAppRoleServiceID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("RoleID");
+                    b.Property<int>("AppRoleServiceID");
 
-                    b.Property<int>("ServiceID");
+                    b.Property<int>("UserAppID");
 
-                    b.Property<int>("UserID");
+                    b.HasKey("UserAppRoleServiceID");
 
-                    b.HasKey("UserAppServicesID");
-
-                    b.ToTable("AM_UserAppServices");
+                    b.ToTable("AM_UserAppRoleServices");
                 });
 #pragma warning restore 612, 618
         }

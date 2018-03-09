@@ -147,11 +147,13 @@ namespace BusinessWorkflow.Services
         {
             foreach (AM_UserApp appRole in userApps)
             {
-                await _userProviders.Delete(appRole.AppID.ToString());
+                //await _userProviders.Delete(appRole.AppID.ToString());
             }
 
             return true;
         }
+
+        //private async Task<bool>
 
         #endregion
 

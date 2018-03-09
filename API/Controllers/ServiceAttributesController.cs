@@ -22,9 +22,9 @@ namespace API.Controllers
 
         // GET: api/ServiceAttributes
         [HttpGet]
-        public IEnumerable<AM_ServiceAttribute> GetAM_ServiceAttribute()
+        public IEnumerable<AM_ServiceAttribute> GetServiceAttribute()
         {
-            return _context.AM_ServiceAttribute;
+            return _context.ServiceAttribute;
         }
 
         // GET: api/ServiceAttributes/5
@@ -36,7 +36,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var aM_ServiceAttribute = await _context.AM_ServiceAttribute.SingleOrDefaultAsync(m => m.ServiceAttributeID == id);
+            var aM_ServiceAttribute = await _context.ServiceAttribute.SingleOrDefaultAsync(m => m.ServiceAttributeID == id);
 
             if (aM_ServiceAttribute == null)
             {
@@ -90,7 +90,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.AM_ServiceAttribute.Add(aM_ServiceAttribute);
+            _context.ServiceAttribute.Add(aM_ServiceAttribute);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetAM_ServiceAttribute", new { id = aM_ServiceAttribute.ServiceAttributeID }, aM_ServiceAttribute);
@@ -105,13 +105,13 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var aM_ServiceAttribute = await _context.AM_ServiceAttribute.SingleOrDefaultAsync(m => m.ServiceAttributeID == id);
+            var aM_ServiceAttribute = await _context.ServiceAttribute.SingleOrDefaultAsync(m => m.ServiceAttributeID == id);
             if (aM_ServiceAttribute == null)
             {
                 return NotFound();
             }
 
-            _context.AM_ServiceAttribute.Remove(aM_ServiceAttribute);
+            _context.ServiceAttribute.Remove(aM_ServiceAttribute);
             await _context.SaveChangesAsync();
 
             return Ok(aM_ServiceAttribute);
@@ -119,7 +119,7 @@ namespace API.Controllers
 
         private bool AM_ServiceAttributeExists(int id)
         {
-            return _context.AM_ServiceAttribute.Any(e => e.ServiceAttributeID == id);
+            return _context.ServiceAttribute.Any(e => e.ServiceAttributeID == id);
         }
     }
 }
