@@ -22,72 +22,72 @@ namespace BusinessWorkflow.Services
         #region GET
         public async Task<List<AM_AppRoleService>> get()
         {
-            List<AM_AppRoleService> users = new List<AM_AppRoleService>();
+            List<AM_AppRoleService> appRoleServices = new List<AM_AppRoleService>();
             bindApiServices();
 
             var result = await _api.Get();
             try
             {
-                users = result == null ? null : JsonConvert.DeserializeObject<List<AM_AppRoleService>>(result);
+                appRoleServices = result == null ? null : JsonConvert.DeserializeObject<List<AM_AppRoleService>>(result);
 
             }
             catch
             {
-                return users;
+                return appRoleServices;
             }
 
 
-            return users;
+            return appRoleServices;
         }
 
         public async Task<AM_AppRoleService> get(string id)
         {
-            AM_AppRoleService user = new AM_AppRoleService();
+            AM_AppRoleService appRoleService = new AM_AppRoleService();
             bindApiServices();
 
             var result = await _api.Get(id);
             try
             {
-                user = result == null ? null : JsonConvert.DeserializeObject<AM_AppRoleService>(result);
+                appRoleService = result == null ? null : JsonConvert.DeserializeObject<AM_AppRoleService>(result);
 
             }
             catch
             {
-                return user;
+                return appRoleService;
             }
 
 
-            return user;
+            return appRoleService;
         }
         #endregion
 
         #region POST
-        public async Task<AM_AppRoleService> Post(AM_AppRoleService user)
+        public async Task<AM_AppRoleService> Post(AM_AppRoleService appRoleService)
         {
             bindApiServices();
 
-            string body = JsonConvert.SerializeObject(user);
+            string body = JsonConvert.SerializeObject(appRoleService);
 
             var result = await _api.Post(body);
 
-            user = result != null ? JsonConvert.DeserializeObject<AM_AppRoleService>(result) : null;
+            appRoleService = result != null ? JsonConvert.DeserializeObject<AM_AppRoleService>(result) : null;
 
-            return user;
+            return appRoleService;
         }
 
         #endregion
 
         #region PUT
-        public async Task<AM_AppRoleService> Put(string id, AM_AppRoleService user)
+        public async Task<AM_AppRoleService> Put(string id, AM_AppRoleService appRoleService)
         {
             bindApiServices();
-            string body = JsonConvert.SerializeObject(user);
+            string body = JsonConvert.SerializeObject(appRoleService);
 
             var result = await _api.Put(id, body);
 
-            user = result != null ? JsonConvert.DeserializeObject<AM_AppRoleService>(result) : null;
+            appRoleService = result != null ? JsonConvert.DeserializeObject<AM_AppRoleService>(result) : null;
 
-            return user;
+            return appRoleService;
         }
 
         #endregion
