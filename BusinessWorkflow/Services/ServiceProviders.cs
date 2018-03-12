@@ -3,6 +3,7 @@ using BusinessWorkflow.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Services
@@ -11,10 +12,14 @@ namespace BusinessWorkflow.Services
     {
         private ApiServices _api;
         private string _authorizationtoken;
+        private AttributeProviders _attributeProviders;
+        private ServiceAttributeProviders _serviceAttributeProviders;
 
         public ServiceProviders(string token)
         {
             _authorizationtoken = token;
+            _attributeProviders = new AttributeProviders(token);
+            _serviceAttributeProviders = new ServiceAttributeProviders(token);
         }
 
         #region API
@@ -105,7 +110,34 @@ namespace BusinessWorkflow.Services
 
         #endregion
 
+        #region On Delete
 
+        public async Task<bool> DeleteServices(List<AM_Service> services)
+        {
+            foreach (AM_Service service in services)
+            {
+                await DeleteServiceAttributes(service.ServiceID);
+                await Delete(service.ServiceID.ToString());
+            }
+
+            return true;
+        }
+
+        public async Task<bool> DeleteServiceAttributes(int serviceID)
+        {
+            var serviceAttributes = await _serviceAttributeProviders.get();
+            serviceAttributes = serviceAttributes.Where(x => x.ServiceID == serviceID).ToList();
+
+            foreach (AM_ServiceAttribute serviceAttribute in serviceAttributes)
+            {
+                //delete attributes
+                await _attributeProviders.Delete(serviceAttribute.AttribID.ToString());
+                await _serviceAttributeProviders.Delete(serviceAttribute.ServiceAttributeID.ToString());
+            }
+            return true;
+        }
+
+        #endregion
 
         private void bindApiServices()
         {

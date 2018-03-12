@@ -113,7 +113,7 @@ namespace BusinessWorkflow.Services
 
         #region On Delete
 
-        public async Task<bool> DeleteAppRoles(List<AM_AppRoleService> appRoleServices)
+        public async Task<bool> DeleteAppRoleServices(List<AM_AppRoleService> appRoleServices)
         {
             foreach (AM_AppRoleService appRoleService in appRoleServices)
             {
