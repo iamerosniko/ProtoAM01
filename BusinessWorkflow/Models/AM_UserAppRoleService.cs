@@ -6,6 +6,8 @@
         //FK UserApps
         public int UserAppID { get; set; }
         //FK AppRoleServices
-        public int AppRoleServiceID { get; set; }
+        //public int AppRoleServiceID { get; set; }
+        public int AppRoleID { get; set; }
+
     }
 }
