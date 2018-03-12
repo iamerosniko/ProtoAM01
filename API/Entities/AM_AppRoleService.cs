@@ -9,7 +9,7 @@ namespace API.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int AppRoleID { get; set; }
+        public int AppRoleServiceID { get; set; }
         public int AppID { get; set; }
         public int RoleID { get; set; }
         public int ServiceID { get; set; }

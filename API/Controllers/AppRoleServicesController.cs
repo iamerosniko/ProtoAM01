@@ -1,11 +1,9 @@
-﻿using System;
+﻿using API.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using API.Entities;
 
 namespace API.Controllers
 {
@@ -36,7 +34,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var aM_AppRoleService = await _context.AppRoleServices.SingleOrDefaultAsync(m => m.AppRoleID == id);
+            var aM_AppRoleService = await _context.AppRoleServices.SingleOrDefaultAsync(m => m.AppRoleServiceID == id);
 
             if (aM_AppRoleService == null)
             {
@@ -55,7 +53,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != aM_AppRoleService.AppRoleID)
+            if (id != aM_AppRoleService.AppRoleServiceID)
             {
                 return BadRequest();
             }
@@ -93,7 +91,7 @@ namespace API.Controllers
             _context.AppRoleServices.Add(aM_AppRoleService);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAM_AppRoleService", new { id = aM_AppRoleService.AppRoleID }, aM_AppRoleService);
+            return CreatedAtAction("GetAM_AppRoleService", new { id = aM_AppRoleService.AppRoleServiceID }, aM_AppRoleService);
         }
 
         // DELETE: api/AppRoleServices/5
@@ -105,7 +103,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var aM_AppRoleService = await _context.AppRoleServices.SingleOrDefaultAsync(m => m.AppRoleID == id);
+            var aM_AppRoleService = await _context.AppRoleServices.SingleOrDefaultAsync(m => m.AppRoleServiceID == id);
             if (aM_AppRoleService == null)
             {
                 return NotFound();
@@ -119,7 +117,7 @@ namespace API.Controllers
 
         private bool AM_AppRoleServiceExists(int id)
         {
-            return _context.AppRoleServices.Any(e => e.AppRoleID == id);
+            return _context.AppRoleServices.Any(e => e.AppRoleServiceID == id);
         }
     }
 }
