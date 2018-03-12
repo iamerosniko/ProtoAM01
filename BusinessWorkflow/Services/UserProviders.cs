@@ -107,8 +107,6 @@ namespace BusinessWorkflow.Services
 
         #endregion
 
-
-
         private void bindApiServices()
         {
             _api = new ApiServices("Users", _authorizationtoken);

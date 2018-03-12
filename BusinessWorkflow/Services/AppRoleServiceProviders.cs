@@ -3,6 +3,7 @@ using BusinessWorkflow.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Services
@@ -11,10 +12,15 @@ namespace BusinessWorkflow.Services
     {
         private ApiServices _api;
         private string _authorizationtoken;
+        private RoleProviders _roleProviders;
+        private InheritedRolesProviders _inheritedRolesProviders;
+
 
         public AppRoleServiceProviders(string token)
         {
             _authorizationtoken = token;
+            _roleProviders = new RoleProviders(token);
+            _inheritedRolesProviders = new InheritedRolesProviders(token);
         }
 
         #region API
@@ -105,7 +111,33 @@ namespace BusinessWorkflow.Services
 
         #endregion
 
+        #region On Delete
 
+        public async Task<bool> DeleteAppRoles(List<AM_AppRoleService> appRoleServices)
+        {
+            foreach (AM_AppRoleService appRoleService in appRoleServices)
+            {
+                await _roleProviders.Delete(appRoleService.RoleID.ToString());
+                await DeleteInheritedRoles(appRoleService.AppRoleServiceID);
+                await Delete(appRoleService.AppRoleServiceID.ToString());
+            }
+
+            return true;
+        }
+
+        public async Task<bool> DeleteInheritedRoles(int appRoleServiceID)
+        {
+            var inheritedRoles = await _inheritedRolesProviders.get();
+            inheritedRoles = inheritedRoles.Where(x => x.AppRoleServiceID == appRoleServiceID).ToList();
+
+            foreach (AM_InheritedRole inheritedRole in inheritedRoles)
+            {
+                await _inheritedRolesProviders.Delete(inheritedRole.InheritedRolesID.ToString());
+            }
+            return true;
+        }
+
+        #endregion
 
         private void bindApiServices()
         {
