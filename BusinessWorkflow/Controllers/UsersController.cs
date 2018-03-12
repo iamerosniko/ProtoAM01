@@ -2,6 +2,7 @@
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
@@ -13,19 +14,19 @@ namespace BusinessWorkflow.Controllers
         private UserProviders _userProviders;
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<List<AM_User>> Get()
         {
             _userProviders = new UserProviders(HttpContext.Session.GetString("authorizationToken"));
             var users = await _userProviders.get();
-            return Ok(users);
+            return users;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<AM_User> Get(string id)
         {
             _userProviders = new UserProviders(HttpContext.Session.GetString("authorizationToken"));
             var user = await _userProviders.get(id);
-            return Ok(user);
+            return user;
         }
 
         [HttpPost]
