@@ -10,6 +10,6 @@ namespace API.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int InheritedRolesID { get; set; }
         //FK AppRoleServices
-        public int AppRoleServiceID { get; set; }
+        public int RoleID { get; set; }
     }
 }

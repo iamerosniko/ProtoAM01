@@ -1,3 +1,5 @@
+//this class is for Authentication only
+
 import { Injectable } from '@angular/core';
 import { ClientApiService } from './clientapi.service'; 
 import { ClientApiSettings } from './clientapi.settings'; 

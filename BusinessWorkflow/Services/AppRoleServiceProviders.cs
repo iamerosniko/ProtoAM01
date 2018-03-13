@@ -119,16 +119,16 @@ namespace BusinessWorkflow.Services
             {
                 await _roleProviders.Delete(appRoleService.RoleID.ToString());
                 await DeleteInheritedRoles(appRoleService.AppRoleServiceID);
-                await Delete(appRoleService.AppRoleServiceID.ToString());
+                await Delete(appRoleService.RoleID.ToString());
             }
 
             return true;
         }
 
-        public async Task<bool> DeleteInheritedRoles(int appRoleServiceID)
+        public async Task<bool> DeleteInheritedRoles(int roleID)
         {
             var inheritedRoles = await _inheritedRolesProviders.get();
-            inheritedRoles = inheritedRoles.Where(x => x.AppRoleServiceID == appRoleServiceID).ToList();
+            inheritedRoles = inheritedRoles.Where(x => x.RoleID == roleID).ToList();
 
             foreach (AM_InheritedRole inheritedRole in inheritedRoles)
             {

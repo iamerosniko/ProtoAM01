@@ -22,7 +22,7 @@ const routes: Routes = [
   // { path: 'Survey', component : SurveysComponent, canActivate:[AuthGuard] },
   // { path: 'Reports', component : ReportsComponent, canActivate:[AuthGuard] },
 
-  { path: '**', redirectTo :'/Login' },
+  //{ path: '**', redirectTo :'/Login' },
 ];
 
 @NgModule({
