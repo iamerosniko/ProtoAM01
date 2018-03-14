@@ -16,24 +16,6 @@ export class ApplicationsService {
     api.apiUrl=ClientApiSettings.GETAPIURL("Applications")
   }
 
-  //getCompanyProfiles(){
-  //  return this.api.getAll();
-  //}
-
-  //getCompanyProfile(companyProfileID:string){
-  //  return this.api.getOne(companyProfileID);
-  //}
-
-  //postCompanyProfiles(companyProfile:Applications){
-  //  var body = JSON.stringify(companyProfile);
-  //  return this.api.postData(body);  
-  //}
-
-  //putCompanyProfiles(companyProfile:Applications){
-  //  var body = JSON.stringify(companyProfile);
-  //  return this.api.putData(body,companyProfile.AppID.toString());  
-  //}
-
   getApplications() {
       return this.api.getAll();
   }
