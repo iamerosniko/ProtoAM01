@@ -23,8 +23,6 @@ export class AppComponent implements OnInit {
    await console.log(app1);
    app1.Status=0;
    await this.appSvc.putApplication(app1);
- 
-
   }
 
   constructor(private appSvc : ApplicationsService){

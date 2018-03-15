@@ -3,6 +3,4 @@ export interface Applications {
     AppName ?: string,
     AppMemberName ?:string,
     Status?:number
-    
 }
-

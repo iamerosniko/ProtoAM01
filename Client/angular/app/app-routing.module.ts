@@ -6,9 +6,20 @@ import { LoginComponent } from './views/others/login/login.component';
 import { LogoutComponent } from './views/others/logout/logout.component';
 import { RedirectingComponent } from './views/others/redirecting/redirecting.component';
 
+import { ApplicationsComponent } from  './views/applications/applications.component';
+import { ApplicationsAddComponent } from  './views/applications/applications-add/applications-add.component';
+import { ApplicationsEditComponent } from  './views/applications/applications-edit/applications-edit.component';
+import { ApplicationsDeleteComponent } from  './views/applications/applications-delete/applications-delete.component';
+
 import { AuthGuard } from './auth-guard.services';
 const routes: Routes = [
-  // { path: '', redirectTo:'/Survey', pathMatch:"full" },
+  { path: '', redirectTo:'/Login', pathMatch: "full" },
+  { path: 'Login', component: LoginComponent},
+  { path: 'Applications', component : ApplicationsComponent},
+  { path: 'ApplicationsAdd', component : ApplicationsAddComponent},
+  { path: 'ApplicationsEdit/:id', component : ApplicationsEditComponent},
+  { path: 'ApplicationsDelete/:id', component : ApplicationsDeleteComponent}
+
   // { path: 'Reports', component : ReportsComponent },
   // { path: 'Survey', component : SurveysComponent},
  

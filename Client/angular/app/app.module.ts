@@ -8,6 +8,7 @@ import { AuthGuard } from './auth-guard.services';
 import { HttpModule } from '@angular/http'
 import { ClientApiService,ClientApiSettings,ClientLoginService,CompanyProfilesService, ApplicationsService } from './services/client.services';
 import { TopNavComponent } from './views/main/top-nav/top-nav.component';
+import { ApplicationsModule } from './views/applications/applications.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TopNavComponent } from './views/main/top-nav/top-nav.component';
     HttpModule,
     BrowserModule,
     OthersModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ApplicationsModule
   ],
   providers: [AuthGuard, ClientApiService, ClientApiSettings, ClientLoginService,
     CompanyProfilesService,ApplicationsService],

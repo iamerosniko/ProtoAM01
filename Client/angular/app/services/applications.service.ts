@@ -4,6 +4,12 @@ import { Injectable } from '@angular/core';
 import { ClientApiService } from './clientapi.service'; 
 import { ClientApiSettings } from './clientapi.settings'; 
 import { Applications } from '../entities/btam-entities';
+
+const apps: Applications[] = [
+    {AppID: "abc", AppName: "test", AppMemberName: "test member"}, 
+    {AppID: "def", AppName: "biztech d", AppMemberName: "Biztech"}
+]
+
 @Injectable()
 export class ApplicationsService {
 
@@ -17,11 +23,13 @@ export class ApplicationsService {
   }
 
   getApplications() {
-      return this.api.getAll();
+      //return this.api.getAll();
+      return apps;
   }
 
   getApplication(applicationID: string) {
-      return this.api.getOne(applicationID);
+      //return this.api.getOne(applicationID);
+        return apps.find(app => app.AppID === applicationID);
   }
 
   postApplication(application: Applications) {

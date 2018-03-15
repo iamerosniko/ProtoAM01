@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   constructor(private loginService :ClientLoginService,private router: Router) { }
 
   ngOnInit() {
-    this.Login();
+    //this.Login();
   }
 
   async Login(){
@@ -27,5 +27,10 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       this.router.navigate(['./Redirecting']) 
     }, 3000);
+  }
+
+  onClick(): void {
+    let link = ['/Applications'];
+    this.router.navigate(link);
   }
 }
