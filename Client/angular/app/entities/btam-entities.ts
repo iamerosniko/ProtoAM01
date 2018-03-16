@@ -2,4 +2,6 @@
 
 export * from './company-profiles'
 export * from './applications'
+export * from './users'
+
 export * from './current-user'
