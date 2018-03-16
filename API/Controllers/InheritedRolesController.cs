@@ -76,7 +76,7 @@ namespace API.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(aM_InheritedRole);
         }
 
         // POST: api/InheritedRoles
