@@ -8,10 +8,13 @@ import { AuthGuard } from './auth-guard.services';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { HttpModule } from '@angular/http';
 import { FormsModule }    from '@angular/forms';
 import { ClientApiService,ClientApiSettings,ClientLoginService,CompanyProfilesService, ApplicationsService } from './services/client.services';
 =======
+=======
+>>>>>>> ce8c2500be89e19abe742979e652dbc50a4d654a
 =======
 >>>>>>> ce8c2500be89e19abe742979e652dbc50a4d654a
 =======
@@ -22,6 +25,9 @@ import { ClientApiService,ClientApiSettings,
   ApplicationsService, UsersService } from './services/client.services';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ce8c2500be89e19abe742979e652dbc50a4d654a
+=======
 >>>>>>> ce8c2500be89e19abe742979e652dbc50a4d654a
 =======
 >>>>>>> ce8c2500be89e19abe742979e652dbc50a4d654a
