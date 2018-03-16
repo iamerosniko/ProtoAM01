@@ -1,3 +1,43 @@
-<p>
-  applications-delete works!
-</p>
+<div class="container-fluid" style="margin-top: 20px;">
+  <div class="row">
+    <div class="col-md-12">
+      <a class="btn btn-default btn-sm" (click)="goBack()">
+        <i class="fa fa-caret-left"></i>
+        Back
+      </a>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5><i class="fa fa-question-circle"></i>&nbsp;Delete this Application</h5>
+          <p>{{app.AppName}}</p>
+        </div>
+        <div *ngIf="app" class="panel-body">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <label>Application Name</label>
+              <p>{{app.AppName}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <label>Application Member Name</label>
+              <p>{{app.AppMemberName}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <a class="btn btn-danger btn-sm pull-right" (click)="save()">
+                <i class="fa fa-trash"></i>
+                Delete
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

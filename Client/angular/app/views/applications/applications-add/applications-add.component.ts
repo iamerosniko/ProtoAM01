@@ -18,6 +18,6 @@ export class ApplicationsAddComponent implements OnInit {
   }
 
   save(): void {
-    
+    alert("Successfully saved!");
   }
 }

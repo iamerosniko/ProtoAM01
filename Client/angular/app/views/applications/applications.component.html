@@ -23,7 +23,7 @@
         <tbody>
           <tr *ngFor="let app of apps">
             <td>
-              <a role="button">
+              <a role="button" (click)="openApp()">
                 {{app.AppName}}
               </a>
             </td>
@@ -32,10 +32,10 @@
             </td>
             <td>
               <div class="btn-group">
-                <a class="btn btn-default btn-xs" title="Edit"> <!--(click)="editApp({{app.AppID}})">-->
+                <a class="btn btn-default btn-xs" title="Edit" (click)="editApp()"> <!--(click)="editApp({{app.AppID}})">-->
                   <i class="fa fa-edit"></i>
                 </a>
-                <a class="btn btn-danger btn-xs" title="Delete"> <!--(click)="deleteApp({{app.AppID}})">-->
+                <a class="btn btn-danger btn-xs" title="Delete" (click)="deleteApp()"> <!--(click)="deleteApp({{app.AppID}})">-->
                   <i class="fa fa-trash"></i>
                 </a>
               </div>

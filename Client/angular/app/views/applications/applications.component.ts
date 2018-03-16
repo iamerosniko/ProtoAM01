@@ -35,11 +35,21 @@ export class ApplicationsComponent implements OnInit {
     this.router.navigate(['/ApplicationsAdd']);
   }
 
-  editApp(id: string): void {
-    this.router.navigate(['/ApplicationsEdit', id]);
+  //editApp(id: string): void {
+  editApp(): void {
+    this.router.navigate(['/ApplicationsEdit']);
+    //this.router.navigate(['/ApplicationsEdit', id]);
   }
 
-  deleteApp(id: string): void {
-    this.router.navigate(['/ApplicationsDelete', id]);
+  //deleteApp(id: string): void {
+  deleteApp(): void {
+    this.router.navigate(['/ApplicationsDelete']);
+    //this.router.navigate(['/ApplicationsDelete', id]);
+  }
+
+  //openApp(id: string): void {
+  openApp(): void {
+    this.router.navigate(['/ApplicationDetails']);
+    //this.router.navigate(['/ApplicationDetails', id]);
   }
 }

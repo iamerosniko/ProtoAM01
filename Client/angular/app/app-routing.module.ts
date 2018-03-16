@@ -10,6 +10,7 @@ import { ApplicationsComponent } from  './views/applications/applications.compon
 import { ApplicationsAddComponent } from  './views/applications/applications-add/applications-add.component';
 import { ApplicationsEditComponent } from  './views/applications/applications-edit/applications-edit.component';
 import { ApplicationsDeleteComponent } from  './views/applications/applications-delete/applications-delete.component';
+import { ApplicationsDetailsComponent } from './views/applications/applications-details/applications-details.component';
 
 import { AuthGuard } from './auth-guard.services';
 const routes: Routes = [
@@ -17,9 +18,12 @@ const routes: Routes = [
   { path: 'Login', component: LoginComponent},
   { path: 'Applications', component : ApplicationsComponent},
   { path: 'ApplicationsAdd', component : ApplicationsAddComponent},
-  { path: 'ApplicationsEdit/:id', component : ApplicationsEditComponent},
-  { path: 'ApplicationsDelete/:id', component : ApplicationsDeleteComponent}
-
+  { path: 'ApplicationsEdit', component : ApplicationsEditComponent},
+  //{ path: 'ApplicationsEdit/:id', component : ApplicationsEditComponent},
+  { path: 'ApplicationsDelete', component : ApplicationsDeleteComponent},
+  //{ path: 'ApplicationsDelete/:id', component : ApplicationsDeleteComponent}
+  { path: 'ApplicationsDetails', component: ApplicationsDetailsComponent},
+  //{ path: 'ApplicationsDetails/:id', component : ApplicationsDetailsComponent}
   // { path: 'Reports', component : ReportsComponent },
   // { path: 'Survey', component : SurveysComponent},
  
