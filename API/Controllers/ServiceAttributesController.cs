@@ -1,11 +1,9 @@
-﻿using System;
+﻿using API.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using API.Entities;
 
 namespace API.Controllers
 {
@@ -89,6 +87,8 @@ namespace API.Controllers
             {
                 return BadRequest(ModelState);
             }
+
+            aM_ServiceAttribute.ServiceAttributeID = 0;
 
             _context.ServiceAttribute.Add(aM_ServiceAttribute);
             await _context.SaveChangesAsync();

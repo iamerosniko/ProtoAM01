@@ -88,6 +88,8 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
+            aM_AppRoleService.AppRoleServiceID = 0;
+
             _context.AppRoleServices.Add(aM_AppRoleService);
             await _context.SaveChangesAsync();
 
