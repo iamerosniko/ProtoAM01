@@ -1,9 +1,9 @@
-﻿//using BusinessWorkflow.Models;
-//using BusinessWorkflow.Services;
-//using Microsoft.AspNetCore.Http;
+﻿using BusinessWorkflow.Models;
+using BusinessWorkflow.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-//using System.Collections.Generic;
-//using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
 {
@@ -11,48 +11,48 @@ namespace BusinessWorkflow.Controllers
     [Route("api/Roles")]
     public class RolesController : Controller
     {
-        //private RoleProviders _roleProviders;
+        private RoleProviders _roleProviders;
 
-        //[HttpGet]
-        //public async Task<List<AM_Role>> Get()
-        //{
-        //    _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
-        //    var roles = await _roleProviders.get();
-        //    return roles;
-        //}
+        [HttpGet]
+        public async Task<List<AM_Role>> Get()
+        {
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            var roles = await _roleProviders.get();
+            return roles;
+        }
 
-        //[HttpGet("{id}")]
-        //public async Task<AM_Role> Get(string id)
-        //{
-        //    _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
-        //    var role = await _roleProviders.get(id);
-        //    return role;
-        //}
+        [HttpGet("{id}")]
+        public async Task<AM_Role> Get(string id)
+        {
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            var role = await _roleProviders.get(id);
+            return role;
+        }
 
-        //[HttpPost]
-        //public async Task<AM_Role> Post([FromBody]AM_Role value)
-        //{
-        //    _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+        [HttpPost]
+        public async Task<AM_Role> Post([FromBody]AM_Role value)
+        {
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
 
-        //    var role = await _roleProviders.Post(value);
-        //    return role;
-        //}
+            var role = await _roleProviders.Post(value);
+            return role;
+        }
 
-        //[HttpPut("{id}")]
-        //public async Task<AM_Role> Put(string id, [FromBody]AM_Role value)
-        //{
-        //    _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+        [HttpPut("{id}")]
+        public async Task<AM_Role> Put(string id, [FromBody]AM_Role value)
+        {
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
 
-        //    var role = await _roleProviders.Put(id, value);
+            var role = await _roleProviders.Put(id, value);
 
-        //    return role;
-        //}
+            return role;
+        }
 
-        //[HttpDelete("{id}")]
-        //public async void Delete(string id)
-        //{
-        //    _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
-        //    await _roleProviders.Delete(id);
-        //}
+        [HttpDelete("{id}")]
+        public async void Delete(string id)
+        {
+            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            await _roleProviders.Delete(id);
+        }
     }
 }

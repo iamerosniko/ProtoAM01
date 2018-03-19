@@ -14,6 +14,6 @@ namespace API.Entities
         public int UserAppID { get; set; }
         //FK AppRoleServices
         //public int AppRoleServiceID { get; set; }
-        public int AppRoleID { get; set; }
+        public int RoleID { get; set; }
     }
 }
