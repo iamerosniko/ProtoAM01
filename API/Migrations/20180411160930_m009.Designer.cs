@@ -11,9 +11,10 @@ using System;
 namespace API.Migrations
 {
     [DbContext(typeof(AMContext))]
-    partial class AMContextModelSnapshot : ModelSnapshot
+    [Migration("20180411160930_m009")]
+    partial class m009
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,8 +29,6 @@ namespace API.Migrations
                     b.Property<string>("AppMemberName");
 
                     b.Property<string>("AppName");
-
-                    b.Property<string>("AppSecurityKey");
 
                     b.Property<int>("Status");
 
