@@ -31,6 +31,8 @@ namespace API.Migrations
 
                     b.Property<string>("AppSecurityKey");
 
+                    b.Property<string>("AppUrl");
+
                     b.Property<int>("Status");
 
                     b.HasKey("AppID");
