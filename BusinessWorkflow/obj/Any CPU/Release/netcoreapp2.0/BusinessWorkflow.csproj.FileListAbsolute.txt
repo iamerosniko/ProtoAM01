@@ -8,3 +8,4 @@ C:\Users\alverer\Documents\GitHub\BTAccessManagement\BusinessWorkflow\obj\Any CP
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\BusinessWorkflow\obj\Any CPU\Release\netcoreapp2.0\BusinessWorkflow.AssemblyInfo.cs
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\BusinessWorkflow\obj\Any CPU\Release\netcoreapp2.0\BusinessWorkflow.dll
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\BusinessWorkflow\obj\Any CPU\Release\netcoreapp2.0\BusinessWorkflow.pdb
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\BusinessWorkflow\obj\Any CPU\Release\netcoreapp2.0\BusinessWorkflow.csprojResolveAssemblyReference.cache
