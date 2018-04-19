@@ -15,6 +15,9 @@
     <Folder Include="Models\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\" />
+    <Folder Include="BTAMUSER\">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Folder>
   </ItemGroup>
 
 

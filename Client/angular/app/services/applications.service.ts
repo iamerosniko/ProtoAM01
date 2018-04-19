@@ -19,7 +19,7 @@ export class ApplicationsService {
     //use api.normalHeader() if anonymous authentication is enabled.
     api.normalHeader();
     //api.authorizedHeader();
-    api.apiUrl=ClientApiSettings.GETAPIURL("Applications")
+    api.apiUrl=ClientApiSettings.GETAPIURL("FEApplications")
   }
 
   getApplications() {

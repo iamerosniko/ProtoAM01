@@ -13,24 +13,24 @@ namespace BusinessWorkflow.Controllers
     [Route("api/FEUsers")]
     public class FEUsersController : Controller
     {
-        private UserProviders _userProviders;
-        private UserAppProviders _userAppProviders;
-        private UserAppRoleServiceProviders _userAppRoleServiceProviders;
+        private BTAMProviders _bTAMProviders;
+        //private UserProviders _userProviders;
+        //private UserAppProviders _userAppProviders;
+        //private UserAppRoleServiceProviders _userAppRoleServiceProviders;
 
         [HttpPost("{applicationID}")]
         public async Task<AM_UserApp> Post([FromRoute]int applicationID, [FromBody]AM_User user)
         {
             //instantiate
-            _userAppProviders = new UserAppProviders(HttpContext.Session.GetString("authorizationToken"));
-            _userProviders = new UserProviders(HttpContext.Session.GetString("authorizationToken"));
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var tempUser = await _userProviders.Post(user);
+            var tempUser = await _bTAMProviders.userProviders.Post(user);
             AM_UserApp userApp = new AM_UserApp
             {
                 AppID = applicationID,
                 UserID = tempUser.UserID
             };
-            return await _userAppProviders.Post(userApp);
+            return await _bTAMProviders.userAppProviders.Post(userApp);
         }
 
         //[HttpGet("{appID}")]
@@ -62,18 +62,17 @@ namespace BusinessWorkflow.Controllers
         public async Task<List<UserAppRoleDTO>> Get(int appID)
         {
             //instantiate
-            _userAppProviders = new UserAppProviders(HttpContext.Session.GetString("authorizationToken"));
-            _userProviders = new UserProviders(HttpContext.Session.GetString("authorizationToken"));
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
             List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
 
-            var userApps = await _userAppProviders.get();
+            var userApps = await _bTAMProviders.userAppProviders.get();
             userApps = userApps.Where(x => x.AppID == appID).ToList();
 
             foreach (AM_UserApp userApp in userApps)
             {
                 //get user
-                var tempUser = await _userProviders.get(userApp.UserID.ToString());
+                var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
                 //get role of that user (using userapproleservices)
 
 

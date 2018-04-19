@@ -13,26 +13,21 @@ namespace BusinessWorkflow.Controllers
     [Route("api/FERoles")]
     public class FERolesController : Controller
     {
-        private RoleProviders _roleProviders;
-        private AppRoleServiceProviders _appRoleServiceProviders;
-        private ServiceProviders _serviceProviders;
-        private AttributeProviders _attributeProviders;
-        private ServiceAttributeProviders _serviceAttributeProviders;
+        private BTAMProviders _bTAMProviders;
 
         [HttpPost("{applicationID}")]
         public async Task<AM_AppRoleService> Post([FromRoute]int applicationID, [FromBody]AM_Role role)
         {
             //instantiate
-            _appRoleServiceProviders = new AppRoleServiceProviders(HttpContext.Session.GetString("authorizationToken"));
-            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            var tempRole = await _roleProviders.Post(role);
+            var tempRole = await _bTAMProviders.roleProviders.Post(role);
             AM_AppRoleService appRoleService = new AM_AppRoleService
             {
                 AppID = applicationID,
                 RoleID = tempRole.RoleID
             };
-            return await _appRoleServiceProviders.Post(appRoleService);
+            return await _bTAMProviders.appRoleServiceProviders.Post(appRoleService);
         }
 
         //getting list of roles for selected application
@@ -40,17 +35,16 @@ namespace BusinessWorkflow.Controllers
         public async Task<List<AM_Role>> Get(int appID)
         {
             //instantiate
-            _appRoleServiceProviders = new AppRoleServiceProviders(HttpContext.Session.GetString("authorizationToken"));
-            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
             List<AM_Role> roles = new List<AM_Role>();
 
-            var userAppServices = await _appRoleServiceProviders.get();
+            var userAppServices = await _bTAMProviders.appRoleServiceProviders.get();
             userAppServices = userAppServices.Where(x => x.AppID == appID).ToList();
 
             foreach (AM_AppRoleService appRoleService in userAppServices)
             {
-                var tempRole = await _roleProviders.get(appRoleService.RoleID.ToString());
+                var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
                 if (tempRole != null)
                 {
                     roles.Add(tempRole);
@@ -73,16 +67,13 @@ namespace BusinessWorkflow.Controllers
                 4) add ids of Application, Role and service to AppRoleServiceID
                 5) loop 1 - 4 until list of service is empty
              */
-            _attributeProviders = new AttributeProviders(HttpContext.Session.GetString("authorizationToken"));
-            _roleProviders = new RoleProviders(HttpContext.Session.GetString("authorizationToken"));
-            _appRoleServiceProviders = new AppRoleServiceProviders(HttpContext.Session.GetString("authorizationToken"));
-            _serviceAttributeProviders = new ServiceAttributeProviders(HttpContext.Session.GetString("authorizationToken"));
-            _serviceProviders = new ServiceProviders(HttpContext.Session.GetString("authorizationToken"));
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+
             //dummy
             List<AM_AppRoleService> tempAppRoleServices = new List<AM_AppRoleService>();
 
             var tempRole = role.Role;
-            tempRole = await _roleProviders.Post(tempRole);
+            tempRole = await _bTAMProviders.roleProviders.Post(tempRole);
 
 
             foreach (var service in role.Services)
@@ -93,14 +84,14 @@ namespace BusinessWorkflow.Controllers
                     ServiceName = service.ServiceName
                 };
 
-                tempService = await _serviceProviders.Post(tempService);
+                tempService = await _bTAMProviders.serviceProviders.Post(tempService);
 
                 foreach (var attribute in service.Attributes)
                 {
                     var tempAttribute = attribute;
-                    tempAttribute = await _attributeProviders.Post(tempAttribute);
+                    tempAttribute = await _bTAMProviders.attributeProviders.Post(tempAttribute);
 
-                    var tempServiceAttribute = await _serviceAttributeProviders.Post(
+                    var tempServiceAttribute = await _bTAMProviders.serviceAttributeProviders.Post(
                             new AM_ServiceAttribute
                             {
                                 AttribID = tempAttribute.AttribID,
@@ -116,10 +107,9 @@ namespace BusinessWorkflow.Controllers
                     ServiceID = tempService.ServiceID
                 };
 
-                tempAppRoleService = await _appRoleServiceProviders.Post(tempAppRoleService);
+                tempAppRoleService = await _bTAMProviders.appRoleServiceProviders.Post(tempAppRoleService);
                 tempAppRoleServices.Add(tempAppRoleService);
             }
-
 
             return tempAppRoleServices;
         }
