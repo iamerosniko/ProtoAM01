@@ -7,6 +7,5 @@
         public string AppSecurityKey { get; set; }
         public string AppUrl { get; set; }
         public string AppMemberName { get; set; }
-        public int Status { get; set; }
     }
 }

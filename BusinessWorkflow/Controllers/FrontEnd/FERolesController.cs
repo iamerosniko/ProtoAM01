@@ -55,6 +55,15 @@ namespace BusinessWorkflow.Controllers
             return await _bTAMProviders.appRoleServiceProviders.Post(appRoleService);
         }
 
+        [HttpPut("{roleID}")]
+        public async void Put([FromRoute] string roleID, [FromBody]AM_Role role)
+        {
+            //instantiate
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+
+            var tempRole = await _bTAMProviders.roleProviders.Put(role.RoleID.ToString(), role);
+
+        }
 
 
         //when adding services 

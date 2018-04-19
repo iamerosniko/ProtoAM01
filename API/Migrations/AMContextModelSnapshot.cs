@@ -33,8 +33,6 @@ namespace API.Migrations
 
                     b.Property<string>("AppUrl");
 
-                    b.Property<int>("Status");
-
                     b.HasKey("AppID");
 
                     b.ToTable("AM_Applications");
@@ -89,8 +87,6 @@ namespace API.Migrations
 
                     b.Property<string>("RoleName");
 
-                    b.Property<int>("Status");
-
                     b.HasKey("RoleID");
 
                     b.ToTable("AM_Roles");
@@ -132,8 +128,6 @@ namespace API.Migrations
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
-
-                    b.Property<int>("Status");
 
                     b.Property<string>("UserName");
 

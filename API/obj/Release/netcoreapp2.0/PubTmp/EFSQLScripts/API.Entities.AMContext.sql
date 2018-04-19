@@ -201,12 +201,12 @@ GO
 
 IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180315151908_m007')
 BEGIN
-    DECLARE @var0 sysname;
-    SELECT @var0 = [d].[name]
+    DECLARE @var3 sysname;
+    SELECT @var3 = [d].[name]
     FROM [sys].[default_constraints] [d]
     INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
     WHERE ([d].[parent_object_id] = OBJECT_ID(N'AM_Services') AND [c].[name] = N'AppID');
-    IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [AM_Services] DROP CONSTRAINT [' + @var0 + '];');
+    IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [AM_Services] DROP CONSTRAINT [' + @var3 + '];');
     ALTER TABLE [AM_Services] DROP COLUMN [AppID];
 END;
 
@@ -298,6 +298,53 @@ IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'2018
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
     VALUES (N'20180419120659_m012', N'2.0.1-rtm-125');
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180419145347_m013')
+BEGIN
+    DECLARE @var4 sysname;
+    SELECT @var4 = [d].[name]
+    FROM [sys].[default_constraints] [d]
+    INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+    WHERE ([d].[parent_object_id] = OBJECT_ID(N'AM_Users') AND [c].[name] = N'Status');
+    IF @var4 IS NOT NULL EXEC(N'ALTER TABLE [AM_Users] DROP CONSTRAINT [' + @var4 + '];');
+    ALTER TABLE [AM_Users] DROP COLUMN [Status];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180419145347_m013')
+BEGIN
+    DECLARE @var5 sysname;
+    SELECT @var5 = [d].[name]
+    FROM [sys].[default_constraints] [d]
+    INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+    WHERE ([d].[parent_object_id] = OBJECT_ID(N'AM_Roles') AND [c].[name] = N'Status');
+    IF @var5 IS NOT NULL EXEC(N'ALTER TABLE [AM_Roles] DROP CONSTRAINT [' + @var5 + '];');
+    ALTER TABLE [AM_Roles] DROP COLUMN [Status];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180419145347_m013')
+BEGIN
+    DECLARE @var6 sysname;
+    SELECT @var6 = [d].[name]
+    FROM [sys].[default_constraints] [d]
+    INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+    WHERE ([d].[parent_object_id] = OBJECT_ID(N'AM_Applications') AND [c].[name] = N'Status');
+    IF @var6 IS NOT NULL EXEC(N'ALTER TABLE [AM_Applications] DROP CONSTRAINT [' + @var6 + '];');
+    ALTER TABLE [AM_Applications] DROP COLUMN [Status];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180419145347_m013')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20180419145347_m013', N'2.0.1-rtm-125');
 END;
 
 GO

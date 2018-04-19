@@ -13,6 +13,5 @@ namespace API.Entities
         public string AppMemberName { get; set; }
         public string AppUrl { get; set; }
         public string AppSecurityKey { get; set; }
-        public int Status { get; set; }
     }
 }

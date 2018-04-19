@@ -66,8 +66,6 @@ namespace BusinessWorkflow.Services
         {
             bindApiServices();
 
-            user.Status = 1;
-
             string body = JsonConvert.SerializeObject(user);
 
             var result = await _api.Post(body);

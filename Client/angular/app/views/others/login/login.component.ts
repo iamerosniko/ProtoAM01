@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
   async Login(){
     var authenticationToken = await this.loginService.GetAuthenticationToken();
     var authorizationToken = await this.loginService.GetAuthorizationToken();    
-    var currentUser = await this.loginService.GetCurrentUser(authenticationToken);
+    // var currentUser = await this.loginService.GetCurrentUser(authenticationToken);
     await sessionStorage.setItem("Cache0",authenticationToken);
     await sessionStorage.setItem("Cache1",authorizationToken);
-    await sessionStorage.setItem("Cache2",window.btoa(JSON.stringify(currentUser)));
+    // await sessionStorage.setItem("Cache2",window.btoa(JSON.stringify(currentUser)));
 
 
     setTimeout(() => {

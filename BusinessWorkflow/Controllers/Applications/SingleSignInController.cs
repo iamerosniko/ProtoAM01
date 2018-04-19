@@ -98,7 +98,6 @@ namespace BusinessWorkflow.Controllers
                                         UserName = tempUser.UserName,
                                         FirstName = tempUser.FirstName,
                                         LastName = tempUser.LastName,
-                                        Status = tempUser.Status,
                                         RoleID = tempRole.RoleID,
                                         Role = tempRole.RoleName
                                     };
@@ -197,7 +196,6 @@ namespace BusinessWorkflow.Controllers
                                         UserName = tempUser.UserName,
                                         FirstName = tempUser.FirstName,
                                         LastName = tempUser.LastName,
-                                        Status = tempUser.Status,
                                         RoleID = tempRole.RoleID,
                                         Role = tempRole.RoleName
                                     };
