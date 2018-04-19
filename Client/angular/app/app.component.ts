@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
-import { ApplicationsService, UsersService } from './services/client.services';
-import { Applications,Users } from './entities/btam-entities';
+import { ApplicationsService, UsersService,RolesService } from './services/client.services';
+import { Applications,Users,Roles } from './entities/btam-entities';
 import { MyHttpResponse } from './services/httpresponse';
 @Component({
   selector: 'app-root',
@@ -16,6 +16,9 @@ export class AppComponent implements OnInit {
   users:Users[]=[];
   user:Users={};
 
+  roles:Roles[]=[];
+  role:Roles={};
+
   async ngOnInit(){
   //  this.apps= <Applications[]> await this.appSvc.getApplications();
   //  this.app = <Applications>await this.appSvc.getApplication("1");
@@ -29,10 +32,18 @@ export class AppComponent implements OnInit {
 
     this.users= <Users[]> await this.userSvc.getUsers(1);
     console.log(this.users);
+    this.testRole();
   }
 
   constructor(private appSvc : ApplicationsService,
-    private userSvc:UsersService){
+    private userSvc:UsersService,private roleSvc:RolesService){
     
+  }
+
+  async testRole(){
+    console.log(await this.roleSvc.getRoles(1));
+  }
+  async testUsers(){
+
   }
 }

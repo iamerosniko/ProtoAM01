@@ -12,19 +12,21 @@ export class UsersService {
 
     //uncomment api.authorizedHeader() if AD Authentication is enabled.
     //use api.normalHeader() if anonymous authentication is enabled.
-    api.normalHeader();
+   
     //api.authorizedHeader();
-    api.apiUrl=ClientApiSettings.GETAPIURL("FEUsers")
   }
 
   getUsers(applicationID:number) {
+    this.api.normalHeader();
+    this.api.apiUrl=ClientApiSettings.GETBWURL("FEUsers")
     this.api.apiUrl = this.api.apiUrl+"/"+applicationID
-    console.log(this.api.apiUrl)
     return this.api.getAll();
   }
 
-  postApplication(applicationID:number, user: Users) {
-    this.api.apiUrl = this.api.apiUrl+"/{applicationID}"
+  postUser(applicationID:number, user: Users) {
+    this.api.normalHeader();
+    this.api.apiUrl=ClientApiSettings.GETBWURL("FEUsers")
+    this.api.apiUrl = this.api.apiUrl+"/"+applicationID
     var body = JSON.stringify(user);
     return this.api.postData(body);
   }

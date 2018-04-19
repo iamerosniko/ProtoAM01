@@ -11,7 +11,7 @@ import { FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http'
 import { ClientApiService,ClientApiSettings,
   ClientLoginService,CompanyProfilesService,
-  ApplicationsService, UsersService } from './services/client.services';
+  ApplicationsService, UsersService, RolesService } from './services/client.services';
 
 import { TopNavComponent } from './views/main/top-nav/top-nav.component';
 import { ApplicationsModule } from './views/applications/applications.module';
@@ -32,7 +32,7 @@ import { ApplicationsUsersComponent } from './views/applications-users/applicati
     ApplicationsModule
   ],
   providers: [AuthGuard, ClientApiService, ClientApiSettings, ClientLoginService,
-    CompanyProfilesService,ApplicationsService,UsersService],
+    CompanyProfilesService,ApplicationsService,UsersService,RolesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

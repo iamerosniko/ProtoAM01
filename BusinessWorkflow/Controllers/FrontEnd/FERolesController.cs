@@ -15,21 +15,6 @@ namespace BusinessWorkflow.Controllers
     {
         private BTAMProviders _bTAMProviders;
 
-        [HttpPost("{applicationID}")]
-        public async Task<AM_AppRoleService> Post([FromRoute]int applicationID, [FromBody]AM_Role role)
-        {
-            //instantiate
-            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-
-            var tempRole = await _bTAMProviders.roleProviders.Post(role);
-            AM_AppRoleService appRoleService = new AM_AppRoleService
-            {
-                AppID = applicationID,
-                RoleID = tempRole.RoleID
-            };
-            return await _bTAMProviders.appRoleServiceProviders.Post(appRoleService);
-        }
-
         //getting list of roles for selected application
         [HttpGet("{appID}")]
         public async Task<List<AM_Role>> Get(int appID)
@@ -54,6 +39,23 @@ namespace BusinessWorkflow.Controllers
             //return all roles in selected application
             return roles;
         }
+
+        [HttpPost("{applicationID}")]
+        public async Task<AM_AppRoleService> Post([FromRoute]int applicationID, [FromBody]AM_Role role)
+        {
+            //instantiate
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+
+            var tempRole = await _bTAMProviders.roleProviders.Post(role);
+            AM_AppRoleService appRoleService = new AM_AppRoleService
+            {
+                AppID = applicationID,
+                RoleID = tempRole.RoleID
+            };
+            return await _bTAMProviders.appRoleServiceProviders.Post(appRoleService);
+        }
+
+
 
         //when adding services 
         [HttpPost("ToService/{appRoleServiceID}")]

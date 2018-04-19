@@ -13,7 +13,7 @@ export class CompanyProfilesService {
     //use api.normalHeader() if anonymous authentication is enabled.
     api.normalHeader();
     //api.authorizedHeader();
-    api.apiUrl=ClientApiSettings.GETAPIURL("Users")
+    api.apiUrl=ClientApiSettings.GETBWURL("Users")
   }
 
   getCompanyProfiles(){

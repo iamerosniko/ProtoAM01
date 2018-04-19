@@ -287,3 +287,18 @@ END;
 
 GO
 
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180419120659_m012')
+BEGIN
+    ALTER TABLE [AM_Roles] ADD [Status] int NOT NULL DEFAULT 0;
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180419120659_m012')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20180419120659_m012', N'2.0.1-rtm-125');
+END;
+
+GO
+

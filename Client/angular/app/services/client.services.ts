@@ -6,3 +6,4 @@ export * from './clientapi.settings';
 export * from './company-profiles.service';
 export * from './applications.service';
 export * from './users.service';
+export * from './roles.service';

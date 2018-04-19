@@ -11,5 +11,7 @@ namespace API.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoleID { get; set; }
         public string RoleName { get; set; }
+        public int Status { get; set; }
+
     }
 }
