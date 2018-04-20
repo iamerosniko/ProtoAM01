@@ -57,7 +57,7 @@ export class ClientApiService {
       .then(res=>res.json());
   }
 
-  async deleteData(ID:string):Promise<MyHttpResponse>{
+  async deleteData(ID:string){
     const url = `${this.apiUrl}/${ID}`;
     return this.http
       .delete(url, {headers: this.headers})

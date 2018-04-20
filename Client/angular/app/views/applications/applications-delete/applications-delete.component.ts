@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ParamMap, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Router,ActivatedRoute } from '@angular/router';
 
 import { ApplicationsService } from '../../../services/client.services';
 import { Applications } from '../../../entities/btam-entities';
@@ -16,18 +15,24 @@ export class ApplicationsDeleteComponent implements OnInit {
 
   app:Applications={};
   
-  constructor(private appSvc : ApplicationsService, private route: ActivatedRoute, private location: Location){
+  constructor(private router:Router,private activatedroute: ActivatedRoute,
+    private appSvc : ApplicationsService){
   }
 
   ngOnInit(): void {
-    //this.route.paramMap.switchMap((params: ParamMap) => this.appSvc.getApplication(params.get('id'))).subscribe(app => this.app = app);
+    this.activatedroute.params.subscribe(params => this.app = params);
   }
 
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['/Applications'],{skipLocationChange:true});
   }
 
-  save(): void {
-    alert("Successfully saved!");
+  async delete() {
+    var app:Applications =await this.appSvc.deleteApplication(this.app.AppID.toString())
+    app.AppID==this.app.AppID 
+    ?(
+      alert("Successfully saved!"),
+      await this.goBack()
+    ):null;
   }
 }

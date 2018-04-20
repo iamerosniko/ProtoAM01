@@ -98,12 +98,12 @@ namespace BusinessWorkflow.Services
         #endregion
 
         #region DELETE
-        public async Task<bool> Delete(string id)
+        public async Task<AM_Service> Delete(string id)
         {
             bindApiServices();
 
             var result = await _api.Delete(id);
-            return result;
+            return result != null ? JsonConvert.DeserializeObject<AM_Service>(result) : null;
         }
 
         #endregion

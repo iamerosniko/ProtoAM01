@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'Applications', component : ApplicationsComponent},
   // { path: 'ApplicationsAdd', component : ApplicationsAddComponent},
   { path: 'ApplicationsAdd', component : ApplicationsFormComponent},
-  { path: 'ApplicationsEdit', component : ApplicationsFormComponent},
+  { path: 'ApplicationsEdit/:id', component : ApplicationsFormComponent},
   //{ path: 'ApplicationsEdit/:id', component : ApplicationsEditComponent},
   { path: 'ApplicationsDelete', component : ApplicationsDeleteComponent},
   //{ path: 'ApplicationsDelete/:id', component : ApplicationsDeleteComponent}

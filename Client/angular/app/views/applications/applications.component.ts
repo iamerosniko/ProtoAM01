@@ -43,7 +43,7 @@ export class ApplicationsComponent implements OnInit {
   //openApp(id: string): void {
   openApp(app:Applications): void {
     // this.router.navigate(['/ApplicationDetails']);
-    this.router.navigate(['/ApplicationsEdit',app],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsEdit',app.AppID],{skipLocationChange:true});
     //this.router.navigate(['/ApplicationDetails', id]);
   }
 

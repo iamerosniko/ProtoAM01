@@ -71,21 +71,24 @@ namespace BusinessWorkflow.Utility
             }
         }
 
-        public async Task<bool> DeleteRequest(string id)
+        public async Task<string> DeleteRequest(string id)
         {
-            bool isSuccess = false;
             try
             {
                 var request = await _client.DeleteAsync(_apiURL + "/" + id);
 
-                isSuccess = request.IsSuccessStatusCode;
+                if (request.IsSuccessStatusCode)
+                {
+                    var result = request.Content.ReadAsStringAsync().Result;
+                    return result;
+                }
+
+                return null;
             }
             catch
             {
-                return false;
+                return null;
             }
-
-            return isSuccess;
         }
 
         public async Task<string> GetRequest()

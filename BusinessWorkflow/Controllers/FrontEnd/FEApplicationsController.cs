@@ -51,11 +51,11 @@ namespace BusinessWorkflow.Controllers.FrontEnd
         }
 
         [HttpDelete("{id}")]
-        public async void Delete(string id)
+        public async Task<AM_Application> Delete(string id)
         {
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            await _bTAMProviders.applicationProviders.Delete(id);
+            return await _bTAMProviders.applicationProviders.Delete(id);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace BusinessWorkflow.Utility
             return result;
         }
 
-        public async Task<bool> Delete(string id)
+        public async Task<string> Delete(string id)
         {
             var result = await _api.DeleteRequest(id);
             return result;
