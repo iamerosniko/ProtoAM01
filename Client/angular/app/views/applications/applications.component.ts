@@ -11,13 +11,12 @@ import { Applications } from '../../entities/btam-entities';
 export class ApplicationsComponent implements OnInit {
 
   apps:Applications[]=[];
-  app:Applications={};
 
   constructor(private appSvc : ApplicationsService, private router: Router){
   }
 
   async ngOnInit(){
-    this.apps = <Applications[]> await this.appSvc.getApplications();
+    await this.getDependencies();
     /*
     this.apps= <Applications[]> await this.appSvc.getApplications();
     this.app = <Applications>await this.appSvc.getApplication("1");
@@ -32,24 +31,23 @@ export class ApplicationsComponent implements OnInit {
   }
 
   addApp(): void {
-    this.router.navigate(['/ApplicationsAdd']);
-  }
-
-  //editApp(id: string): void {
-  editApp(): void {
-    this.router.navigate(['/ApplicationsEdit']);
-    //this.router.navigate(['/ApplicationsEdit', id]);
+    this.router.navigate(['/ApplicationsAdd'],{skipLocationChange:true});
   }
 
   //deleteApp(id: string): void {
-  deleteApp(): void {
-    this.router.navigate(['/ApplicationsDelete']);
+  deleteApp(app:Applications): void {
+    this.router.navigate(['/ApplicationsDelete',app],{skipLocationChange:true});
     //this.router.navigate(['/ApplicationsDelete', id]);
   }
 
   //openApp(id: string): void {
-  openApp(): void {
-    this.router.navigate(['/ApplicationDetails']);
+  openApp(app:Applications): void {
+    // this.router.navigate(['/ApplicationDetails']);
+    this.router.navigate(['/ApplicationsEdit',app],{skipLocationChange:true});
     //this.router.navigate(['/ApplicationDetails', id]);
+  }
+
+  async getDependencies(){
+    this.apps = <Applications[]> await this.appSvc.getApplications();
   }
 }
