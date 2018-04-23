@@ -11,19 +11,25 @@ export class RolesService {
   ) { 
   }
 
-  getRoles(applicationID:number) {
+  getRoles(applicationID:string) {
     this.api.normalHeader();
     this.api.apiUrl=ClientApiSettings.GETBWURL("FERoles")
     this.api.apiUrl = this.api.apiUrl+"/"+applicationID
     return this.api.getAll();
   }
 
-  postRole(applicationID:number, role: Roles) {
+  postRole(applicationID:string, role: Roles) {
     this.api.normalHeader();
     this.api.apiUrl=ClientApiSettings.GETBWURL("FERoles")
-    this.api.apiUrl = this.api.apiUrl+"/"+applicationID
     var body = JSON.stringify(role);
     return this.api.postData(body);
+  }
+
+  putRole(roleID:string, role: Roles) {
+    this.api.normalHeader();
+    this.api.apiUrl=ClientApiSettings.GETBWURL("FERoles")
+    var body = JSON.stringify(role);
+    return this.api.putData(roleID,body);
   }
 
 }

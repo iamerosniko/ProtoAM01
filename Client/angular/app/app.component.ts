@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   async testRole(){
-    console.log(await this.roleSvc.getRoles(1));
+    console.log(await this.roleSvc.getRoles('1'));
   }
   async testUsers(){
 

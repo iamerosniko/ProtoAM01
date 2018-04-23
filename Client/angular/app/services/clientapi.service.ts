@@ -49,7 +49,7 @@ export class ClientApiService {
       .then(res=>res.json());
   }
 
-  async putData(body:string,ID:string){
+  async putData(ID:string,body:string){
     const url = `${this.apiUrl}/${ID}`;
     return this.http
       .put(url, body, {headers: this.headers})

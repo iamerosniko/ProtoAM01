@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApplicationsService } from '../../../services/client.services';
-import { Applications,Roles } from '../../../entities/btam-entities';
+import { RolesService } from '../../../services/client.services';
+import { Roles } from '../../../entities/btam-entities';
 
 @Component({
   selector: 'app-applications-roles',
@@ -11,29 +11,26 @@ import { Applications,Roles } from '../../../entities/btam-entities';
 export class ApplicationsRolesComponent implements OnInit {
 
   constructor(private router:Router,private activatedroute: ActivatedRoute,
-    private appSvc : ApplicationsService,) { }
+    private roleSvc :RolesService) { }
 
   roles:Roles[]=[];
-  public app:Applications={};
   private appID : string;
 
   ngOnInit() {
-    //this.router.url.includes("Add") ? this.FormLabelState ="New" : this.FormLabelState = "Edit";
-    this.appID = this.activatedroute.snapshot.params['id'];
-    this.appID!=null? this.getApplication():null;
+    this.appID = this.activatedroute.snapshot.params['appID'];
+    this.appID!=null? this.getRoles():null;
   }
 
-  async getApplication(){
-    
-    this.app =<Applications> await this.appSvc.getApplication(this.appID);
+  async getRoles(){
+    this.roles =<Roles[]> await this.roleSvc.getRoles(this.appID);
   }
 
   goBack(): void {
-    this.router.navigate(['/ApplicationsEdit', this.app.AppID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsEdit', this.appID],{skipLocationChange:true});
   }
 
   addRole(): void {
-    this.router.navigate(['/ApplicationsRolesAdd'],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsRolesAdd',this.appID],{skipLocationChange:true});
   }
 
   deleteRole(role:Roles): void {
@@ -41,6 +38,6 @@ export class ApplicationsRolesComponent implements OnInit {
   }
 
   openRole(role:Roles): void {
-    this.router.navigate(['/ApplicationsRolesEdit',role.RoleID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsRolesEdit',role.RoleID,this.appID],{skipLocationChange:true});
   }
 }

@@ -48,7 +48,7 @@ export class ApplicationsService {
     this.api.normalHeader();
     this.api.apiUrl=ClientApiSettings.GETBWURL("FEApplications")
     var body = JSON.stringify(application);
-    return this.api.putData(body, application.AppID.toString());
+    return this.api.putData(application.AppID.toString(),body );
   }
 
   deleteApplication(applicationID: string) {
