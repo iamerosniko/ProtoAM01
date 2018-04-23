@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule,ReactiveFormsModule }    from '@angular/forms';
 
 import { ApplicationsComponent } from './applications.component';
 import { ClientApiService, ClientApiSettings, ApplicationsService } from '../../services/client.services';
@@ -16,7 +16,7 @@ import { ApplicationsRolesFormComponent } from './applications-roles/application
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,ReactiveFormsModule
   ],
   declarations: [ApplicationsComponent,  ApplicationsDeleteComponent, ApplicationsFormComponent, ApplicationsUsersComponent, ApplicationsRolesComponent, ApplicationsRolesDeleteComponent, ApplicationsUsersDeleteComponent, ApplicationsUsersFormComponent, ApplicationsRolesFormComponent],
   providers: [ClientApiService, ClientApiSettings, ApplicationsService]

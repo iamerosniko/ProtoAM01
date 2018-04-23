@@ -1,5 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { UUID } from 'angular2-uuid';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApplicationsService } from '../../../services/client.services';
 import { Applications } from '../../../entities/btam-entities'
@@ -10,10 +11,15 @@ import { Applications } from '../../../entities/btam-entities'
 })
 export class ApplicationsFormComponent implements OnInit {
   constructor(private router:Router,private activatedroute: ActivatedRoute,
-    private appSvc : ApplicationsService,) { }
+    private appSvc : ApplicationsService,private fb:FormBuilder) 
+  {
+
+  }
 
   //public variables
   public FormLabelState:string;
+  appForm = new FormGroup({
+  });
   public app:Applications={};
   private appID : string;
   //private variables
@@ -21,12 +27,27 @@ export class ApplicationsFormComponent implements OnInit {
   ngOnInit() {
     this.router.url.includes("Add") ? this.FormLabelState ="New" : this.FormLabelState = "Edit";
     this.appID = this.activatedroute.snapshot.params['id'];
-    this.appID!=null? this.getApplication():null;
+    this.appID!=null
+    ? this.getApplication()
+    :null;
+
+    this.appForm = this.fb.group({
+      AppName : [this.app.AppName,Validators.required],
+      AppMemberName : [this.app.AppMemberName,Validators.required],
+      AppSecurityKey : [UUID.UUID(),Validators.required],
+      AppUrl : [this.app.AppUrl,Validators.required],
+    });
   }
 
   async getApplication(){
-    
-    this.app =<Applications> await this.appSvc.getApplication(this.appID);
+    this.app = <Applications> await this.appSvc.getApplication(this.appID);
+    this.appForm = this.fb.group({
+      AppID:[this.app.AppID,Validators.required],
+      AppName : [this.app.AppName,Validators.required],
+      AppMemberName : [this.app.AppMemberName,Validators.required],
+      AppSecurityKey : [this.app.AppSecurityKey,Validators.required],
+      AppUrl : [this.app.AppUrl,Validators.required],
+    })
   }
 
   goBack(): void {
@@ -42,6 +63,7 @@ export class ApplicationsFormComponent implements OnInit {
   }
 
   async save() {
+    this.app=await this.appForm.value;
     var app:Applications ={};
     if(this.app.AppID==null){
       app = <Applications> await this.appSvc.postApplication(this.app);
