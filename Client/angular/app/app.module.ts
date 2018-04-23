@@ -15,13 +15,11 @@ import { ClientApiService,ClientApiSettings,
 
 import { TopNavComponent } from './views/main/top-nav/top-nav.component';
 import { ApplicationsModule } from './views/applications/applications.module';
-import { ApplicationsUsersComponent } from './views/applications-users/applications-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopNavComponent,
-    ApplicationsUsersComponent
+    TopNavComponent
   ],
   imports: [
     HttpModule,

@@ -13,7 +13,8 @@ import { RedirectingComponent } from './views/others/redirecting/redirecting.com
 // import { ApplicationsDetailsComponent } from './views/applications/applications-details/applications-details.component';
 
 import {
-  ApplicationsComponent,ApplicationsDeleteComponent,ApplicationsFormComponent
+  ApplicationsComponent,ApplicationsDeleteComponent,ApplicationsFormComponent,ApplicationsRolesComponent,ApplicationsUsersComponent,
+  ApplicationsRolesFormComponent,ApplicationsUsersFormComponent,ApplicationsRolesDeleteComponent,ApplicationsUsersDeleteComponent
 } from './views/applications/applications'
 
 import { AuthGuard } from './auth-guard.services';
@@ -26,6 +27,14 @@ const routes: Routes = [
   { path: 'ApplicationsEdit/:id', component : ApplicationsFormComponent},
   //{ path: 'ApplicationsEdit/:id', component : ApplicationsEditComponent},
   { path: 'ApplicationsDelete', component : ApplicationsDeleteComponent},
+  { path: 'ApplicationsRoles/:id', component: ApplicationsRolesComponent },
+  { path: 'ApplicationsRolesAdd', component: ApplicationsRolesFormComponent },
+  { path: 'ApplicationsRolesEdit/:id', component: ApplicationsRolesFormComponent },
+  { path: 'ApplicationsRolesDelete', component: ApplicationsRolesDeleteComponent },
+  { path: 'ApplicationsUsers/:id', component: ApplicationsUsersComponent },
+  { path: 'ApplicationsUsersAdd', component: ApplicationsUsersFormComponent },
+  { path: 'ApplicationsUsersEdit/:id', component: ApplicationsUsersFormComponent },
+  { path: 'ApplicationsUsersDelete', component: ApplicationsUsersDeleteComponent },
   //{ path: 'ApplicationsDelete/:id', component : ApplicationsDeleteComponent}
   //{ path: 'ApplicationsDetails/:id', component : ApplicationsDetailsComponent}
   // { path: 'Reports', component : ReportsComponent },

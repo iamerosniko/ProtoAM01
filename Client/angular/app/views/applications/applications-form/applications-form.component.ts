@@ -33,6 +33,14 @@ export class ApplicationsFormComponent implements OnInit {
     this.router.navigate(['/Applications'],{skipLocationChange:true});
   }
 
+  getRoles(app:Applications): void {
+    this.router.navigate(['/ApplicationsRoles',app.AppID],{skipLocationChange:true});
+  }
+
+  getUsers(app:Applications): void {
+    this.router.navigate(['/ApplicationsUsers',app.AppID],{skipLocationChange:true});
+  }
+
   async save() {
     var app:Applications ={};
     if(this.app.AppID==null){

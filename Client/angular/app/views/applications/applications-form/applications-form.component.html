@@ -1,10 +1,22 @@
 <div class="container-fluid" style="margin-top: 20px;">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <a class="btn btn-default btn-sm" (click)="goBack()">
         <i class="fa fa-caret-left"></i>
         Back
       </a>
+    </div>
+    <div class="col-md-6">
+      <div class="btn-group pull-right">
+        <a class="btn btn-primary btn-sm" (click)="getRoles(app)">
+          <i class="fa fa-universal-access"></i>
+          Roles
+        </a>
+        <a class="btn btn-primary btn-sm" (click)="getUsers(app)">
+          <i class="fa fa-user-circle"></i>
+          Users
+        </a>
+      </div>
     </div>
   </div>
   <br />

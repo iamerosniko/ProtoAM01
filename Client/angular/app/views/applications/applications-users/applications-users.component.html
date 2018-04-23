@@ -1,3 +1,56 @@
-<p>
-  applications-users works!
-</p>
+<div class="container-fluid" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-md-6">
+          <a class="btn btn-default btn-sm" (click)="goBack()">
+            <i class="fa fa-caret-left"></i>
+            Back
+          </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="btn-group">
+            <a class="btn btn-primary btn-sm" (click)="addUser()">
+              <i class="fa fa-plus"></i>
+              Add User
+            </a>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <table class="table table-bordered table-hover table-striped input-sm">
+            <thead>
+              <tr>
+                <th>User Name</th>
+                <th>Role</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>
+                  <a role="button" (click)="openUser(user)">
+                    {{user.UserName}}
+                  </a>
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <a class="btn btn-default btn-xs" title="Edit" (click)="openUser(user)"> <!--(click)="editApp({{app.AppID}})">-->
+                      <i class="fa fa-edit"></i>
+                    </a>
+                    <a class="btn btn-danger btn-xs" title="Delete" (click)="deleteUser(user)"> <!--(click)="deleteApp({{app.AppID}})">-->
+                      <i class="fa fa-trash"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>

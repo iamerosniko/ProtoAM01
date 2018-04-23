@@ -1,3 +1,52 @@
-<p>
-  applications-roles works!
-</p>
+<div class="container-fluid" style="margin-top: 20px;">
+  <div class="row">
+      <div class="col-md-6">
+        <a class="btn btn-default btn-sm" (click)="goBack()">
+          <i class="fa fa-caret-left"></i>
+          Back
+        </a>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="btn-group">
+          <a class="btn btn-primary btn-sm" (click)="addRole()">
+            <i class="fa fa-plus"></i>
+            Add Role
+          </a>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <table class="table table-bordered table-hover table-striped input-sm">
+          <thead>
+            <tr>
+              <th>Role Name</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let role of roles">
+              <td>
+                <a role="button" (click)="openRole(role)">
+                  {{role.RoleName}}
+                </a>
+              </td>
+              <td>
+                <div class="btn-group">
+                  <a class="btn btn-default btn-xs" title="Edit" (click)="openRole(role)"> <!--(click)="editApp({{app.AppID}})">-->
+                    <i class="fa fa-edit"></i>
+                  </a>
+                  <a class="btn btn-danger btn-xs" title="Delete" (click)="deleteRole(role)"> <!--(click)="deleteApp({{app.AppID}})">-->
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
