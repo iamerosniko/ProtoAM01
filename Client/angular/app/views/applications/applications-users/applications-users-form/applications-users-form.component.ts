@@ -33,6 +33,8 @@ export class ApplicationsUsersFormComponent implements OnInit {
 
     this.userForm = this.fb.group({
       UserName : [this.user.UserName,Validators.required],
+      FirstName : [this.user.FirstName,Validators.required],
+      LastName : [this.user.LastName,Validators.required],
     });
   }
 
@@ -43,6 +45,9 @@ export class ApplicationsUsersFormComponent implements OnInit {
     this.userForm = this.fb.group({
       UserID:[this.user.UserID,Validators.required],
       UserName : [this.user.UserName,Validators.required],
+      FirstName : [this.user.FirstName,Validators.required],
+      LastName : [this.user.LastName,Validators.required],
+
     });
   }
 
