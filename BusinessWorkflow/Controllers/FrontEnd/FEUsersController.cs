@@ -155,12 +155,13 @@ namespace BusinessWorkflow.Controllers
         }
 
         [HttpPut("{userID}")]
-        public async void Put([FromRoute]string userID, [FromBody]AM_User user)
+        public async Task<AM_User> Put([FromRoute]string userID, [FromBody]AM_User user)
         {
             //instantiate
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
             var tempUser = await _bTAMProviders.userProviders.Put(userID, user);
+            return tempUser;
         }
     }
 }

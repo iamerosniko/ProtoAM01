@@ -31,11 +31,14 @@ export class UsersService {
     return this.api.postData(body);
   }
 
-//   putApplication(user: Users) {
-//     //   var body = JSON.stringify(application);
-//     //   return this.api.putData(body, application.AppID.toString());
-//   }
+  putUser(userID :string,user: Users) {
+    this.api.normalHeader();
+    this.api.apiUrl=ClientApiSettings.GETBWURL("FEUsers")
+    var body = JSON.stringify(user);
+    return this.api.putData(userID,body);
+  }
 
+ 
 //   deleteApplication(ID: string) {
 //     //   return this.api.deleteData(applicationID);
 //   }

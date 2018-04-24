@@ -62,9 +62,8 @@ export class ApplicationsUsersFormComponent implements OnInit {
       user = <Users> await this.usrSvc.postUser(this.appID,this.user);
     }
     else{
-      // user = <Roles> await this.usrSvc.putRole(this.roleID,this.role);
+      user = <Users> await this.usrSvc.putUser(this.userID,this.user);
     }
-    console.log(user)
     if(user!=null)
     {
       await alert("Successfully saved!");
