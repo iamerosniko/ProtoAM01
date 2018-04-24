@@ -103,29 +103,27 @@ namespace BusinessWorkflow.Controllers
                         var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
                         if (tempUser != null)
                         {
+                            AM_Role tempRole = new AM_Role();
                             //get role of that user (using userapproleservices)
                             var tempUserAppRoleService = userAppRoleServices.Where(x => x.UserAppID == userApp.UserAppID).FirstOrDefault();
                             if (tempUserAppRoleService != null)
                             {
-                                var tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
-                                if (tempRole != null)
-                                {
-                                    UserAppRoleDTO userAppRole = new UserAppRoleDTO
-                                    {
-                                        UserAppID = userApp.UserAppID,
-                                        UserID = tempUser.UserID,
-                                        UserName = tempUser.UserName,
-                                        FirstName = tempUser.FirstName,
-                                        LastName = tempUser.LastName,
-                                        RoleID = tempRole.RoleID,
-                                        Role = tempRole.RoleName
-                                    };
-                                    //create a UserAppRoleDTO
-
-                                    users.Add(userAppRole);
-                                }
-
+                                tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
                             }
+
+                            UserAppRoleDTO userAppRole = new UserAppRoleDTO
+                            {
+                                UserAppID = userApp.UserAppID,
+                                UserID = tempUser.UserID,
+                                UserName = tempUser.UserName,
+                                FirstName = tempUser.FirstName,
+                                LastName = tempUser.LastName,
+                                RoleID = tempRole != null ? tempRole.RoleID : 0,
+                                Role = tempRole != null ? tempRole.RoleName : ""
+                            };
+                            //create a UserAppRoleDTO
+
+                            users.Add(userAppRole);
                         }
                     }
 

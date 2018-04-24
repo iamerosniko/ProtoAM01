@@ -16,14 +16,14 @@ export class UsersService {
     //api.authorizedHeader();
   }
 
-  getUsers(applicationID:number) {
+  getUsers(applicationID:string) {
     this.api.normalHeader();
     this.api.apiUrl=ClientApiSettings.GETBWURL("FEUsers")
     this.api.apiUrl = this.api.apiUrl+"/"+applicationID
     return this.api.getAll();
   }
 
-  postUser(applicationID:number, user: Users) {
+  postUser(applicationID:string, user: Users) {
     this.api.normalHeader();
     this.api.apiUrl=ClientApiSettings.GETBWURL("FEUsers")
     this.api.apiUrl = this.api.apiUrl+"/"+applicationID

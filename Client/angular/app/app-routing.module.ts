@@ -21,17 +21,20 @@ import { AuthGuard } from './auth-guard.services';
 const routes: Routes = [
   { path: '', redirectTo:'/Login', pathMatch: "full" },
   { path: 'Login', component: LoginComponent},
+  //applications
   { path: 'Applications', component : ApplicationsComponent},
   { path: 'ApplicationsAdd', component : ApplicationsFormComponent},
   { path: 'ApplicationsEdit/:id', component : ApplicationsFormComponent},
   { path: 'ApplicationsDelete', component : ApplicationsDeleteComponent},
+  //roles
   { path: 'ApplicationsRoles/:appID', component: ApplicationsRolesComponent },
   { path: 'ApplicationsRolesAdd/:appID', component: ApplicationsRolesFormComponent },
   { path: 'ApplicationsRolesEdit/:roleID/:appID', component: ApplicationsRolesFormComponent },
   { path: 'ApplicationsRolesDelete', component: ApplicationsRolesDeleteComponent },
-  { path: 'ApplicationsUsers/:id', component: ApplicationsUsersComponent },
-  { path: 'ApplicationsUsersAdd', component: ApplicationsUsersFormComponent },
-  { path: 'ApplicationsUsersEdit/:id', component: ApplicationsUsersFormComponent },
+  //users
+  { path: 'ApplicationsUsers/:appID', component: ApplicationsUsersComponent },
+  { path: 'ApplicationsUsersAdd/:appID', component: ApplicationsUsersFormComponent },
+  { path: 'ApplicationsUsersEdit/:userID/:appID', component: ApplicationsUsersFormComponent },
   { path: 'ApplicationsUsersDelete', component: ApplicationsUsersDeleteComponent },
   // { path: 'Reports', component : ReportsComponent },
   // { path: 'Survey', component : SurveysComponent},

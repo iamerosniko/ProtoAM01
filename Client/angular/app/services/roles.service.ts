@@ -21,6 +21,9 @@ export class RolesService {
   postRole(applicationID:string, role: Roles) {
     this.api.normalHeader();
     this.api.apiUrl=ClientApiSettings.GETBWURL("FERoles")
+    this.api.apiUrl = this.api.apiUrl+"/"+applicationID
+    
+    console.log(this.api.apiUrl)
     var body = JSON.stringify(role);
     return this.api.postData(body);
   }

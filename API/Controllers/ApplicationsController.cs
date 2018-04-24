@@ -121,5 +121,15 @@ namespace API.Controllers
         {
             return _context.Applications.Any(e => e.AppID == id);
         }
+
+        //Extensions
+        public async void delete(int applicationID)
+        {
+            MyControllers myControllers = new MyControllers(_context);
+            //for deletion of users
+            var userapps = myControllers.userAppsController.GetUserApps().Where(x => x.AppID == applicationID);
+            //for deletion of roles
+            var approleservices = myControllers.appRoleServicesController.GetAppRoleServices().Where(x => x.AppID == applicationID);
+        }
     }
 }
