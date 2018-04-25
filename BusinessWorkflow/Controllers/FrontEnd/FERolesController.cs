@@ -3,6 +3,7 @@ using BusinessWorkflow.Models.DTOs;
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -60,11 +61,21 @@ namespace BusinessWorkflow.Controllers
         {
             //instantiate
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-
             var tempRole = await _bTAMProviders.roleProviders.Put(role.RoleID.ToString(), role);
             return tempRole;
         }
 
+        [HttpDelete("{roleID}")]
+        public async Task<AM_Role> Delete([FromRoute]string roleID)
+        {
+            //instantiate
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+
+            var tempRole = await _bTAMProviders.roleProviders.Delete(roleID);
+            var a = await Cascade(Convert.ToInt32(roleID));
+
+            return tempRole;
+        }
 
         //when adding services 
         [HttpPost("ToService/{appRoleServiceID}")]
@@ -123,6 +134,109 @@ namespace BusinessWorkflow.Controllers
             }
 
             return tempAppRoleServices;
+        }
+
+        public async Task<bool> Cascade(int roleID)
+        {
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+            try
+            {
+                //for deletion of roles
+                var approleservices = (await _bTAMProviders.appRoleServiceProviders.get()).Where(x => x.RoleID == roleID).ToList();
+
+                foreach (var approleservice in approleservices)
+                {
+                    var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.ServiceID == approleservice.ServiceID).ToList();
+
+                    var userapproleservices = (await _bTAMProviders.userAppRoleServiceProviders.get()).Where(x => x.RoleID == approleservice.RoleID);
+
+                    var inheritedroles = (await _bTAMProviders.inheritedRolesProviders.get()).Where(x => x.RoleID == approleservice.RoleID);
+                    //approleservices
+                    await _bTAMProviders.appRoleServiceProviders.Delete(approleservice.AppRoleServiceID.ToString());
+
+                    foreach (var serviceattribute in serviceattributes)
+                    {
+                        //serviceattributes
+                        await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
+                        //attributes
+                        await _bTAMProviders.attributeProviders.Delete(serviceattribute.AttribID.ToString());
+                        //services
+                        await _bTAMProviders.serviceProviders.Delete(approleservice.ServiceID.ToString());
+                    }
+
+                    foreach (var userapproleservice in userapproleservices)
+                    {
+                        //userapproleservices
+                        await _bTAMProviders.userAppRoleServiceProviders.Delete(userapproleservice.UserAppRoleServiceID.ToString());
+                    }
+
+                    foreach (var inheritedrole in inheritedroles)
+                    {
+                        //inheritedroles
+                        await _bTAMProviders.inheritedRolesProviders.Delete(inheritedrole.InheritedRolesID.ToString());
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        //services
+        public async Task<bool> Cascade2(int serviceID)
+        {
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+            try
+            {
+                //for deletion of roles
+
+                var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.ServiceID == serviceID).ToList();
+
+
+                foreach (var serviceattribute in serviceattributes)
+                {
+                    //serviceattributes
+                    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
+                    //attributes
+                    await _bTAMProviders.attributeProviders.Delete(serviceattribute.AttribID.ToString());
+                }
+
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> Cascade3(int attrubuteID)
+        {
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+            try
+            {
+                //for deletion of roles
+
+                var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.AttribID == attrubuteID).ToList();
+
+
+                foreach (var serviceattribute in serviceattributes)
+                {
+                    //serviceattributes
+                    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
+                    //attributes
+                    await _bTAMProviders.serviceProviders.Delete(serviceattribute.ServiceID.ToString());
+                }
+
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

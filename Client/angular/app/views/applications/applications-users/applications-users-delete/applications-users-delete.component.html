@@ -13,13 +13,19 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h5><i class="fa fa-question-circle"></i>&nbsp;Delete this User</h5>
-          <p>{{user.UserName}}</p>
+          <p>{{user.FirstName + ' ' + user.LastName}}</p>
         </div>
         <div *ngIf="user" class="panel-body">
           <div class="row">
             <div class="col-md-10 col-md-offset-1">
               <label>User Name</label>
               <p>{{user.UserName}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <label>Role</label>
+              <p>{{user.Role}}</p>
             </div>
           </div>
           <div class="row">

@@ -1,6 +1,7 @@
 ﻿using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -114,6 +115,7 @@ namespace API.Controllers
             _context.Applications.Remove(aM_Application);
             await _context.SaveChangesAsync();
 
+            //await Cascade(id);
             return Ok(aM_Application);
         }
 
@@ -123,13 +125,64 @@ namespace API.Controllers
         }
 
         //Extensions
-        public async void delete(int applicationID)
+        public async Task<bool> Cascade(int applicationID)
         {
-            MyControllers myControllers = new MyControllers(_context);
-            //for deletion of users
-            var userapps = myControllers.userAppsController.GetUserApps().Where(x => x.AppID == applicationID);
-            //for deletion of roles
-            var approleservices = myControllers.appRoleServicesController.GetAppRoleServices().Where(x => x.AppID == applicationID);
+            try
+            {
+                MyControllers myControllers = new MyControllers(_context);
+                //for deletion of users
+                var userapps = myControllers.userAppsController.GetUserApps().Where(x => x.AppID == applicationID);
+                //for deletion of roles
+                var approleservices = myControllers.appRoleServicesController.GetAppRoleServices().Where(x => x.AppID == applicationID);
+
+                foreach (var userapp in userapps)
+                {
+                    //users
+                    await myControllers.usersController.DeleteAM_User(userapp.UserID);
+                    //userapps
+                    await myControllers.userAppsController.DeleteAM_UserApp(userapp.UserAppID);
+                }
+
+                foreach (var approleservice in approleservices)
+                {
+                    var serviceattributes = myControllers.serviceAttributesController.GetServiceAttribute().Where(x => x.ServiceID == approleservice.ServiceID);
+
+                    var userapproleservices = myControllers.userAppRoleServicesController.GetUserAppRoles().Where(x => x.RoleID == approleservice.RoleID);
+
+                    var inheritedroles = myControllers.inheritedRolesController.GetInheritedRoles().Where(x => x.RoleID == approleservice.RoleID);
+                    //roles
+                    await myControllers.rolesController.DeleteAM_Role(approleservice.RoleID);
+                    //approleservices
+                    await myControllers.appRoleServicesController.DeleteAM_AppRoleService(approleservice.AppRoleServiceID);
+
+                    foreach (var serviceattribute in serviceattributes)
+                    {
+                        //serviceattributes
+                        await myControllers.serviceAttributesController.DeleteAM_ServiceAttribute(serviceattribute.ServiceAttributeID);
+                        //attributes
+                        await myControllers.attributesController.DeleteAM_Attribute(serviceattribute.AttribID);
+                        //services
+                        await myControllers.servicesController.DeleteAM_Service(approleservice.ServiceID);
+                    }
+
+                    foreach (var userapproleservice in userapproleservices)
+                    {
+                        //userapproleservices
+                        await myControllers.userAppRoleServicesController.DeleteAM_UserAppRoleService(userapproleservice.UserAppRoleServiceID);
+                    }
+
+                    foreach (var inheritedrole in inheritedroles)
+                    {
+                        //inheritedroles
+                        await myControllers.inheritedRolesController.DeleteAM_InheritedRole(inheritedrole.InheritedRolesID);
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

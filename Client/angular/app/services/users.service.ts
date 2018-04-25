@@ -38,8 +38,10 @@ export class UsersService {
     return this.api.putData(userID,body);
   }
 
- 
-//   deleteApplication(ID: string) {
-//     //   return this.api.deleteData(applicationID);
-//   }
+  deleteUser(roleID: string) {
+    this.api.normalHeader();
+    this.api.apiUrl=ClientApiSettings.GETBWURL("FEUsers")
+    return this.api.deleteData(roleID);
+  }
+
 }

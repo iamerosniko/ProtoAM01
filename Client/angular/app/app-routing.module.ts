@@ -30,12 +30,12 @@ const routes: Routes = [
   { path: 'ApplicationsRoles/:appID', component: ApplicationsRolesComponent },
   { path: 'ApplicationsRolesAdd/:appID', component: ApplicationsRolesFormComponent },
   { path: 'ApplicationsRolesEdit/:roleID/:appID', component: ApplicationsRolesFormComponent },
-  { path: 'ApplicationsRolesDelete', component: ApplicationsRolesDeleteComponent },
+  { path: 'ApplicationsRolesDelete/:appID', component: ApplicationsRolesDeleteComponent },
   //users
   { path: 'ApplicationsUsers/:appID', component: ApplicationsUsersComponent },
   { path: 'ApplicationsUsersAdd/:appID', component: ApplicationsUsersFormComponent },
   { path: 'ApplicationsUsersEdit/:userID/:appID', component: ApplicationsUsersFormComponent },
-  { path: 'ApplicationsUsersDelete', component: ApplicationsUsersDeleteComponent },
+  { path: 'ApplicationsUsersDelete/:appID', component: ApplicationsUsersDeleteComponent },
   // { path: 'Reports', component : ReportsComponent },
   // { path: 'Survey', component : SurveysComponent},
  

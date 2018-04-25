@@ -34,7 +34,7 @@ export class ApplicationsRolesComponent implements OnInit {
   }
 
   deleteRole(role:Roles): void {
-    this.router.navigate(['/ApplicationsRolesDelete',role],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsRolesDelete',this.appID,role],{skipLocationChange:true});
   }
 
   openRole(role:Roles): void {

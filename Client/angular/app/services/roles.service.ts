@@ -23,7 +23,6 @@ export class RolesService {
     this.api.apiUrl=ClientApiSettings.GETBWURL("FERoles")
     this.api.apiUrl = this.api.apiUrl+"/"+applicationID
     
-    console.log(this.api.apiUrl)
     var body = JSON.stringify(role);
     return this.api.postData(body);
   }
@@ -33,6 +32,12 @@ export class RolesService {
     this.api.apiUrl=ClientApiSettings.GETBWURL("FERoles")
     var body = JSON.stringify(role);
     return this.api.putData(roleID,body);
+  }
+
+  deleteRole(roleID: string) {
+    this.api.normalHeader();
+    this.api.apiUrl=ClientApiSettings.GETBWURL("FERoles")
+    return this.api.deleteData(roleID);
   }
 
 }

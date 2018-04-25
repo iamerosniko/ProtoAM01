@@ -35,7 +35,7 @@ export class ApplicationsUsersComponent implements OnInit {
   }
 
   deleteUser(user:Users): void {
-    this.router.navigate(['/ApplicationsUsersDelete',user],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsUsersDelete',this.appID,user],{skipLocationChange:true});
   }
 
   openUser(user:Users): void {

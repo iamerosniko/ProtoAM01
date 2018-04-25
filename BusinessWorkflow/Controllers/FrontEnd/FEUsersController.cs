@@ -3,6 +3,7 @@ using BusinessWorkflow.Models.DTOs;
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,44 +15,6 @@ namespace BusinessWorkflow.Controllers
     public class FEUsersController : Controller
     {
         private BTAMProviders _bTAMProviders;
-
-        //[HttpGet("{appID}")]
-        //public async Task<List<UserAppRoleDTO>> Get(int appID)
-        //{
-        //    //instantiate
-        //    _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-
-        //    List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
-
-        //    var userApps = await _bTAMProviders.userAppProviders.get();
-        //    userApps = userApps.Where(x => x.AppID == appID).ToList();
-
-        //    foreach (AM_UserApp userApp in userApps)
-        //    {
-        //        //get user
-        //        var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
-        //        //get role of that user (using userapproleservices)
-
-        //        //create a UserAppRoleDTO
-        //        UserAppRoleDTO userAppRole = new UserAppRoleDTO
-        //        {
-        //            UserAppID = userApp.UserAppID,
-        //            UserID = tempUser.UserID,
-        //            UserName = tempUser.UserName,
-        //            FirstName = tempUser.FirstName,
-        //            LastName = tempUser.LastName
-        //        };
-
-
-        //        if (tempUser != null)
-        //        {
-        //            users.Add(userAppRole);
-        //        }
-        //    }
-
-        //    //return all users in selected application
-        //    return users;
-        //}
 
         [HttpGet("{appID}")]
         public async Task<List<UserAppRoleDTO>> Get(int appID)
@@ -154,6 +117,18 @@ namespace BusinessWorkflow.Controllers
             return await _bTAMProviders.userAppProviders.Post(userApp);
         }
 
+        [HttpDelete("{userID}")]
+        public async Task<AM_User> Delete([FromRoute]string userID)
+        {
+            //instantiate
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+
+            var tempUser = await _bTAMProviders.userProviders.Delete(userID);
+            var a = await Cascade(Convert.ToInt32(userID));
+
+            return tempUser;
+        }
+
         [HttpPut("{userID}")]
         public async Task<AM_User> Put([FromRoute]string userID, [FromBody]AM_User user)
         {
@@ -162,6 +137,36 @@ namespace BusinessWorkflow.Controllers
 
             var tempUser = await _bTAMProviders.userProviders.Put(userID, user);
             return tempUser;
+        }
+
+        public async Task<bool> Cascade(int applicationID)
+        {
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+            try
+            {
+                //for deletion of users
+                var userapps = (await _bTAMProviders.userAppProviders.get()).Where(x => x.AppID == applicationID).ToList();
+
+                foreach (var userapp in userapps)
+                {
+                    //userapps
+                    await _bTAMProviders.userAppProviders.Delete(userapp.UserAppID.ToString());
+
+                    var userapproleservices = (await _bTAMProviders.userAppRoleServiceProviders.get()).Where(x => x.UserAppID == userapp.UserAppID).ToList();
+
+                    foreach (var userapproleservice in userapproleservices)
+                    {
+                        //userapproleservices
+                        await _bTAMProviders.userAppRoleServiceProviders.Delete(userapproleservice.UserAppRoleServiceID.ToString());
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
