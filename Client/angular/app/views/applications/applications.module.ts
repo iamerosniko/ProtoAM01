@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule }    from '@angular/forms';
 
 import { ApplicationsComponent } from './applications.component';
-import { ClientApiService, ClientApiSettings, ApplicationsService } from '../../services/client.services';
+import { ClientApiService, ClientApiSettings, ApplicationsService, RoleUsersService } from '../../services/client.services';
 import { ApplicationsDeleteComponent } from './applications-delete/applications-delete.component';
 import { ApplicationsFormComponent } from './applications-form/applications-form.component';
 import { ApplicationsUsersComponent } from './applications-users/applications-users.component';
@@ -20,6 +20,6 @@ import { ApplicationsRolesUsersComponent } from './applications-roles/applicatio
     FormsModule,ReactiveFormsModule
   ],
   declarations: [ApplicationsComponent,  ApplicationsDeleteComponent, ApplicationsFormComponent, ApplicationsUsersComponent, ApplicationsRolesComponent, ApplicationsRolesDeleteComponent, ApplicationsUsersDeleteComponent, ApplicationsUsersFormComponent, ApplicationsRolesFormComponent, ApplicationsRolesUsersComponent],
-  providers: [ClientApiService, ClientApiSettings, ApplicationsService]
+  providers: [ClientApiService, ClientApiSettings, ApplicationsService,RoleUsersService]
 })
 export class ApplicationsModule { }

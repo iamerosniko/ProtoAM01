@@ -19,33 +19,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of user">
+          <tr *ngFor="let user of users">
             <td>
-              {{user.UserName}}
+              {{user.FirstName + ' ' + user.LastName}}
             </td>
             <td>
-              <input type="checkbox" (click)="changePermission(user)"/>
-            </td>
-          </tr>
-
-          <!--for testing-->
-          <tr>
-            <td>
-              Albert
-            </td>
-            <td>
-              <input type="checkbox" />
+              <input type="checkbox" [(ngModel)]="user.IsChecked" (click)="changePermission(user)"/>
             </td>
           </tr>
-          <!--for testing-->
-          <tr>
-              <td>
-                Eros
-              </td>
-              <td>
-                <input type="checkbox" />
-              </td>
-            </tr>
         </tbody>
       </table>
     </div>
