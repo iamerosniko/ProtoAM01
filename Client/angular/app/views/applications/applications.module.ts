@@ -12,13 +12,14 @@ import { ApplicationsRolesDeleteComponent } from './applications-roles/applicati
 import { ApplicationsUsersDeleteComponent } from './applications-users/applications-users-delete/applications-users-delete.component';
 import { ApplicationsUsersFormComponent } from './applications-users/applications-users-form/applications-users-form.component';
 import { ApplicationsRolesFormComponent } from './applications-roles/applications-roles-form/applications-roles-form.component';
+import { ApplicationsRolesUsersComponent } from './applications-roles/applications-roles-users/applications-roles-users.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,ReactiveFormsModule
   ],
-  declarations: [ApplicationsComponent,  ApplicationsDeleteComponent, ApplicationsFormComponent, ApplicationsUsersComponent, ApplicationsRolesComponent, ApplicationsRolesDeleteComponent, ApplicationsUsersDeleteComponent, ApplicationsUsersFormComponent, ApplicationsRolesFormComponent],
+  declarations: [ApplicationsComponent,  ApplicationsDeleteComponent, ApplicationsFormComponent, ApplicationsUsersComponent, ApplicationsRolesComponent, ApplicationsRolesDeleteComponent, ApplicationsUsersDeleteComponent, ApplicationsUsersFormComponent, ApplicationsRolesFormComponent, ApplicationsRolesUsersComponent],
   providers: [ClientApiService, ClientApiSettings, ApplicationsService]
 })
 export class ApplicationsModule { }

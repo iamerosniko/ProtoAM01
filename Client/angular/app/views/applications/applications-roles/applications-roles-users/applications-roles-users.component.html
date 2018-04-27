@@ -1,0 +1,53 @@
+<div class="container-fluid" style="margin-top: 20px;">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="row">
+        <div class="col-md-3 col-md-offset-9">
+          <input type="text" class="form-control input-sm pull-right" placeholder="Search..."/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <table class="table table-bordered table-hover table-striped input-sm">
+        <thead>
+          <tr>
+            <th class="col-md-9">Users</th>
+            <th class="col-md-3">Grant Access</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of user">
+            <td>
+              {{user.UserName}}
+            </td>
+            <td>
+              <input type="checkbox" (click)="changePermission(user)"/>
+            </td>
+          </tr>
+
+          <!--for testing-->
+          <tr>
+            <td>
+              Albert
+            </td>
+            <td>
+              <input type="checkbox" />
+            </td>
+          </tr>
+          <!--for testing-->
+          <tr>
+              <td>
+                Eros
+              </td>
+              <td>
+                <input type="checkbox" />
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
