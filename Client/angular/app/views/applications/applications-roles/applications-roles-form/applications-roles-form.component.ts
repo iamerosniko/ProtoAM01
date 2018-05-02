@@ -22,7 +22,7 @@ export class ApplicationsRolesFormComponent implements OnInit {
   });
   private roles:Roles[]=[];
   //private variables
-  private roleID : string;
+  public roleID : string;
   private appID:string;
 
   ngOnInit() {

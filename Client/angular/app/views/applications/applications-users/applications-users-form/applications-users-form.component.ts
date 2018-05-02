@@ -21,7 +21,7 @@ export class ApplicationsUsersFormComponent implements OnInit {
   userForm = new FormGroup({
   });
   private users:Users[]=[];
-  private userID : string;
+  public userID : string;
   private appID:string;
   
 
