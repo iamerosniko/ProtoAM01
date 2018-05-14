@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\API20180514111855 - Web Deploy.pubxml" />
     <None Remove="Properties\PublishProfiles\BTAccessManagementDev - Web Deploy.pubxml" />
   </ItemGroup>
 
