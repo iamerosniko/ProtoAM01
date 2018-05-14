@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpGet]
         public IEnumerable<AM_User> GetUsers()
         {
-            return _context.Users;
+            return _context.Users.OrderBy(x => x.FirstName);
         }
 
         // GET: api/Users/5

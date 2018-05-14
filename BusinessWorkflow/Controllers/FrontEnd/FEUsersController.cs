@@ -99,7 +99,7 @@ namespace BusinessWorkflow.Controllers
             }
 
             #endregion
-            return users;
+            return users.OrderBy(x => x.FirstName).ToList();
         }
 
         [HttpPost("{applicationID}")]
@@ -115,6 +115,38 @@ namespace BusinessWorkflow.Controllers
                 UserID = tempUser.UserID
             };
             return await _bTAMProviders.userAppProviders.Post(userApp);
+        }
+
+        [HttpPost("Bulk/{applicationID}")]
+        public async Task<List<AM_UserApp>> PostAll([FromRoute]int applicationID, [FromBody]AM_User[] users)
+        {
+            //instantiate
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+            List<AM_UserApp> userapps = new List<AM_UserApp>();
+
+            //bulk add users
+            foreach (var user in users)
+            {
+                var tempUser = await _bTAMProviders.userProviders.Post(user);
+                if (tempUser != null)
+                {
+                    userapps.Add(new AM_UserApp
+                    {
+                        AppID = applicationID,
+                        UserID = tempUser.UserID
+                    });
+                }
+            }
+
+            //bulk add userapps
+
+            for (int i = 0; i < userapps.Count(); i++)
+            {
+                userapps[i] = await _bTAMProviders.userAppProviders.Post(userapps[i]);
+            }
+
+            return userapps;
+            //return await _bTAMProviders.userAppProviders.Post(userApp);
         }
 
         [HttpDelete("{userID}")]
@@ -139,13 +171,13 @@ namespace BusinessWorkflow.Controllers
             return tempUser;
         }
 
-        public async Task<bool> Cascade(int applicationID)
+        public async Task<bool> Cascade(int userID)
         {
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
             try
             {
                 //for deletion of users
-                var userapps = (await _bTAMProviders.userAppProviders.get()).Where(x => x.AppID == applicationID).ToList();
+                var userapps = (await _bTAMProviders.userAppProviders.get()).Where(x => x.UserID == userID).ToList();
 
                 foreach (var userapp in userapps)
                 {
@@ -163,7 +195,7 @@ namespace BusinessWorkflow.Controllers
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

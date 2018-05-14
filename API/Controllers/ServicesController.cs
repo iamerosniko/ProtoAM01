@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpGet]
         public IEnumerable<AM_Service> GetServices()
         {
-            return _context.Services;
+            return _context.Services.OrderBy(X => X.ServiceName);
         }
 
         // GET: api/Services/5

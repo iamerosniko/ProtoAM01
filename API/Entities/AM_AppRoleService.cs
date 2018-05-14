@@ -12,6 +12,5 @@ namespace API.Entities
         public int AppRoleServiceID { get; set; }
         public int AppID { get; set; }
         public int RoleID { get; set; }
-        public int ServiceID { get; set; }
     }
 }

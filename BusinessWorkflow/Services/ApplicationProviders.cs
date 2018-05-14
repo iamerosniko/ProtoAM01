@@ -121,53 +121,6 @@ namespace BusinessWorkflow.Services
         #endregion
 
 
-        #region APP-BEHAVIOR
-
-        #region AppRoleBehavior
-
-        //private async Task<bool> DeleteAssocToAppRole(List<AM_AppRole> appRoles)
-        //{
-        //    foreach (AM_AppRole appRole in appRoles)
-        //    {
-        //        //delete 
-        //        await _roleProviders.Delete(appRole.AppID.ToString());
-        //    }
-
-        //    return true;
-        //}
-
-        private async Task<bool> DeleteAssocToUserApp(List<AM_UserApp> userApps)
-        {
-            foreach (AM_UserApp appRole in userApps)
-            {
-                //await _userProviders.Delete(appRole.AppID.ToString());
-            }
-
-            return true;
-        }
-
-        //private async Task<bool>
-
-        #endregion
-
-        private async Task<bool> OnApplicationDelete(int id)
-        {
-            //get all the lists of every table except application table
-
-            var attributes = await _attributeProviders.get();
-            var roles = await _roleProviders.get();
-            var service = await _serviceProviders.get();
-            var serviceAttribs = await _serviceAttributeProviders.get();
-            var users = await _userProviders.get();
-            var userApps = await _userAppProviders.get();
-
-            //filter every tables accoring to its application
-
-
-            return true;
-        }
-        #endregion
-
 
         private void bindApiServices()
         {

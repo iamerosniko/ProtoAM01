@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpGet]
         public IEnumerable<AM_Attribute> GetAttributes()
         {
-            return _context.Attributes;
+            return _context.Attributes.OrderBy(X => X.AttribName);
         }
 
         // GET: api/Attributes/5

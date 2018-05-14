@@ -1,7 +1,6 @@
 ﻿using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,7 +22,7 @@ namespace API.Controllers
         [HttpGet]
         public IEnumerable<AM_Application> GetApplications()
         {
-            return _context.Applications;
+            return _context.Applications.OrderBy(X => X.AppName);
         }
 
         // GET: api/Applications/5
@@ -145,7 +144,7 @@ namespace API.Controllers
 
                 foreach (var approleservice in approleservices)
                 {
-                    var serviceattributes = myControllers.serviceAttributesController.GetServiceAttribute().Where(x => x.ServiceID == approleservice.ServiceID);
+                    //var serviceattributes = myControllers.serviceAttributesController.GetServiceAttribute().Where(x => x.ServiceID == approleservice.ServiceID);
 
                     var userapproleservices = myControllers.userAppRoleServicesController.GetUserAppRoles().Where(x => x.RoleID == approleservice.RoleID);
 
@@ -155,15 +154,15 @@ namespace API.Controllers
                     //approleservices
                     await myControllers.appRoleServicesController.DeleteAM_AppRoleService(approleservice.AppRoleServiceID);
 
-                    foreach (var serviceattribute in serviceattributes)
-                    {
-                        //serviceattributes
-                        await myControllers.serviceAttributesController.DeleteAM_ServiceAttribute(serviceattribute.ServiceAttributeID);
-                        //attributes
-                        await myControllers.attributesController.DeleteAM_Attribute(serviceattribute.AttribID);
-                        //services
-                        await myControllers.servicesController.DeleteAM_Service(approleservice.ServiceID);
-                    }
+                    //foreach (var serviceattribute in serviceattributes)
+                    //{
+                    //    //serviceattributes
+                    //    await myControllers.serviceAttributesController.DeleteAM_ServiceAttribute(serviceattribute.ServiceAttributeID);
+                    //    //attributes
+                    //    await myControllers.attributesController.DeleteAM_Attribute(serviceattribute.AttribID);
+                    //    //services
+                    //    await myControllers.servicesController.DeleteAM_Service(approleservice.ServiceID);
+                    //}
 
                     foreach (var userapproleservice in userapproleservices)
                     {
@@ -179,7 +178,7 @@ namespace API.Controllers
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

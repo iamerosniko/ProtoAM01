@@ -21,6 +21,7 @@ namespace API.Entities
         public DbSet<AM_AppRoleService> AppRoleServices { get; set; }
         public DbSet<AM_InheritedRole> InheritedRoles { get; set; }
 
+        public DbSet<AM_RoleServices> RoleServices { get; set; }
         //decommission
         //public DbSet<AM_AppRole> AppRoles { get; set; }
         //public DbSet<AM_UserAppService> UserAppServices { get; set; }

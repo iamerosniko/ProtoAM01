@@ -1,3 +1,4 @@
+
 <div class="container-fluid" style="margin-top: 20px;">
     <div class="row">
       <div class="col-md-6">
@@ -5,6 +6,18 @@
           <i class="fa fa-caret-left"></i>
           Back
         </a>
+      </div>
+      <div class="col-md-6" *ngIf="FormLabelState!='New'">
+        <div class="btn-group pull-right">
+          <a class="btn btn-primary btn-sm" (click)="getRoles(app)">
+            <i class="fa fa-universal-access"></i>
+            Services
+          </a>
+          <!-- <a class="btn btn-primary btn-sm" (click)="getUsers(app)">
+            <i class="fa fa-user-circle"></i>
+            Users
+          </a> -->
+        </div>
       </div>
     </div>
     <br />
@@ -37,7 +50,23 @@
         </div>
       </div>
     </div>
+    <hr />
+    
     <div class="row" *ngIf="roleID!=null">
-      <app-applications-roles-users></app-applications-roles-users>
+      <div class="container">
+        
+        <tabset>
+          <tab heading="Users" id="tab1">
+              <app-applications-roles-users></app-applications-roles-users>
+          </tab>
+          <tab heading="Services">
+              <app-services></app-services>
+          </tab>
+          <tab heading="Roles inherited">
+
+          </tab>
+        </tabset>
+        
+      </div>
     </div>
   </div>

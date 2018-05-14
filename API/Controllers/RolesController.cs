@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpGet]
         public IEnumerable<AM_Role> GetRoles()
         {
-            return _context.Roles;
+            return _context.Roles.OrderBy(x => x.RoleName);
         }
 
         // GET: api/Roles/5

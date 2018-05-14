@@ -29,7 +29,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of users">
+              <tr *ngFor="let user of returnedArray">
                 <td>
                   <a role="button" (click)="openUser(user)">
                     {{user.FirstName + ' ' + user.LastName}}
@@ -51,6 +51,8 @@
               </tr>
             </tbody>
           </table>
+          <pagination [totalItems]="users.length" (pageChanged)="pageChanged($event)"></pagination>
+          
         </div>
       </div>
   </div>

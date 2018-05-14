@@ -126,7 +126,6 @@ namespace BusinessWorkflow.Controllers
                 {
                     AppID = applicationID,
                     RoleID = tempRole.RoleID,
-                    ServiceID = tempService.ServiceID
                 };
 
                 tempAppRoleService = await _bTAMProviders.appRoleServiceProviders.Post(tempAppRoleService);
@@ -146,7 +145,7 @@ namespace BusinessWorkflow.Controllers
 
                 foreach (var approleservice in approleservices)
                 {
-                    var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.ServiceID == approleservice.ServiceID).ToList();
+                    //var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.ServiceID == approleservice.ServiceID).ToList();
 
                     var userapproleservices = (await _bTAMProviders.userAppRoleServiceProviders.get()).Where(x => x.RoleID == approleservice.RoleID);
 
@@ -154,15 +153,15 @@ namespace BusinessWorkflow.Controllers
                     //approleservices
                     await _bTAMProviders.appRoleServiceProviders.Delete(approleservice.AppRoleServiceID.ToString());
 
-                    foreach (var serviceattribute in serviceattributes)
-                    {
-                        //serviceattributes
-                        await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
-                        //attributes
-                        await _bTAMProviders.attributeProviders.Delete(serviceattribute.AttribID.ToString());
-                        //services
-                        await _bTAMProviders.serviceProviders.Delete(approleservice.ServiceID.ToString());
-                    }
+                    //foreach (var serviceattribute in serviceattributes)
+                    //{
+                    //    //serviceattributes
+                    //    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
+                    //    //attributes
+                    //    await _bTAMProviders.attributeProviders.Delete(serviceattribute.AttribID.ToString());
+                    //    //services
+                    //    await _bTAMProviders.serviceProviders.Delete(approleservice.ServiceID.ToString());
+                    //}
 
                     foreach (var userapproleservice in userapproleservices)
                     {
@@ -178,7 +177,7 @@ namespace BusinessWorkflow.Controllers
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -206,7 +205,7 @@ namespace BusinessWorkflow.Controllers
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -233,7 +232,7 @@ namespace BusinessWorkflow.Controllers
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

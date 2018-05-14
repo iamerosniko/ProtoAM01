@@ -47,8 +47,6 @@ namespace API.Migrations
 
                     b.Property<int>("RoleID");
 
-                    b.Property<int>("ServiceID");
-
                     b.HasKey("AppRoleServiceID");
 
                     b.ToTable("AM_AppRoleServices");
@@ -90,6 +88,20 @@ namespace API.Migrations
                     b.HasKey("RoleID");
 
                     b.ToTable("AM_Roles");
+                });
+
+            modelBuilder.Entity("API.Entities.AM_RoleServices", b =>
+                {
+                    b.Property<int>("RoleServiceID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("RoleID");
+
+                    b.Property<int>("ServiceID");
+
+                    b.HasKey("RoleServiceID");
+
+                    b.ToTable("AM_RoleServices");
                 });
 
             modelBuilder.Entity("API.Entities.AM_Service", b =>
