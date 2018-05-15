@@ -38,7 +38,8 @@ const routes: Routes = [
   { path: 'ApplicationsUsersEdit/:userID/:appID', component: ApplicationsUsersFormComponent },
   { path: 'ApplicationsUsersDelete/:appID', component: ApplicationsUsersDeleteComponent },
   //services
-  { path: 'Services/:roleID', component:ServicesFormComponent},
+  { path: 'ServicesAdd/:roleID/:appID', component:ServicesFormComponent},
+  { path: 'ServicesEdit/:roleID/:appID/:serviceID', component:ServicesFormComponent},
   // { path: 'Reports', component : ReportsComponent },
   // { path: 'Survey', component : SurveysComponent},
  

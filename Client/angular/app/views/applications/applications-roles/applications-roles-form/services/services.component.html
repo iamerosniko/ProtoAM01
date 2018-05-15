@@ -14,8 +14,9 @@
       <table class="table table-bordered table-hover table-striped input-sm">
         <thead>
           <tr>
-            <th class="col-md-9">Service Name</th>
-            <th class="col-md-3">Service Description</th>
+            <th>Service Name</th>
+            <th>Service Description</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -25,7 +26,16 @@
             </td>
             <td>
               {{service.ServiceDesc}}
-              
+            </td>
+            <td>
+              <div class="btn-group">
+                <a class="btn btn-default btn-xs" title="Edit" (click)="openService(service)"> <!--(click)="editApp({{app.AppID}})">-->
+                  <i class="fa fa-edit"></i>
+                </a>
+                <a class="btn btn-danger btn-xs" title="Delete" (click)="deleteService(service)"> <!--(click)="deleteApp({{app.AppID}})">-->
+                  <i class="fa fa-trash"></i>
+                </a>
+              </div>
             </td>
           </tr>
         </tbody>

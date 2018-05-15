@@ -55,13 +55,17 @@ namespace BusinessWorkflow.Controllers
             return null;
         }
 
-        [HttpPut]
-        public async Task<AM_Service> Put([FromBody] AM_Service service)
+        [HttpPut("{serviceID}")]
+        public async Task<AM_Service> Put([FromRoute]int serviceID, [FromBody] AM_Service service)
         {
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+
             if (service != null)
             {
-                return await _bTAMProviders.serviceProviders.Put(service.ServiceID.ToString(), service);
+                return await _bTAMProviders.serviceProviders.Put(serviceID.ToString(), service);
+
             }
+
             return null;
         }
 

@@ -21,16 +21,16 @@ export class ServicesService {
     return this.api.getOne(roleID);
   }
 
-  postService(service: Services) {
+  postService(roleID:string,service: Services) {
     this.api.normalHeader();
-    this.api.apiUrl=ClientApiSettings.GETBWURL("FEServices")
+    this.api.apiUrl=ClientApiSettings.GETBWURL("FEServices") +"/"+ roleID
     var body = JSON.stringify(service);
     return this.api.postData(body);
   } 
 
   putService(service: Services) {
     this.api.normalHeader();
-    this.api.apiUrl=ClientApiSettings.GETBWURL("FEServices")
+    this.api.apiUrl=ClientApiSettings.GETBWURL("FEServices") 
     var body = JSON.stringify(service);
     return this.api.putData(service.ServiceID.toString(),body );
   }

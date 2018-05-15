@@ -11,13 +11,21 @@ export class ServicesComponent implements OnInit {
 
   services:Services[]=[];
   roleID:string;
+  appID:string;
+  
 
   constructor(private serviceSvc : ServicesService, private router:Router,
     private activatedroute: ActivatedRoute) { }
 
   async ngOnInit() {
     this.roleID =await this.activatedroute.snapshot.params['roleID'];
+    this.appID =await this.activatedroute.snapshot.params['appID'];
     await this.getDependencies();
+  }
+  
+  openService(service:Services):void{
+    console.log(service)
+    this.router.navigate(['/ServicesEdit',this.roleID,this.appID,service.ServiceID],{skipLocationChange:true});
   }
 
   async getDependencies(){

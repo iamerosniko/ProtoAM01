@@ -10,7 +10,7 @@ import { Services } from '../../../../../entities/btam-entities';
   styleUrls: ['./services-form.component.css']
 })
 export class ServicesFormComponent implements OnInit {
-
+  public appID:string;
   public roleID : string;
   public serviceID:string;
   public FormLabelState:string;
@@ -25,6 +25,7 @@ export class ServicesFormComponent implements OnInit {
 
   async ngOnInit() {
     this.roleID = this.activatedroute.snapshot.params['roleID'];
+    this.appID = this.activatedroute.snapshot.params['appID'];
     this.serviceID = this.activatedroute.snapshot.params['serviceID'];
 
     this.serviceID!=null?this.getServices():null;
@@ -36,6 +37,8 @@ export class ServicesFormComponent implements OnInit {
   }
 
   async getServices(){
+    this.router.url.includes("Add") ? this.FormLabelState ="New" : this.FormLabelState = "Edit";
+    
     this.services =<Services[]> await this.serviceSvc.getService(this.roleID);
     this.service = <Services> await this.services.find(x=>x.ServiceID==this.serviceID);
 
@@ -44,5 +47,24 @@ export class ServicesFormComponent implements OnInit {
       ServiceName:[this.service.ServiceName,Validators.required],
       ServiceDesc:[this.service.ServiceDesc],
     })
+  }
+
+  async save() {
+    this.service=await this.serviceForm.value;
+    var service:Services ={};
+    if(this.service.ServiceID==null){
+      service = <Services> await this.serviceSvc.postService(this.roleID,this.service);
+    }
+    else{
+      service = <Services> await this.serviceSvc.putService(this.service);
+    }
+    if(service!=null)
+    {
+      await alert("Successfully saved!");
+      this.goBack();
+    }  
+  }
+  goBack(): void {
+    this.router.navigate(['/ApplicationsRolesEdit',this.roleID, this.appID],{skipLocationChange:true});
   }
 }
