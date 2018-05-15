@@ -27,6 +27,11 @@ export class ServicesComponent implements OnInit {
     console.log(service)
     this.router.navigate(['/ServicesEdit',this.roleID,this.appID,service.ServiceID],{skipLocationChange:true});
   }
+  
+  deleteService(service:Services):void{
+    console.log(service)
+    this.router.navigate(['/ServicesDelete',this.roleID,this.appID,service.ServiceID],{skipLocationChange:true});
+  }
 
   async getDependencies(){
     this.services = <Services[]> await this.serviceSvc.getService(this.roleID);
