@@ -17,6 +17,8 @@ namespace BusinessWorkflow.Services
         public UserAppRoleServiceProviders userAppRoleServiceProviders { get; set; }
         public UserProviders userProviders { get; set; }
 
+        public RoleServiceProviders roleServiceProviders { get; set; }
+
 
         public BTAMProviders(string authorizationToken)
         {
@@ -30,6 +32,7 @@ namespace BusinessWorkflow.Services
             userAppRoleServiceProviders = new UserAppRoleServiceProviders(authorizationToken);
             userAppProviders = new UserAppProviders(authorizationToken);
             userProviders = new UserProviders(authorizationToken);
+            roleServiceProviders = new RoleServiceProviders(authorizationToken);
         }
     }
 }
