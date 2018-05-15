@@ -5,11 +5,6 @@ import { ClientApiService } from './clientapi.service';
 import { ClientApiSettings } from './clientapi.settings'; 
 import { Applications } from '../entities/btam-entities';
 
-const apps: Applications[] = [
-    {AppID: "abc", AppName: "test", AppMemberName: "test member"}, 
-    {AppID: "def", AppName: "biztech d", AppMemberName: "Biztech"}
-]
-
 @Injectable()
 export class ApplicationsService {
 

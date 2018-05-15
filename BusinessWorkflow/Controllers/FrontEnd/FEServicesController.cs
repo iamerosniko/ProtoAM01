@@ -54,5 +54,29 @@ namespace BusinessWorkflow.Controllers
 
             return null;
         }
+
+        [HttpPut]
+        public async Task<AM_Service> Put([FromBody] AM_Service service)
+        {
+            if (service != null)
+            {
+                return await _bTAMProviders.serviceProviders.Put(service.ServiceID.ToString(), service);
+            }
+            return null;
+        }
+
+        [HttpDelete("{serviceID}")]
+        public async Task<AM_Service> Delete([FromRoute]int serviceID)
+        {
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+            List<AM_RoleService> roleServices = (await _bTAMProviders.roleServiceProviders.get()).Where(x => x.ServiceID == serviceID).ToList();
+
+            foreach (var roleService in roleServices)
+            {
+                await _bTAMProviders.roleServiceProviders.Delete(roleService.RoleServiceID.ToString());
+            }
+
+            return await _bTAMProviders.serviceProviders.Delete(serviceID.ToString());
+        }
     }
 }

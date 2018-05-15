@@ -19,11 +19,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr >
+          <tr *ngFor="let service of services">
             <td>
-          
+              {{service.ServiceName}}
             </td>
             <td>
+              {{service.ServiceDesc}}
               
             </td>
           </tr>

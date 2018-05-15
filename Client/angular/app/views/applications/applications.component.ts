@@ -17,17 +17,6 @@ export class ApplicationsComponent implements OnInit {
 
   async ngOnInit(){
     await this.getDependencies();
-    /*
-    this.apps= <Applications[]> await this.appSvc.getApplications();
-    this.app = <Applications>await this.appSvc.getApplication("1");
-    var app:Applications={AppMemberName:'sample',AppName:'name',Status:1}
-    await console.log(this.apps);
-    await console.log(this.app);
-    var app1 = <Applications> await this.appSvc.postApplication(app);
-    await console.log(app1);
-    app1.Status=0;
-    await this.appSvc.putApplication(app1);
-    */
   }
 
   addApp(): void {

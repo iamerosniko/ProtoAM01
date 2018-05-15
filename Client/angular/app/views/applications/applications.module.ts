@@ -6,7 +6,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { ApplicationsComponent } from './applications.component';
-import { ClientApiService, ClientApiSettings, ApplicationsService, RoleUsersService } from '../../services/client.services';
+import { ClientApiService, ClientApiSettings, ApplicationsService,
+  RoleUsersService, ServicesService } from '../../services/client.services';
 import { ApplicationsDeleteComponent } from './applications-delete/applications-delete.component';
 import { ApplicationsFormComponent } from './applications-form/applications-form.component';
 import { ApplicationsUsersComponent } from './applications-users/applications-users.component';
@@ -28,6 +29,6 @@ import { ServicesFormComponent } from './applications-roles/applications-roles-f
     FormsModule,ReactiveFormsModule
   ],
   declarations: [ApplicationsComponent,  ApplicationsDeleteComponent, ApplicationsFormComponent, ApplicationsUsersComponent, ApplicationsRolesComponent, ApplicationsRolesDeleteComponent, ApplicationsUsersDeleteComponent, ApplicationsUsersFormComponent, ApplicationsRolesFormComponent, ApplicationsRolesUsersComponent, ServicesComponent, ServicesDeleteComponent, ServicesFormComponent],
-  providers: [ClientApiService, ClientApiSettings, ApplicationsService,RoleUsersService]
+  providers: [ClientApiService, ClientApiSettings, ApplicationsService,RoleUsersService,ServicesService]
 })
 export class ApplicationsModule { }
