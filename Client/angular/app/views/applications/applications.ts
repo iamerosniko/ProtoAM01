@@ -9,3 +9,4 @@ export * from './applications-roles/applications-roles-delete/applications-roles
 export * from './applications-users/applications-users.component'
 export * from './applications-users/applications-users-form/applications-users-form.component'
 export * from './applications-users/applications-users-delete/applications-users-delete.component'
+export * from './applications-roles/applications-roles-form/services-form/services-form.component'

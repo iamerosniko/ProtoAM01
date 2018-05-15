@@ -50,6 +50,10 @@ export class ApplicationsRolesFormComponent implements OnInit {
     this.router.navigate(['/ApplicationsRoles', this.appID],{skipLocationChange:true});
   }
 
+  gotoServices():void{
+    this.router.navigate(['/Services',this.roleID],{skipLocationChange:true});
+  }
+
   async save() {
     this.role=await this.roleForm.value;
     var role:Roles ={};

@@ -21,9 +21,6 @@ export class ServicesComponent implements OnInit {
   }
 
   async getDependencies(){
-    console.log(this.roleID)
-    
     this.services = <Services[]> await this.serviceSvc.getService(this.roleID);
-    console.log(this.services);
   }
 }
