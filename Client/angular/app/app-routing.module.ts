@@ -27,16 +27,16 @@ const routes: Routes = [
   { path: 'ApplicationsAdd', component : ApplicationsFormComponent},
   { path: 'ApplicationsEdit/:id', component : ApplicationsFormComponent},
   { path: 'ApplicationsDelete', component : ApplicationsDeleteComponent},
-  //roles
-  { path: 'ApplicationsRoles/:appID', component: ApplicationsRolesComponent },
-  { path: 'ApplicationsRolesAdd/:appID', component: ApplicationsRolesFormComponent },
-  { path: 'ApplicationsRolesEdit/:roleID/:appID', component: ApplicationsRolesFormComponent },
-  { path: 'ApplicationsRolesDelete/:appID', component: ApplicationsRolesDeleteComponent },
   //users
   { path: 'ApplicationsUsers/:appID', component: ApplicationsUsersComponent },
   { path: 'ApplicationsUsersAdd/:appID', component: ApplicationsUsersFormComponent },
   { path: 'ApplicationsUsersEdit/:userID/:appID', component: ApplicationsUsersFormComponent },
   { path: 'ApplicationsUsersDelete/:appID', component: ApplicationsUsersDeleteComponent },
+  //roles
+  { path: 'ApplicationsRoles/:appID', component: ApplicationsRolesComponent },
+  { path: 'ApplicationsRolesAdd/:appID', component: ApplicationsRolesFormComponent },
+  { path: 'ApplicationsRolesEdit/:roleID/:appID', component: ApplicationsRolesFormComponent },
+  { path: 'ApplicationsRolesDelete/:appID', component: ApplicationsRolesDeleteComponent },
   //services
   { path: 'ServicesAdd/:roleID/:appID', component:ServicesFormComponent},
   { path: 'ServicesEdit/:roleID/:appID/:serviceID', component:ServicesFormComponent},

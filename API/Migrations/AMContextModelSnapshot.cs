@@ -71,6 +71,8 @@ namespace API.Migrations
                     b.Property<int>("InheritedRolesID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("MainRoleID");
+
                     b.Property<int>("RoleID");
 
                     b.HasKey("InheritedRolesID");

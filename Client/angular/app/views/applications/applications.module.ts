@@ -7,7 +7,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { ApplicationsComponent } from './applications.component';
 import { ClientApiService, ClientApiSettings, ApplicationsService,
-  RoleUsersService, ServicesService } from '../../services/client.services';
+  RoleUsersService, ServicesService, InheritedRolesService } from '../../services/client.services';
 import { ApplicationsDeleteComponent } from './applications-delete/applications-delete.component';
 import { ApplicationsFormComponent } from './applications-form/applications-form.component';
 import { ApplicationsUsersComponent } from './applications-users/applications-users.component';
@@ -18,8 +18,9 @@ import { ApplicationsUsersFormComponent } from './applications-users/application
 import { ApplicationsRolesFormComponent } from './applications-roles/applications-roles-form/applications-roles-form.component';
 import { ApplicationsRolesUsersComponent } from './applications-roles/applications-roles-users/applications-roles-users.component';
 import { ServicesComponent } from './applications-roles/applications-roles-form/services/services.component';
-import { ServicesDeleteComponent } from './applications-roles/applications-roles-form/services-delete/services-delete.component';
-import { ServicesFormComponent } from './applications-roles/applications-roles-form/services-form/services-form.component';
+import { ServicesDeleteComponent } from './applications-roles/applications-roles-form/services/services-delete/services-delete.component';
+import { ServicesFormComponent } from './applications-roles/applications-roles-form/services/services-form/services-form.component';
+import { InheritedrolesComponent } from './applications-roles/applications-roles-form/inheritedroles/inheritedroles.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import { ServicesFormComponent } from './applications-roles/applications-roles-f
     PaginationModule.forRoot(),
     FormsModule,ReactiveFormsModule
   ],
-  declarations: [ApplicationsComponent,  ApplicationsDeleteComponent, ApplicationsFormComponent, ApplicationsUsersComponent, ApplicationsRolesComponent, ApplicationsRolesDeleteComponent, ApplicationsUsersDeleteComponent, ApplicationsUsersFormComponent, ApplicationsRolesFormComponent, ApplicationsRolesUsersComponent, ServicesComponent, ServicesDeleteComponent, ServicesFormComponent],
-  providers: [ClientApiService, ClientApiSettings, ApplicationsService,RoleUsersService,ServicesService]
+  declarations: [ApplicationsComponent,  ApplicationsDeleteComponent, ApplicationsFormComponent, ApplicationsUsersComponent, ApplicationsRolesComponent, ApplicationsRolesDeleteComponent, ApplicationsUsersDeleteComponent, ApplicationsUsersFormComponent, ApplicationsRolesFormComponent, ApplicationsRolesUsersComponent, ServicesComponent, ServicesDeleteComponent, ServicesFormComponent, InheritedrolesComponent],
+  providers: [ClientApiService, ClientApiSettings, ApplicationsService, RoleUsersService, ServicesService, InheritedRolesService]
 })
 export class ApplicationsModule { }

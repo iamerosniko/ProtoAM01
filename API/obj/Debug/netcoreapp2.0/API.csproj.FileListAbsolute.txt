@@ -8,3 +8,4 @@ C:\Users\alverer\Documents\GitHub\BTAccessManagement\API\obj\Debug\netcoreapp2.0
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\API\obj\Debug\netcoreapp2.0\API.AssemblyInfo.cs
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\API\obj\Debug\netcoreapp2.0\API.dll
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\API\obj\Debug\netcoreapp2.0\API.pdb
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\API\obj\Debug\netcoreapp2.0\API.csprojResolveAssemblyReference.cache

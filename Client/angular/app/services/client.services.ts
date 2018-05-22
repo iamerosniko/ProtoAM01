@@ -8,3 +8,4 @@ export * from './users.service';
 export * from './roles.service';
 export * from './roleusers.service';
 export * from './services.service';
+export * from './inheritedroles.service';

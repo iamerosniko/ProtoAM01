@@ -382,3 +382,18 @@ END;
 
 GO
 
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180522152700_m015')
+BEGIN
+    ALTER TABLE [AM_InheritedRoles] ADD [MainRoleID] int NOT NULL DEFAULT 0;
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180522152700_m015')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20180522152700_m015', N'2.0.1-rtm-125');
+END;
+
+GO
+

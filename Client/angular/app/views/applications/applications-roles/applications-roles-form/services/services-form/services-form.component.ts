@@ -1,8 +1,8 @@
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ServicesService } from '../../../../../services/client.services';
-import { Services } from '../../../../../entities/btam-entities';
+import { ServicesService } from '../../../../../../services/client.services';
+import { Services } from '../../../../../../entities/btam-entities';
 
 @Component({
   selector: 'app-services-form',

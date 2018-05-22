@@ -20,3 +20,14 @@ C:\Users\martiab\Documents\Project2\ProtoAM01\Client\obj\Debug\netcoreapp2.0\Cli
 C:\Users\martiab\Documents\Project2\ProtoAM01\Client\obj\Debug\netcoreapp2.0\Client.AssemblyInfo.cs
 C:\Users\martiab\Documents\Project2\ProtoAM01\Client\obj\Debug\netcoreapp2.0\Client.dll
 C:\Users\martiab\Documents\Project2\ProtoAM01\Client\obj\Debug\netcoreapp2.0\Client.pdb
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\bin\Debug\netcoreapp2.0\Client.deps.json
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\bin\Debug\netcoreapp2.0\Client.runtimeconfig.json
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\bin\Debug\netcoreapp2.0\Client.runtimeconfig.dev.json
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\bin\Debug\netcoreapp2.0\Client.dll
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\bin\Debug\netcoreapp2.0\Client.pdb
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Debug\netcoreapp2.0\Client.csprojResolveAssemblyReference.cache
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Debug\netcoreapp2.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Debug\netcoreapp2.0\Client.AssemblyInfoInputs.cache
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Debug\netcoreapp2.0\Client.AssemblyInfo.cs
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Debug\netcoreapp2.0\Client.dll
+C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Debug\netcoreapp2.0\Client.pdb
