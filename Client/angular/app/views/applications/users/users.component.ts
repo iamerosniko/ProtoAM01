@@ -6,8 +6,8 @@ import { Users } from '../../../entities/btam-entities';
 
 @Component({
   selector: 'app-applications-users',
-  templateUrl: './applications-users.component.html',
-  styleUrls: ['./applications-users.component.css']
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
 })
 export class ApplicationsUsersComponent implements OnInit {
 

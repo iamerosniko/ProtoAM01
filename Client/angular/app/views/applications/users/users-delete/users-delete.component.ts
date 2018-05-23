@@ -6,8 +6,8 @@ import { Users } from '../../../../entities/btam-entities';
 
 @Component({
   selector: 'app-applications-users-delete',
-  templateUrl: './applications-users-delete.component.html',
-  styleUrls: ['./applications-users-delete.component.css']
+  templateUrl: './users-delete.component.html',
+  styleUrls: ['./users-delete.component.css']
 })
 export class ApplicationsUsersDeleteComponent implements OnInit {
 

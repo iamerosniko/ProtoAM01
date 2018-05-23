@@ -5,8 +5,8 @@ import { Roles } from '../../../entities/btam-entities';
 
 @Component({
   selector: 'app-applications-roles',
-  templateUrl: './applications-roles.component.html',
-  styleUrls: ['./applications-roles.component.css']
+  templateUrl: './roles.component.html',
+  styleUrls: ['./roles.component.css']
 })
 export class ApplicationsRolesComponent implements OnInit {
 

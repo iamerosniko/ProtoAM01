@@ -6,8 +6,8 @@ import { RolesService } from '../../../../services/client.services';
 
 @Component({
   selector: 'app-applications-roles-delete',
-  templateUrl: './applications-roles-delete.component.html',
-  styleUrls: ['./applications-roles-delete.component.css']
+  templateUrl: './roles-delete.component.html',
+  styleUrls: ['./roles-delete.component.css']
 })
 export class ApplicationsRolesDeleteComponent implements OnInit {
   

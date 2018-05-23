@@ -6,8 +6,8 @@ import { Users } from '../../../../entities/btam-entities';
 
 @Component({
   selector: 'app-applications-users-form',
-  templateUrl: './applications-users-form.component.html',
-  styleUrls: ['./applications-users-form.component.css']
+  templateUrl: './users-form.component.html',
+  styleUrls: ['./users-form.component.css']
 })
 export class ApplicationsUsersFormComponent implements OnInit {
 
