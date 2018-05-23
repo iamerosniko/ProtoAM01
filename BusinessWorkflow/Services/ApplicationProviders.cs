@@ -12,24 +12,9 @@ namespace BusinessWorkflow.Services
         private ApiServices _api;
         private string _authorizationtoken;
 
-        private AttributeProviders _attributeProviders;
-        private RoleProviders _roleProviders;
-        private ServiceProviders _serviceProviders;
-        private ServiceAttributeProviders _serviceAttributeProviders;
-        private UserProviders _userProviders;
-        private UserAppProviders _userAppProviders;
-
-
         public ApplicationProviders(string token)
         {
             _authorizationtoken = token;
-            //instantiate providers
-            _attributeProviders = new AttributeProviders(token);
-            _roleProviders = new RoleProviders(token);
-            _serviceProviders = new ServiceProviders(token);
-            _serviceAttributeProviders = new ServiceAttributeProviders(token);
-            _userProviders = new UserProviders(token);
-            _userAppProviders = new UserAppProviders(token);
         }
 
         #region API

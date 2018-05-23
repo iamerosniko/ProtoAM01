@@ -3,7 +3,6 @@ using BusinessWorkflow.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Services
@@ -108,34 +107,6 @@ namespace BusinessWorkflow.Services
         }
 
         #endregion
-
-        #endregion
-
-        #region On Delete
-
-        public async Task<bool> DeleteAppRoleServices(List<AM_AppRoleService> appRoleServices)
-        {
-            foreach (AM_AppRoleService appRoleService in appRoleServices)
-            {
-                await _roleProviders.Delete(appRoleService.RoleID.ToString());
-                await DeleteInheritedRoles(appRoleService.AppRoleServiceID);
-                await Delete(appRoleService.RoleID.ToString());
-            }
-
-            return true;
-        }
-
-        public async Task<bool> DeleteInheritedRoles(int roleID)
-        {
-            var inheritedRoles = await _inheritedRolesProviders.get();
-            inheritedRoles = inheritedRoles.Where(x => x.RoleID == roleID).ToList();
-
-            foreach (AM_InheritedRole inheritedRole in inheritedRoles)
-            {
-                await _inheritedRolesProviders.Delete(inheritedRole.InheritedRolesID.ToString());
-            }
-            return true;
-        }
 
         #endregion
 

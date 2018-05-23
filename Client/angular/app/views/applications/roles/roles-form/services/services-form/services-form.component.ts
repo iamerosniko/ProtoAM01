@@ -24,6 +24,7 @@ export class ServicesFormComponent implements OnInit {
     private serviceSvc : ServicesService,private fb:FormBuilder) { }
 
   async ngOnInit() {
+    this.router.url.includes("Add") ? this.FormLabelState ="New" : this.FormLabelState = "Edit";
     this.roleID = this.activatedroute.snapshot.params['roleID'];
     this.appID = this.activatedroute.snapshot.params['appID'];
     this.serviceID = this.activatedroute.snapshot.params['serviceID'];
@@ -37,7 +38,6 @@ export class ServicesFormComponent implements OnInit {
   }
 
   async getServices(){
-    this.router.url.includes("Add") ? this.FormLabelState ="New" : this.FormLabelState = "Edit";
     
     this.services =<Services[]> await this.serviceSvc.getService(this.roleID);
     this.service = <Services> await this.services.find(x=>x.ServiceID==this.serviceID);
@@ -66,5 +66,8 @@ export class ServicesFormComponent implements OnInit {
   }
   goBack(): void {
     this.router.navigate(['/ApplicationsRolesEdit',this.roleID, this.appID],{skipLocationChange:true});
+  }
+  gotoAttributes():void{
+    this.router.navigate(['/AttributesAdd',this.roleID, this.appID,this.serviceID],{skipLocationChange:true});
   }
 }

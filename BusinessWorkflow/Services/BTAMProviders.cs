@@ -8,7 +8,6 @@ namespace BusinessWorkflow.Services
     {
         public ApplicationProviders applicationProviders { get; set; }
         public AppRoleServiceProviders appRoleServiceProviders { get; set; }
-        public AttributeProviders attributeProviders { get; set; }
         public InheritedRolesProviders inheritedRolesProviders { get; set; }
         public RoleProviders roleProviders { get; set; }
         public ServiceAttributeProviders serviceAttributeProviders { get; set; }
@@ -24,7 +23,6 @@ namespace BusinessWorkflow.Services
         {
             applicationProviders = new ApplicationProviders(authorizationToken);
             appRoleServiceProviders = new AppRoleServiceProviders(authorizationToken);
-            attributeProviders = new AttributeProviders(authorizationToken);
             inheritedRolesProviders = new InheritedRolesProviders(authorizationToken);
             roleProviders = new RoleProviders(authorizationToken);
             serviceAttributeProviders = new ServiceAttributeProviders(authorizationToken);

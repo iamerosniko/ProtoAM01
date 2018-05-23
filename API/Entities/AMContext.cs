@@ -10,7 +10,6 @@ namespace API.Entities
         }
 
         public DbSet<AM_Application> Applications { get; set; }
-        public DbSet<AM_Attribute> Attributes { get; set; }
         public DbSet<AM_Role> Roles { get; set; }
         public DbSet<AM_Service> Services { get; set; }
         public DbSet<AM_User> Users { get; set; }

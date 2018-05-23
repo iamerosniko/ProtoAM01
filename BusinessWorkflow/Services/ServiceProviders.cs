@@ -12,13 +12,11 @@ namespace BusinessWorkflow.Services
     {
         private ApiServices _api;
         private string _authorizationtoken;
-        private AttributeProviders _attributeProviders;
         private ServiceAttributeProviders _serviceAttributeProviders;
 
         public ServiceProviders(string token)
         {
             _authorizationtoken = token;
-            _attributeProviders = new AttributeProviders(token);
             _serviceAttributeProviders = new ServiceAttributeProviders(token);
         }
 
@@ -131,7 +129,7 @@ namespace BusinessWorkflow.Services
             foreach (AM_ServiceAttribute serviceAttribute in serviceAttributes)
             {
                 //delete attributes
-                await _attributeProviders.Delete(serviceAttribute.AttribID.ToString());
+                //await _attributeProviders.Delete(serviceAttribute.AttribID.ToString());
                 await _serviceAttributeProviders.Delete(serviceAttribute.ServiceAttributeID.ToString());
             }
             return true;

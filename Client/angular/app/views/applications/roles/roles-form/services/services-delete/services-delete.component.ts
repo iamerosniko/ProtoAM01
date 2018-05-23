@@ -41,7 +41,7 @@ export class ServicesDeleteComponent implements OnInit {
     console.log(this.service.ServiceID)
     service.ServiceID==this.service.ServiceID 
     ?(
-      alert("Successfully saved!"),
+      alert("Successfully deleted!"),
       await this.goBack()
     ):null;
   }

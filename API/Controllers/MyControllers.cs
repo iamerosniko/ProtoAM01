@@ -7,7 +7,6 @@ namespace API.Controllers
         private readonly AMContext _context;
         public ApplicationsController applicationsController { get; set; }
         public AppRoleServicesController appRoleServicesController { get; set; }
-        public AttributesController attributesController { get; set; }
         public InheritedRolesController inheritedRolesController { get; set; }
         public RolesController rolesController { get; set; }
         public ServiceAttributesController serviceAttributesController { get; set; }
@@ -21,7 +20,6 @@ namespace API.Controllers
             _context = context;
             applicationsController = new ApplicationsController(context);
             appRoleServicesController = new AppRoleServicesController(context);
-            attributesController = new AttributesController(context);
             inheritedRolesController = new InheritedRolesController(context);
             rolesController = new RolesController(context);
             serviceAttributesController = new ServiceAttributesController(context);

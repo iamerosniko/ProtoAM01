@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="IIS Web Application Name" description="" value="BTAccessManagementAPI-DEV" tags="IisApp">
+  <parameter name="IIS Web Application Name" description="" value="BTAMAPIService" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\alverer\\Documents\\GitHub\\BTAccessManagement\\API\\obj\\Release\\netcoreapp2\.0\\PubTmp\\Out\\$" />
-  </parameter>
-  <parameter name="API.Entities.AMContext" description="" value="Data Source=skillsetapidbserver.database.windows.net;Initial Catalog=BTAccessManagementAPI-DEV_db;User Id=biztech;Password=BizT3chAzure" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\alverer\\Documents\\GitHub\\BTAccessManagement\\API\\obj\\Release\\netcoreapp2\.0\\PubTmp\\EFSQLScripts\\API\.Entities\.AMContext\.sql$" />
   </parameter>
 </parameters>

@@ -22,7 +22,9 @@
         <tbody>
           <tr *ngFor="let service of services">
             <td>
-              {{service.ServiceName}}
+              <a role="button" (click)="openService(service)">
+                {{service.ServiceName}}
+              </a>  
             </td>
             <td>
               {{service.ServiceDesc}}

@@ -32,7 +32,7 @@ export class ApplicationsDeleteComponent implements OnInit {
     console.log(this.app.AppID)
     app.AppID==this.app.AppID 
     ?(
-      alert("Successfully saved!"),
+      alert("Successfully deleted!"),
       await this.goBack()
     ):null;
   }

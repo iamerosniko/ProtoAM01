@@ -30,7 +30,7 @@ export class ApplicationsUsersDeleteComponent implements OnInit {
     var user:Users =await this.userSvc.deleteUser(this.user.UserID.toString())
     user!=null
     ?(
-      alert("Successfully saved!"),
+      alert("Successfully deleted!"),
       await this.goBack()
     ):null;
   }

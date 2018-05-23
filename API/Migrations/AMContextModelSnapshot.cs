@@ -52,20 +52,6 @@ namespace API.Migrations
                     b.ToTable("AM_AppRoleServices");
                 });
 
-            modelBuilder.Entity("API.Entities.AM_Attribute", b =>
-                {
-                    b.Property<int>("AttribID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AttribDesc");
-
-                    b.Property<string>("AttribName");
-
-                    b.HasKey("AttribID");
-
-                    b.ToTable("AM_Attributes");
-                });
-
             modelBuilder.Entity("API.Entities.AM_InheritedRole", b =>
                 {
                     b.Property<int>("InheritedRolesID")
@@ -125,7 +111,9 @@ namespace API.Migrations
                     b.Property<int>("ServiceAttributeID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AttribID");
+                    b.Property<string>("AttribDesc");
+
+                    b.Property<string>("AttribName");
 
                     b.Property<int>("ServiceID");
 

@@ -6,6 +6,14 @@
         Back
       </a>
     </div>
+    <div class="col-md-6" *ngIf="FormLabelState!='New'">
+      <div class="btn-group pull-right">
+        <a class="btn btn-primary btn-sm" (click)="gotoAttributes()">
+          <i class="fa fa-universal-access"></i>
+          Attributes
+        </a>
+      </div>
+    </div>
   </div>
   <br />
   <div class="row">
@@ -44,6 +52,19 @@
           </div>
         </form>
       </div>
+    </div>
+  </div>
+  <hr />
+    
+  <div class="row" *ngIf="serviceID!=null">
+    <div class="container">
+      
+      <tabset>
+        <tab heading="Attributes" id="tab1">
+          <app-attributes></app-attributes>
+        </tab>
+      </tabset>
+      
     </div>
   </div>
 </div>

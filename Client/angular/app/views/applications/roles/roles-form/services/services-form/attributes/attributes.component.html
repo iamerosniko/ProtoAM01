@@ -1,0 +1,47 @@
+<div class="container-fluid" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-9">
+            <input type="text" class="form-control input-sm pull-right" placeholder="Search..."/>
+            </div>
+        </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+        <table class="table table-bordered table-hover table-striped input-sm">
+            <thead>
+            <tr>
+                <th>Attribute Name</th>
+                <th>Attribute Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let attribute of attributes">
+                <td>
+                <a role="button" (click)="openAttribute(attribute)">
+                    {{attribute.AttribName}}
+                </a>  
+                </td>
+                <td>
+                    {{attribute.AttribDesc}}
+                </td>
+                <td>
+                <div class="btn-group">
+                    <a class="btn btn-default btn-xs" title="Edit" (click)="openAttribute(attribute)"> <!--(click)="editApp({{app.AppID}})">-->
+                    <i class="fa fa-edit"></i>
+                    </a>
+                    <a class="btn btn-danger btn-xs" title="Delete" (click)="deleteAttribute(attribute)"> <!--(click)="deleteApp({{app.AppID}})">-->
+                    <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>

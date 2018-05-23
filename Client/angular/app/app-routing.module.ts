@@ -15,7 +15,7 @@ import { RedirectingComponent } from './views/others/redirecting/redirecting.com
 import {
   ApplicationsComponent,ApplicationsDeleteComponent,ApplicationsFormComponent,ApplicationsRolesComponent,ApplicationsUsersComponent,
   ApplicationsRolesFormComponent,ApplicationsUsersFormComponent,ApplicationsRolesDeleteComponent,ApplicationsUsersDeleteComponent,
-  ServicesFormComponent,ServicesDeleteComponent
+  ServicesFormComponent,ServicesDeleteComponent,AttributesDeleteComponent,AttributesFormComponent
 } from './views/applications/applications'
 
 import { AuthGuard } from './auth-guard.services';
@@ -41,6 +41,10 @@ const routes: Routes = [
   { path: 'ServicesAdd/:roleID/:appID', component:ServicesFormComponent},
   { path: 'ServicesEdit/:roleID/:appID/:serviceID', component:ServicesFormComponent},
   { path: 'ServicesDelete/:roleID/:appID/:serviceID',component:ServicesDeleteComponent},
+  //attributes
+  { path: 'AttributesAdd/:roleID/:appID/:serviceID',component:AttributesFormComponent},
+  { path: 'AttributesEdit/:roleID/:appID/:serviceID/:attributeID',component:AttributesFormComponent},
+  { path: 'AttributesDelete/:roleID/:appID/:serviceID/:attributeID',component:AttributesDeleteComponent},
   // { path: 'Reports', component : ReportsComponent },
   // { path: 'Survey', component : SurveysComponent},
  

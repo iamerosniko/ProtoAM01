@@ -1,5 +1,4 @@
 ﻿using BusinessWorkflow.Models;
-using BusinessWorkflow.Models.DTOs;
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -77,63 +76,6 @@ namespace BusinessWorkflow.Controllers
             return tempRole;
         }
 
-        //when adding services 
-        [HttpPost("ToService/{appRoleServiceID}")]
-        public async Task<List<AM_AppRoleService>> ToAppRoleService([FromRoute]int applicationID, [FromBody] AppRoleServicesDTO role)
-        {
-            /* SEQUENCE
-                0) Role
-                1) Service
-                2) Attribute
-                3) Loop then add ids of Attribute and Services to ServiceAttributes
-                4) add ids of Application, Role and service to AppRoleServiceID
-                5) loop 1 - 4 until list of service is empty
-             */
-            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-
-            //dummy
-            List<AM_AppRoleService> tempAppRoleServices = new List<AM_AppRoleService>();
-
-            var tempRole = role.Role;
-            tempRole = await _bTAMProviders.roleProviders.Post(tempRole);
-
-
-            foreach (var service in role.Services)
-            {
-                var tempService = new AM_Service
-                {
-                    ServiceDesc = service.ServiceDesc,
-                    ServiceName = service.ServiceName
-                };
-
-                tempService = await _bTAMProviders.serviceProviders.Post(tempService);
-
-                foreach (var attribute in service.Attributes)
-                {
-                    var tempAttribute = attribute;
-                    tempAttribute = await _bTAMProviders.attributeProviders.Post(tempAttribute);
-
-                    var tempServiceAttribute = await _bTAMProviders.serviceAttributeProviders.Post(
-                            new AM_ServiceAttribute
-                            {
-                                AttribID = tempAttribute.AttribID,
-                                ServiceID = tempService.ServiceID
-                            }
-                        );
-                }
-
-                var tempAppRoleService = new AM_AppRoleService
-                {
-                    AppID = applicationID,
-                    RoleID = tempRole.RoleID,
-                };
-
-                tempAppRoleService = await _bTAMProviders.appRoleServiceProviders.Post(tempAppRoleService);
-                tempAppRoleServices.Add(tempAppRoleService);
-            }
-
-            return tempAppRoleServices;
-        }
 
         public async Task<bool> Cascade(int roleID)
         {
@@ -199,7 +141,7 @@ namespace BusinessWorkflow.Controllers
                     //serviceattributes
                     await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
                     //attributes
-                    await _bTAMProviders.attributeProviders.Delete(serviceattribute.AttribID.ToString());
+                    //await _bTAMProviders.attributeProviders.Delete(serviceattribute.AttribID.ToString());
                 }
 
 
@@ -218,16 +160,16 @@ namespace BusinessWorkflow.Controllers
             {
                 //for deletion of roles
 
-                var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.AttribID == attrubuteID).ToList();
+                //var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.AttribID == attrubuteID).ToList();
 
 
-                foreach (var serviceattribute in serviceattributes)
-                {
-                    //serviceattributes
-                    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
-                    //attributes
-                    await _bTAMProviders.serviceProviders.Delete(serviceattribute.ServiceID.ToString());
-                }
+                //foreach (var serviceattribute in serviceattributes)
+                //{
+                //    //serviceattributes
+                //    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
+                //    //attributes
+                //    await _bTAMProviders.serviceProviders.Delete(serviceattribute.ServiceID.ToString());
+                //}
 
 
                 return true;

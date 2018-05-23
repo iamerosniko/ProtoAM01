@@ -30,7 +30,7 @@ export class ApplicationsRolesDeleteComponent implements OnInit {
     var role:Roles =await this.roleSvc.deleteRole(this.role.RoleID.toString())
     role!=null
     ?(
-      alert("Successfully saved!"),
+      alert("Successfully deleted!"),
       await this.goBack()
     ):null;
   }
