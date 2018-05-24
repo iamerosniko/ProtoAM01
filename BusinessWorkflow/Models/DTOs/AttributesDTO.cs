@@ -1,8 +1,7 @@
-﻿namespace BusinessWorkflow.Models
+﻿namespace BusinessWorkflow.Models.DTOs
 {
-    public class AM_Attribute
+    public class AttributesDTO
     {
-        public int AttribID { get; set; }
         public string AttribName { get; set; }
         public string AttribDesc { get; set; }
     }

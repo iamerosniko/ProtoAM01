@@ -1,4 +1,6 @@
-﻿namespace BusinessWorkflow.Models.DTOs
+﻿using System.Collections.Generic;
+
+namespace BusinessWorkflow.Models.DTOs
 {
     public class UserAppRoleDTO
     {
@@ -9,5 +11,8 @@
         public string LastName { get; set; }
         public int RoleID { get; set; }
         public string Role { get; set; }
+        public List<ServiceDTO> services { get; set; }
     }
+
+
 }

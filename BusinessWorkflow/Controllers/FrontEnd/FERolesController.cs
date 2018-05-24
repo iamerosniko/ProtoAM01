@@ -153,31 +153,31 @@ namespace BusinessWorkflow.Controllers
             }
         }
 
-        public async Task<bool> Cascade3(int attrubuteID)
-        {
-            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-            try
-            {
-                //for deletion of roles
+        //public async Task<bool> Cascade3(int attrubuteID)
+        //{
+        //    _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+        //    try
+        //    {
+        //        //for deletion of roles
 
-                //var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.AttribID == attrubuteID).ToList();
-
-
-                //foreach (var serviceattribute in serviceattributes)
-                //{
-                //    //serviceattributes
-                //    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
-                //    //attributes
-                //    await _bTAMProviders.serviceProviders.Delete(serviceattribute.ServiceID.ToString());
-                //}
+        //        //var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.AttribID == attrubuteID).ToList();
 
 
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        //        //foreach (var serviceattribute in serviceattributes)
+        //        //{
+        //        //    //serviceattributes
+        //        //    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
+        //        //    //attributes
+        //        //    await _bTAMProviders.serviceProviders.Delete(serviceattribute.ServiceID.ToString());
+        //        //}
+
+
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }

@@ -24,6 +24,15 @@ namespace BusinessWorkflow.Controllers.FrontEnd
             return allServiceAttributes.Where(x => x.ServiceID == serviceID).ToList();
         }
 
+        public async Task<List<AM_ServiceAttribute>> GetAttributes([FromRoute]int serviceID, string authorization)
+        {
+            _bTAMProviders = new BTAMProviders(authorization);
+
+            var allServiceAttributes = await _bTAMProviders.serviceAttributeProviders.get();
+
+            return allServiceAttributes.Where(x => x.ServiceID == serviceID).ToList();
+        }
+
         [HttpPost]
         public async Task<AM_ServiceAttribute> PostAttribute([FromBody]AM_ServiceAttribute attribute)
         {

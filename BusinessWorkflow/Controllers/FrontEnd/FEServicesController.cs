@@ -34,6 +34,24 @@ namespace BusinessWorkflow.Controllers
             return services;
         }
 
+        public async Task<List<AM_Service>> Get([FromRoute]int roleID, string authorization)
+        {
+            _bTAMProviders = new BTAMProviders(authorization);
+
+            List<AM_Service> services = new List<AM_Service>();
+            List<AM_RoleService> roleServices = await _bTAMProviders.roleServiceProviders.get();
+
+            foreach (var roleService in roleServices.Where(x => x.RoleID == roleID))
+            {
+                var service = await _bTAMProviders.serviceProviders.get(roleService.ServiceID.ToString());
+                if (service != null)
+                {
+                    services.Add(service);
+                }
+            }
+
+            return services;
+        }
 
         [HttpPost("{roleID}")]
         public async Task<AM_RoleService> Post([FromRoute]int roleID, [FromBody] AM_Service service)
