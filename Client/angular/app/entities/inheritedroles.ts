@@ -4,5 +4,7 @@ export interface InheritedRoles {
     MainRoleID ?:string,
     RoleID?:string;
     RoleName?:string,    
-    IsChecked?:boolean
+    IsChecked?:boolean,
+    IsEnabled?:boolean,
+    inHeritedRoles?:InheritedRoles[]
 }

@@ -8,5 +8,6 @@
         public int RoleID { get; set; }
         public string RoleName { get; set; }
         public bool IsChecked { get; set; }
+        public bool IsEnabled { get; set; }
     }
 }

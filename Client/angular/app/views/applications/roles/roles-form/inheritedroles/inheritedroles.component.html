@@ -15,6 +15,7 @@
         <thead>
           <tr>
             <th>RoleName</th>
+            <th>Roles Inherited</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -24,7 +25,14 @@
               {{inheritedRole.RoleName}}
             </td>
             <td>
-              <input type="checkbox" [(ngModel)]="inheritedRole.IsChecked" (click)="inheritRole(inheritedRole)"/>
+              <table class="table table-bordered table-hover table-striped input-sm">
+                <tr *ngFor="let ir of inheritedRole.inHeritedRoles">
+                  <th>{{ir.RoleName}}</th>
+                </tr>                
+              </table>
+            </td>
+            <td>
+              <input [disabled]="!inheritedRole.IsEnabled" type="checkbox" [(ngModel)]="inheritedRole.IsChecked" (click)="inheritRole(inheritedRole)"/>
             </td>
           </tr>
         </tbody>

@@ -45,10 +45,10 @@ namespace BusinessWorkflow.Controllers.FrontEnd
             inheritedroles = allInheritedroles.Where(x => x.MainRoleID == RoleID).ToList();
             invalidRoles = allInheritedroles.Where(x => x.RoleID == RoleID).ToList();
 
-            foreach (var inheritedRole in invalidRoles)
-            {
-                roles = roles.Where(x => x.RoleID != inheritedRole.MainRoleID).ToList();
-            }
+            //foreach (var inheritedRole in invalidRoles)
+            //{
+            //    roles = roles.Where(x => x.RoleID != inheritedRole.MainRoleID).ToList();
+            //}
 
             //gets selected inheritedrole
             foreach (var inheritedRole in inheritedroles)
@@ -66,7 +66,6 @@ namespace BusinessWorkflow.Controllers.FrontEnd
                     });
                     roles = roles.Where(x => x.RoleID != role.RoleID).ToList();
                 }
-                //ir.Add
             }
 
             foreach (var role in roles)
@@ -79,7 +78,18 @@ namespace BusinessWorkflow.Controllers.FrontEnd
                 });
             }
 
-            return ir;
+            //filter ir if there's a inherited part
+            var irItems = new List<InheritedRolesDTO>();
+            foreach (var irItem in ir)
+            {
+                inheritedroles = allInheritedroles.Where(x => x.MainRoleID == irItem.RoleID).ToList();
+                foreach (var inheritedRolesItem in inheritedroles)
+                {
+                    irItems = irItems.Concat(ir.Where(x => x.RoleID != inheritedRolesItem.RoleID).ToList()).ToList();
+                }
+            }
+
+            return irItems.Count() == 0 ? ir : irItems.Distinct().ToList();
         }
 
         public async Task<List<InheritedRolesDTO>> GetRoles([FromRoute]int AppID, [FromRoute]int RoleID, string authorization)
@@ -152,6 +162,7 @@ namespace BusinessWorkflow.Controllers.FrontEnd
         public async Task<AM_InheritedRole> postInheritedRole([FromBody] AM_InheritedRole inheritedRole)
         {
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+
             return await _bTAMProviders.inheritedRolesProviders.Post(inheritedRole);
         }
         [HttpDelete("{InheritedRoleID}")]

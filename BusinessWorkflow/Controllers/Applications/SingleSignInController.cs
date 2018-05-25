@@ -232,7 +232,7 @@ namespace BusinessWorkflow.Controllers
             #endregion
         }
 
-        [Route("AppSignIn")]
+        [Route("AppSignIn2")]
         [HttpPost]
         public async Task<UserAppRoleDTO> AppSignInWithServiceAttributes([FromBody] AM_AppSignIn appSignIn)
         {
@@ -311,7 +311,7 @@ namespace BusinessWorkflow.Controllers
                     }
                     #endregion
                     signedUser = users.Where(x => x.UserName == appSignIn.UserName.ToLower()).FirstOrDefault();
-                    signedUser = await getServices(applicationID, signedUser, HttpContext.Session.GetString("authorizationToken"));
+                    signedUser = await getServiceAttributes(applicationID, signedUser, HttpContext.Session.GetString("authorizationToken"));
                 }
             }
             catch (Exception Ex)
@@ -323,7 +323,7 @@ namespace BusinessWorkflow.Controllers
             return signedUser;
         }
 
-        public async Task<UserAppRoleDTO> getServices(int appID, UserAppRoleDTO userDetails, string authorizaion)
+        public async Task<UserAppRoleDTO> getServiceAttributes(int appID, UserAppRoleDTO userDetails, string authorization)
         {
             //get inherited roles
             FEInheritedRolesController inheritedrolesController = new FEInheritedRolesController();
@@ -331,40 +331,65 @@ namespace BusinessWorkflow.Controllers
             FEAttributesController attributesController = new FEAttributesController();
             List<ServiceDTO> serviceAttributes = new List<ServiceDTO>();
 
-            var roles = await inheritedrolesController.GetRoles(appID, userDetails.RoleID, authorizaion);
+            //var roles = await inheritedrolesController.GetRoles(appID, userDetails.RoleID, authorization);
+            var roles = await getInheritedRoles(appID, userDetails.RoleID, authorization);
 
             foreach (var role in roles)
             {
-                var services = await servicesController.Get(role.RoleID, authorizaion);
+                var tempservices = await servicesController.Get(role.RoleID, authorization);
 
-                foreach (var service in services)
+                foreach (var service in tempservices)
                 {
-                    List<AttributesDTO> attributes = new List<AttributesDTO>();
-                    var tempAttributes = await attributesController.GetAttributes(service.ServiceID, authorizaion);
-
-                    foreach (var attribute in tempAttributes)
-                    {
-                        attributes.Add(new AttributesDTO
-                        {
-                            AttribDesc = attribute.AttribDesc,
-                            AttribName = attribute.AttribName
-                        });
-                    }
-                    serviceAttributes.Add(new ServiceDTO
-                    {
-                        ServiceName = service.ServiceName,
-                        ServiceID = service.ServiceID,
-                        ServiceDesc = service.ServiceDesc,
-                        Attributes = attributes
-                    });
+                    serviceAttributes.Add(await getServiceAttributesDetails(attributesController, service, authorization));
                 }
+
             }
+
+            //for main role
+            var services = await servicesController.Get(userDetails.RoleID, authorization);
+
+            foreach (var service in services)
+            {
+                serviceAttributes.Add(await getServiceAttributesDetails(attributesController, service, authorization));
+            }
+
             //filter service
 
             //add services
             userDetails.services = serviceAttributes;
 
             return userDetails;
+        }
+
+
+
+        private async Task<List<InheritedRolesDTO>> getInheritedRoles(int appID, int roleID, string authorization)
+        {
+            FEInheritedRolesController inheritedrolesController = new FEInheritedRolesController();
+
+            return await inheritedrolesController.GetRoles(appID, roleID, authorization);
+        }
+
+        private async Task<ServiceDTO> getServiceAttributesDetails(FEAttributesController attributesController, AM_Service service, string authorization)
+        {
+            List<AttributesDTO> attributes = new List<AttributesDTO>();
+            var tempAttributes = await attributesController.GetAttributes(service.ServiceID, authorization);
+
+            foreach (var attribute in tempAttributes)
+            {
+                attributes.Add(new AttributesDTO
+                {
+                    AttribDesc = attribute.AttribDesc,
+                    AttribName = attribute.AttribName
+                });
+            }
+            return new ServiceDTO
+            {
+                ServiceName = service.ServiceName,
+                ServiceID = service.ServiceID,
+                ServiceDesc = service.ServiceDesc,
+                Attributes = attributes
+            };
         }
 
         private List<Claim> GetCurrentClaims(UserAppRoleDTO currentUser)
@@ -379,5 +404,4 @@ namespace BusinessWorkflow.Controllers
             return claims;
         }
     }
-
 }
