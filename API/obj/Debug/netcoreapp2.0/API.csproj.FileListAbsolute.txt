@@ -8,3 +8,4 @@ C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\API\obj\Debug\netcoreapp2.0\API.As
 C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\API\obj\Debug\netcoreapp2.0\API.AssemblyInfo.cs
 C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\API\obj\Debug\netcoreapp2.0\API.dll
 C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\API\obj\Debug\netcoreapp2.0\API.pdb
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\API\obj\Debug\netcoreapp2.0\API.csprojResolveAssemblyReference.cache

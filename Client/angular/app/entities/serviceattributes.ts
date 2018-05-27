@@ -1,7 +1,7 @@
 
 export interface ServiceAttributes {
     ServiceAttributeID ?: string,
-    ServiceID ?: string,
+    RoleServiceID ?: string,
     AttribName ?: string,
     AttribDesc ?: string,
 }

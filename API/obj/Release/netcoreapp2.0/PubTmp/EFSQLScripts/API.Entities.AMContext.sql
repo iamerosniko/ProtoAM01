@@ -481,3 +481,18 @@ END;
 
 GO
 
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180527195036_m018')
+BEGIN
+    EXEC sp_rename N'AM_ServiceAttributes.ServiceID', N'RoleServiceID', N'COLUMN';
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180527195036_m018')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20180527195036_m018', N'2.0.1-rtm-125');
+END;
+
+GO
+

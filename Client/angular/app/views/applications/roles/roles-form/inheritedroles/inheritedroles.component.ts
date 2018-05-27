@@ -25,7 +25,7 @@ export class InheritedrolesComponent implements OnInit {
       element.inHeritedRoles = (await this.irSvc.getRoles(this.appID,element.RoleID));
       element.inHeritedRoles = await element.inHeritedRoles.filter(x=>x.IsChecked==true);
       element.IsEnabled=true;
-      console.log(element.inHeritedRoles.length);
+      // console.log(element.inHeritedRoles.length);
       if(element.inHeritedRoles.length>0){
         var checkIfMeIsInherited = element.inHeritedRoles.find(x=>x.RoleID==this.roleID);
         if(checkIfMeIsInherited!=null){
@@ -33,7 +33,7 @@ export class InheritedrolesComponent implements OnInit {
         }
         element.inHeritedRoles.forEach( irSub => {
           var test = this.inheritedRoles.find(x=>x.RoleID==irSub.RoleID)
-          console.log(test)
+          // console.log(test)
           if(test!=null){
             this.inheritedRoles=this.inheritedRoles.filter(x=>x.RoleID!=test.RoleID);
           }
@@ -54,7 +54,7 @@ export class InheritedrolesComponent implements OnInit {
     //   ir=await this.irSvc.deleteInheritedRole(ir.InheritedRolesID.toString())
     // }
     // this.inheritedRoles=<InheritedRoles[]> await this.irSvc.getRoles(this.appID,this.roleID);
-    console.log(this.inheritedRoles);
+    // console.log(this.inheritedRoles);
     
   }
 }

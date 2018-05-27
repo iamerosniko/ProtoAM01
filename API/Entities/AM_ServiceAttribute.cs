@@ -9,7 +9,7 @@ namespace API.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ServiceAttributeID { get; set; }
-        public int ServiceID { get; set; }
+        public int RoleServiceID { get; set; }
         public string AttribName { get; set; }
         public string AttribDesc { get; set; }
     }

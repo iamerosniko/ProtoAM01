@@ -33,7 +33,7 @@ export class AttributesFormComponent implements OnInit {
     this.attributeID!=null?this.getServices():null;
 
     this.attributeForm = this.fb.group({
-      ServiceID:[this.serviceID],
+      RoleServiceID:[this.serviceID],
       AttribName:[this.attribute.AttribName,Validators.required],
       AttribDesc:[this.attribute.AttribDesc],
     })
@@ -47,7 +47,7 @@ export class AttributesFormComponent implements OnInit {
 
     this.attributeForm = this.fb.group({
       ServiceAttributeID:[this.attribute.ServiceAttributeID],
-      ServiceID:[this.attribute.ServiceID],
+      RoleServiceID:[this.attribute.RoleServiceID],
       AttribName:[this.attribute.AttribName,Validators.required],
       AttribDesc:[this.attribute.AttribDesc],
     })
