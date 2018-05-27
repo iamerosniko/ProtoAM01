@@ -22,17 +22,19 @@ namespace BusinessWorkflow.Controllers
         #region PrivateVariables
         BTAMProviders _bTAMProviders;
         string _authorization;
-        List<UserAppRoleDTO> _allUsers;
-        List<AM_Application> _allApps ;
+        List<AM_Application> _allApps;
+        List<AM_Role> _allRoles;
+        List<AM_User> _allUsers;
         List<AM_UserApp> _allUserApps;
-        List<AM_Role> _allRoles ;
         List<AM_UserAppRoleService> _allUserAppRoleServices;
         List<AM_AppRoleService> _allAppRoleServices;
-        List<AM_InheritedRole> _allInheritedRoles;
+        List<AM_RoleService> _allRoleServices;
         List<AM_ServiceAttribute> _allServiceAttributes;
+        List<AM_InheritedRole> _allInheritedRoles;
+
         List<ServiceDTO> _myServiceDTOs;
-        UserAppRoleDTO _signedUser ;
-        
+        UserAppRoleDTO _signedUser;
+        List<UserAppRoleDTO> _allUsersDTO;
         #endregion
 
         [Route("AppSignIn")]
@@ -40,92 +42,95 @@ namespace BusinessWorkflow.Controllers
         public async Task<UserAppRoleDTO> AppSignIn([FromBody] AM_AppSignIn appSignIn)
         {
             //lists of users, roles, and apps in btam
-            #region ListsInitialization
-            List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
-            List<AM_Application> apps = new List<AM_Application>();
-            List<AM_Role> roles = new List<AM_Role>();
-            UserAppRoleDTO signedUser = new UserAppRoleDTO();
-            #endregion
-            #region ProvidersInitialization
-            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-            #endregion
-            #region BTAMData
-            //to see the user in every application 
-            var userApps = await _bTAMProviders.userAppProviders.get();
-            //to see the user app role services in all application
-            var userAppRoleServices = await _bTAMProviders.userAppRoleServiceProviders.get();
-            //to see the app role in all applications
-            var appRoleServices = await _bTAMProviders.appRoleServiceProviders.get();
-            //get apps in btam
-            var applications = await _bTAMProviders.applicationProviders.get();
-            #endregion
-            #region VerificationOfApplicationInBTAM
-            try
-            {
-                var app = applications.Where(x => x.AppUrl == appSignIn.AppURL).FirstOrDefault();
-                if (app != null)
-                {
-                    userApps = userApps.Where(x => x.AppID == app.AppID).ToList();
-                    appRoleServices = appRoleServices.Where(x => x.AppID == app.AppID).ToList();
+            //#region ListsInitialization
+            //List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
+            //List<AM_Application> apps = new List<AM_Application>();
+            //List<AM_Role> roles = new List<AM_Role>();
+            //UserAppRoleDTO signedUser = new UserAppRoleDTO();
+            //#endregion
+            //#region ProvidersInitialization
+            //_bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+            //#endregion
+            //#region BTAMData
+            ////to see the user in every application 
+            //var userApps = await _bTAMProviders.userAppProviders.get();
+            ////to see the user app role services in all application
+            //var userAppRoleServices = await _bTAMProviders.userAppRoleServiceProviders.get();
+            ////to see the app role in all applications
+            //var appRoleServices = await _bTAMProviders.appRoleServiceProviders.get();
+            ////get apps in btam
+            //var applications = await _bTAMProviders.applicationProviders.get();
+            //#endregion
+            //#region VerificationOfApplicationInBTAM
+            //try
+            //{
+            //    var app = applications.Where(x => x.AppUrl == appSignIn.AppURL).FirstOrDefault();
+            //    if (app != null)
+            //    {
+            //        userApps = userApps.Where(x => x.AppID == app.AppID).ToList();
+            //        appRoleServices = appRoleServices.Where(x => x.AppID == app.AppID).ToList();
 
-                    //this will get the roles under app
-                    #region roles
-                    foreach (AM_AppRoleService appRoleService in appRoleServices)
-                    {
-                        var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
-                        if (tempRole != null)
-                        {
-                            roles.Add(tempRole);
-                        }
-                    }
-                    #endregion
+            //        //this will get the roles under app
+            //        #region roles
+            //        foreach (AM_AppRoleService appRoleService in appRoleServices)
+            //        {
+            //            var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
+            //            if (tempRole != null)
+            //            {
+            //                roles.Add(tempRole);
+            //            }
+            //        }
+            //        #endregion
 
-                    #region userswithroles
-                    foreach (AM_UserApp userApp in userApps)
-                    {
-                        //get user
-                        var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
-                        if (tempUser != null)
-                        {
-                            //get role of that user (using userapproleservices)
-                            var tempUserAppRoleService = userAppRoleServices.Where(x => x.UserAppID == userApp.UserAppID).FirstOrDefault();
-                            if (tempUserAppRoleService != null)
-                            {
-                                var tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
-                                if (tempRole != null)
-                                {
-                                    UserAppRoleDTO userAppRole = new UserAppRoleDTO
-                                    {
-                                        UserAppID = userApp.UserAppID,
-                                        UserID = tempUser.UserID,
-                                        UserName = tempUser.UserName,
-                                        FirstName = tempUser.FirstName,
-                                        LastName = tempUser.LastName,
-                                        RoleID = tempRole.RoleID,
-                                        Role = tempRole.RoleName
-                                    };
-                                    //create a UserAppRoleDTO
+            //        #region userswithroles
+            //        foreach (AM_UserApp userApp in userApps)
+            //        {
+            //            //get user
+            //            var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
+            //            if (tempUser != null)
+            //            {
+            //                //get role of that user (using userapproleservices)
+            //                var tempUserAppRoleService = userAppRoleServices.Where(x => x.UserAppID == userApp.UserAppID).FirstOrDefault();
+            //                if (tempUserAppRoleService != null)
+            //                {
+            //                    var tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
+            //                    if (tempRole != null)
+            //                    {
+            //                        UserAppRoleDTO userAppRole = new UserAppRoleDTO
+            //                        {
+            //                            UserAppID = userApp.UserAppID,
+            //                            UserID = tempUser.UserID,
+            //                            UserName = tempUser.UserName,
+            //                            FirstName = tempUser.FirstName,
+            //                            LastName = tempUser.LastName,
+            //                            RoleID = tempRole.RoleID,
+            //                            Role = tempRole.RoleName
+            //                        };
+            //                        //create a UserAppRoleDTO
 
-                                    users.Add(userAppRole);
-                                }
+            //                        users.Add(userAppRole);
+            //                    }
 
-                            }
-                        }
-                    }
+            //                }
+            //            }
+            //        }
 
-                    #endregion
-                    signedUser = users.Where(x => x.UserName == appSignIn.UserName.ToLower()).FirstOrDefault();
+            //        #endregion
+            //        signedUser = users.Where(x => x.UserName == appSignIn.UserName.ToLower()).FirstOrDefault();
 
 
-                }
-            }
-            catch (Exception Ex)
-            {
-                signedUser.UserName = Ex.ToString();
-            }
+            //    }
+            //}
+            //catch (Exception Ex)
+            //{
+            //    signedUser.UserName = Ex.ToString();
+            //}
 
-            #endregion
-            return signedUser;
+            //#endregion
+
+            //return signedUser;
+
+            return await AppSignInWithServiceAttributes(appSignIn);
         }
 
         [Route("GetUsersInApp")]
@@ -244,98 +249,103 @@ namespace BusinessWorkflow.Controllers
             #endregion
         }
 
-        //[Route("AppSignIn2")]
-        //[HttpPost]
-        //public async Task<UserAppRoleDTO> AppSignInWithServiceAttributes([FromBody] AM_AppSignIn appSignIn)
-        //{
-        //    int applicationID = 0;
-        //    //lists of users, roles, and apps in btam
-        //    #region ListsInitialization
-        //    #endregion
-        //    #region ProvidersInitialization
-        //    _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-        //    #endregion
-        //    #region BTAMData
-        //    //to see the user in every application 
-        //    _allUserApps = await _bTAMProviders.userAppProviders.get();
-        //    //to see the user app role services in all application
-        //    _allUserAppRoleServices = await _bTAMProviders.userAppRoleServiceProviders.get();
-        //    //to see the app role in all applications
-        //    _allAppRoleServices= await _bTAMProviders.appRoleServiceProviders.get();
-        //    //get apps in btam
-        //    _allApps = await _bTAMProviders.applicationProviders.get();
-        //    #endregion
-        //    #region VerificationOfApplicationInBTAM
-        //    try
-        //    {
-        //        var app = _allApps.Where(x => x.AppUrl == appSignIn.AppURL).FirstOrDefault();
-        //        if (app != null)
-        //        {
-        //            applicationID = app.AppID;
-        //            var userApps = _allUserApps.Where(x => x.AppID == app.AppID).ToList();
-        //            var appRoleServices = _allAppRoleServices.Where(x => x.AppID == app.AppID).ToList();
+        [Route("AppSignIn2")]
+        [HttpPost]
+        public async Task<UserAppRoleDTO> AppSignInWithServiceAttributes([FromBody] AM_AppSignIn appSignIn)
+        {
+            int applicationID = 0;
+            //lists of users, roles, and apps in btam
+            #region ListsInitialization
+            #endregion
+            #region ProvidersInitialization
+            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
+            #endregion
+            #region BTAMData
+            //get all data that is needed
+            _allApps = await _bTAMProviders.applicationProviders.get();
+            _allRoles = await _bTAMProviders.roleProviders.get();
+            _allUsers = await _bTAMProviders.userProviders.get();
+            _allUserApps = await _bTAMProviders.userAppProviders.get();
+            _allUserAppRoleServices = await _bTAMProviders.userAppRoleServiceProviders.get();
+            _allRoleServices = await _bTAMProviders.roleServiceProviders.get();
+            _allAppRoleServices = await _bTAMProviders.appRoleServiceProviders.get();
+            _allInheritedRoles = await _bTAMProviders.inheritedRolesProviders.get();
+            _allServiceAttributes = await _bTAMProviders.serviceAttributeProviders.get();
 
-        //            //this will get the roles under app
-        //            #region roles
-        //            foreach (AM_AppRoleService appRoleService in appRoleServices)
-        //            {
-        //                var tempRole = _allRoles
-        //                //var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
-        //                if (tempRole != null)
-        //                {
-        //                    roles.Add(tempRole);
-        //                }
-        //            }
-        //            #endregion
+            List<AM_Role> roles = new List<AM_Role>(); 
+            List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
+            #endregion
+            #region VerificationOfApplicationInBTAM
+            try
+            {
+                var app = _allApps.Find(x => x.AppUrl == appSignIn.AppURL);
+                if (app != null)
+                {
+                    applicationID = app.AppID;
+                    var userApps = _allUserApps.Where(x => x.AppID == app.AppID).ToList();
+                    var appRoleServices = _allAppRoleServices.Where(x => x.AppID == app.AppID).ToList();
 
-        //            #region userswithroles
-        //            foreach (AM_UserApp userApp in userApps)
-        //            {
-        //                //get user
-        //                var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
-        //                if (tempUser != null)
-        //                {
-        //                    //get role of that user (using userapproleservices)
-        //                    var tempUserAppRoleService = userAppRoleServices.Where(x => x.UserAppID == userApp.UserAppID).FirstOrDefault();
-        //                    if (tempUserAppRoleService != null)
-        //                    {
-        //                        var tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
-        //                        if (tempRole != null)
-        //                        {
-        //                            UserAppRoleDTO userAppRole = new UserAppRoleDTO
-        //                            {
-        //                                UserAppID = userApp.UserAppID,
-        //                                UserID = tempUser.UserID,
-        //                                UserName = tempUser.UserName,
-        //                                FirstName = tempUser.FirstName,
-        //                                LastName = tempUser.LastName,
-        //                                RoleID = tempRole.RoleID,
-        //                                Role = tempRole.RoleName
-        //                            };
-        //                            //create a UserAppRoleDTO
-        //                            users.Add(userAppRole);
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //            #endregion
-        //            _signedUser = _allUsers.Where(x => x.UserName == appSignIn.UserName.ToLower()).FirstOrDefault();
-        //            //signedUser = await getServiceAttributes(applicationID, signedUser, HttpContext.Session.GetString("authorizationToken"));
-        //        }
-        //    }
-        //    catch (Exception Ex)
-        //    {
-        //        _signedUser.UserName = Ex.ToString();
-        //    }
+                    //this will get the roles under app
+                    #region roles
+                    foreach (AM_AppRoleService appRoleService in appRoleServices)
+                    {
+                        var tempRole = _allRoles.Find(x => x.RoleID == appRoleService.RoleID);
+                        if (tempRole != null)
+                        {
+                            roles.Add(tempRole);
+                        }
+                    }
+                    #endregion
 
-        //    #endregion
-        //    return _signedUser;
-        //}
+                    #region userswithroles
+                    foreach (AM_UserApp userApp in userApps)
+                    {
+                        //get user
+                        var tempUser = _allUsers.Find(x => x.UserID == userApp.UserID);
+                        //var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
+                        if (tempUser != null)
+                        {
+                            //get role of that user (using userapproleservices)
+                            var tempUserAppRoleService = _allUserAppRoleServices.Find(x => x.UserAppID == userApp.UserAppID);
+                            if (tempUserAppRoleService != null)
+                            {
+                                var tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
+                                if (tempRole != null)
+                                {
+                                    UserAppRoleDTO userAppRole = new UserAppRoleDTO
+                                    {
+                                        UserAppID = userApp.UserAppID,
+                                        UserID = tempUser.UserID,
+                                        UserName = tempUser.UserName,
+                                        FirstName = tempUser.FirstName,
+                                        LastName = tempUser.LastName,
+                                        RoleID = tempRole.RoleID,
+                                        Role = tempRole.RoleName
+                                    };
+                                    //create a UserAppRoleDTO
+                                    users.Add(userAppRole);
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+                    _signedUser = users.Find(x => x.UserName == appSignIn.UserName.ToLower());
+                    //signedUser = await getServiceAttributes(applicationID, signedUser, HttpContext.Session.GetString("authorizationToken"));
+                }
+            }
+            catch (Exception Ex)
+            {
+                _signedUser.UserName = Ex.ToString();
+            }
+
+            #endregion
+            return _signedUser;
+        }
 
         //public async void getServiceAttributes(int appID, UserAppRoleDTO userDetails)
         //{
-            
-            
+
+
         //}
 
         //private async Task<ServiceDTO> getServiceAttributesDetails(FEAttributesController attributesController, AM_Service service, string authorization)
