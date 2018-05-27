@@ -9,3 +9,14 @@ C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Release\netcorea
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Release\netcoreapp2.0\Client.AssemblyInfo.cs
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Release\netcoreapp2.0\Client.dll
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\Client\obj\Release\netcoreapp2.0\Client.pdb
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\bin\Release\netcoreapp2.0\Client.deps.json
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\bin\Release\netcoreapp2.0\Client.runtimeconfig.json
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\bin\Release\netcoreapp2.0\Client.runtimeconfig.dev.json
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\bin\Release\netcoreapp2.0\Client.dll
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\bin\Release\netcoreapp2.0\Client.pdb
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\obj\Release\netcoreapp2.0\Client.csprojResolveAssemblyReference.cache
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\obj\Release\netcoreapp2.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\obj\Release\netcoreapp2.0\Client.AssemblyInfoInputs.cache
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\obj\Release\netcoreapp2.0\Client.AssemblyInfo.cs
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\obj\Release\netcoreapp2.0\Client.dll
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\Client\obj\Release\netcoreapp2.0\Client.pdb

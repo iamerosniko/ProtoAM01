@@ -14,23 +14,14 @@ namespace BusinessWorkflow.Controllers.FrontEnd
     {
         private BTAMProviders _bTAMProviders;
 
-        [HttpGet("{serviceID}")]
-        public async Task<List<AM_ServiceAttribute>> GetAttributes([FromRoute]int serviceID)
+        [HttpGet("{roleServiceID}")]
+        public async Task<List<AM_ServiceAttribute>> GetAttributes([FromRoute]int roleServiceID)
         {
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
             var allServiceAttributes = await _bTAMProviders.serviceAttributeProviders.get();
 
-            return allServiceAttributes.Where(x => x.ServiceID == serviceID).ToList();
-        }
-
-        public async Task<List<AM_ServiceAttribute>> GetAttributes([FromRoute]int serviceID, string authorization)
-        {
-            _bTAMProviders = new BTAMProviders(authorization);
-
-            var allServiceAttributes = await _bTAMProviders.serviceAttributeProviders.get();
-
-            return allServiceAttributes.Where(x => x.ServiceID == serviceID).ToList();
+            return allServiceAttributes.Where(x => x.RoleServiceID == roleServiceID).ToList();
         }
 
         [HttpPost]

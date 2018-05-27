@@ -28,7 +28,7 @@ export class ServicesDeleteComponent implements OnInit {
 
   async getServices(){
     this.services =<Services[]> await this.serviceSvc.getService(this.roleID);
-    this.service = <Services> await this.services.find(x=>x.ServiceID==this.serviceID);
+    this.service = <Services> await this.services.find(x=>x.RoleServiceID==this.serviceID);
   }
 
 
@@ -37,9 +37,9 @@ export class ServicesDeleteComponent implements OnInit {
   }
 
   async delete() {
-    var service:Services =await this.serviceSvc.deleteService(this.service.ServiceID.toString())
-    console.log(this.service.ServiceID)
-    service.ServiceID==this.service.ServiceID 
+    var service:Services =await this.serviceSvc.deleteService(this.service.RoleServiceID.toString())
+    console.log(this.service.RoleServiceID)
+    service.RoleServiceID==this.service.RoleServiceID 
     ?(
       alert("Successfully deleted!"),
       await this.goBack()

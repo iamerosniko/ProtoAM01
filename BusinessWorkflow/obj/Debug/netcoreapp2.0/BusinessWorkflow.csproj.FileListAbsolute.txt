@@ -9,3 +9,14 @@ C:\Users\alverer\Documents\GitHub\BTAccessManagement\BusinessWorkflow\obj\Debug\
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\BusinessWorkflow\obj\Debug\netcoreapp2.0\BusinessWorkflow.AssemblyInfo.cs
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\BusinessWorkflow\obj\Debug\netcoreapp2.0\BusinessWorkflow.dll
 C:\Users\alverer\Documents\GitHub\BTAccessManagement\BusinessWorkflow\obj\Debug\netcoreapp2.0\BusinessWorkflow.pdb
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\bin\Debug\netcoreapp2.0\BusinessWorkflow.deps.json
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\bin\Debug\netcoreapp2.0\BusinessWorkflow.runtimeconfig.json
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\bin\Debug\netcoreapp2.0\BusinessWorkflow.runtimeconfig.dev.json
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\bin\Debug\netcoreapp2.0\BusinessWorkflow.dll
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\bin\Debug\netcoreapp2.0\BusinessWorkflow.pdb
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\obj\Debug\netcoreapp2.0\BusinessWorkflow.csprojResolveAssemblyReference.cache
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\obj\Debug\netcoreapp2.0\BusinessWorkflow.csproj.CoreCompileInputs.cache
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\obj\Debug\netcoreapp2.0\BusinessWorkflow.AssemblyInfoInputs.cache
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\obj\Debug\netcoreapp2.0\BusinessWorkflow.AssemblyInfo.cs
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\obj\Debug\netcoreapp2.0\BusinessWorkflow.dll
+C:\Users\zEROSeven\Documents\GitHub\ProtoAM01\BusinessWorkflow\obj\Debug\netcoreapp2.0\BusinessWorkflow.pdb

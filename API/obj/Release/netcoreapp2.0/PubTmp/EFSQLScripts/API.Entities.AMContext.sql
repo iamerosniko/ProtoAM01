@@ -439,3 +439,45 @@ END;
 
 GO
 
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180527191553_m017')
+BEGIN
+    DROP TABLE [AM_Services];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180527191553_m017')
+BEGIN
+    DECLARE @var6 sysname;
+    SELECT @var6 = [d].[name]
+    FROM [sys].[default_constraints] [d]
+    INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+    WHERE ([d].[parent_object_id] = OBJECT_ID(N'AM_RoleServices') AND [c].[name] = N'ServiceID');
+    IF @var6 IS NOT NULL EXEC(N'ALTER TABLE [AM_RoleServices] DROP CONSTRAINT [' + @var6 + '];');
+    ALTER TABLE [AM_RoleServices] DROP COLUMN [ServiceID];
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180527191553_m017')
+BEGIN
+    ALTER TABLE [AM_RoleServices] ADD [ServiceDesc] nvarchar(max) NULL;
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180527191553_m017')
+BEGIN
+    ALTER TABLE [AM_RoleServices] ADD [ServiceName] nvarchar(max) NULL;
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20180527191553_m017')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20180527191553_m017', N'2.0.1-rtm-125');
+END;
+
+GO
+

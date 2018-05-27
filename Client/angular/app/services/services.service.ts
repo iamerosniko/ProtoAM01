@@ -21,9 +21,9 @@ export class ServicesService {
     return this.api.getOne(roleID);
   }
 
-  postService(roleID:string,service: Services) {
+  postService(service: Services) {
     this.api.normalHeader();
-    this.api.apiUrl=ClientApiSettings.GETBWURL("FEServices") +"/"+ roleID
+    this.api.apiUrl=ClientApiSettings.GETBWURL("FEServices") 
     var body = JSON.stringify(service);
     return this.api.postData(body);
   } 
@@ -32,7 +32,7 @@ export class ServicesService {
     this.api.normalHeader();
     this.api.apiUrl=ClientApiSettings.GETBWURL("FEServices") 
     var body = JSON.stringify(service);
-    return this.api.putData(service.ServiceID.toString(),body );
+    return this.api.putData(service.RoleServiceID.toString(),body );
   }
 
   deleteService(serviceID: string) {

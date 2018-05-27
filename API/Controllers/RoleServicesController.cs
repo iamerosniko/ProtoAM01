@@ -78,7 +78,7 @@ namespace API.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(aM_RoleServices);
         }
 
         // POST: api/RoleServices

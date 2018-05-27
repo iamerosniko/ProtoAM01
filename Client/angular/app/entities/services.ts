@@ -1,6 +1,7 @@
 
 export interface Services {
-    ServiceID ?: string,
+    RoleServiceID?:string,
+    RoleID?:string,
     ServiceName ?: string,
     ServiceDesc ?:string
 }

@@ -10,7 +10,6 @@ namespace API.Controllers
         public InheritedRolesController inheritedRolesController { get; set; }
         public RolesController rolesController { get; set; }
         public ServiceAttributesController serviceAttributesController { get; set; }
-        public ServicesController servicesController { get; set; }
         public UserAppRoleServicesController userAppRoleServicesController { get; set; }
         public UserAppsController userAppsController { get; set; }
         public UsersController usersController { get; set; }
@@ -23,7 +22,6 @@ namespace API.Controllers
             inheritedRolesController = new InheritedRolesController(context);
             rolesController = new RolesController(context);
             serviceAttributesController = new ServiceAttributesController(context);
-            servicesController = new ServicesController(context);
             userAppRoleServicesController = new UserAppRoleServicesController(context);
             userAppsController = new UserAppsController(context);
             usersController = new UsersController(context);

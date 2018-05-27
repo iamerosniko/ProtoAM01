@@ -32,6 +32,7 @@ export class ServicesFormComponent implements OnInit {
     this.serviceID!=null?this.getServices():null;
 
     this.serviceForm = this.fb.group({
+      RoleID:[this.roleID],
       ServiceName:[this.service.ServiceName,Validators.required],
       ServiceDesc:[this.service.ServiceDesc],
     })
@@ -40,10 +41,11 @@ export class ServicesFormComponent implements OnInit {
   async getServices(){
     
     this.services =<Services[]> await this.serviceSvc.getService(this.roleID);
-    this.service = <Services> await this.services.find(x=>x.ServiceID==this.serviceID);
-
+    this.service = <Services> await this.services.find(x=>x.RoleServiceID==this.serviceID);
+    // this.service.RoleID
     this.serviceForm = this.fb.group({
-      ServiceID:[this.service.ServiceID],
+      RoleServiceID:[this.service.RoleServiceID],
+      RoleID:[this.service.RoleID],
       ServiceName:[this.service.ServiceName,Validators.required],
       ServiceDesc:[this.service.ServiceDesc],
     })
@@ -52,8 +54,8 @@ export class ServicesFormComponent implements OnInit {
   async save() {
     this.service=await this.serviceForm.value;
     var service:Services ={};
-    if(this.service.ServiceID==null){
-      service = <Services> await this.serviceSvc.postService(this.roleID,this.service);
+    if(this.service.RoleServiceID==null){
+      service = <Services> await this.serviceSvc.postService(this.service);
     }
     else{
       service = <Services> await this.serviceSvc.putService(this.service);

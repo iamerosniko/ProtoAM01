@@ -94,17 +94,7 @@ namespace BusinessWorkflow.Controllers
                     var inheritedroles = (await _bTAMProviders.inheritedRolesProviders.get()).Where(x => x.RoleID == approleservice.RoleID);
                     //approleservices
                     await _bTAMProviders.appRoleServiceProviders.Delete(approleservice.AppRoleServiceID.ToString());
-
-                    //foreach (var serviceattribute in serviceattributes)
-                    //{
-                    //    //serviceattributes
-                    //    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
-                    //    //attributes
-                    //    await _bTAMProviders.attributeProviders.Delete(serviceattribute.AttribID.ToString());
-                    //    //services
-                    //    await _bTAMProviders.serviceProviders.Delete(approleservice.ServiceID.ToString());
-                    //}
-
+     
                     foreach (var userapproleservice in userapproleservices)
                     {
                         //userapproleservices
@@ -124,60 +114,5 @@ namespace BusinessWorkflow.Controllers
                 return false;
             }
         }
-
-        //services
-        public async Task<bool> Cascade2(int serviceID)
-        {
-            _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-            try
-            {
-                //for deletion of roles
-
-                var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.ServiceID == serviceID).ToList();
-
-
-                foreach (var serviceattribute in serviceattributes)
-                {
-                    //serviceattributes
-                    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
-                    //attributes
-                    //await _bTAMProviders.attributeProviders.Delete(serviceattribute.AttribID.ToString());
-                }
-
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        //public async Task<bool> Cascade3(int attrubuteID)
-        //{
-        //    _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-        //    try
-        //    {
-        //        //for deletion of roles
-
-        //        //var serviceattributes = (await _bTAMProviders.serviceAttributeProviders.get()).Where(x => x.AttribID == attrubuteID).ToList();
-
-
-        //        //foreach (var serviceattribute in serviceattributes)
-        //        //{
-        //        //    //serviceattributes
-        //        //    await _bTAMProviders.serviceAttributeProviders.Delete(serviceattribute.ServiceAttributeID.ToString());
-        //        //    //attributes
-        //        //    await _bTAMProviders.serviceProviders.Delete(serviceattribute.ServiceID.ToString());
-        //        //}
-
-
-        //        return true;
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-        //}
     }
 }

@@ -15,90 +15,48 @@ namespace BusinessWorkflow.Controllers
         private BTAMProviders _bTAMProviders;
 
         [HttpGet("{roleID}")]
-        public async Task<List<AM_Service>> Get([FromRoute]int roleID)
+        public async Task<List<AM_RoleService>> Get([FromRoute]int roleID)
         {
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            List<AM_Service> services = new List<AM_Service>();
             List<AM_RoleService> roleServices = await _bTAMProviders.roleServiceProviders.get();
 
-            foreach (var roleService in roleServices.Where(x => x.RoleID == roleID))
-            {
-                var service = await _bTAMProviders.serviceProviders.get(roleService.ServiceID.ToString());
-                if (service != null)
-                {
-                    services.Add(service);
-                }
-            }
-
-            return services;
+            return roleServices.Where(x => x.RoleID == roleID).ToList();
         }
 
-        public async Task<List<AM_Service>> Get([FromRoute]int roleID, string authorization)
-        {
-            _bTAMProviders = new BTAMProviders(authorization);
-
-            List<AM_Service> services = new List<AM_Service>();
-            List<AM_RoleService> roleServices = await _bTAMProviders.roleServiceProviders.get();
-
-            foreach (var roleService in roleServices.Where(x => x.RoleID == roleID))
-            {
-                var service = await _bTAMProviders.serviceProviders.get(roleService.ServiceID.ToString());
-                if (service != null)
-                {
-                    services.Add(service);
-                }
-            }
-
-            return services;
-        }
-
-        [HttpPost("{roleID}")]
-        public async Task<AM_RoleService> Post([FromRoute]int roleID, [FromBody] AM_Service service)
+        [HttpPost]
+        public async Task<AM_RoleService> Post([FromBody] AM_RoleService roleservice)
         {
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            if (roleID != 0 && service != null)
+            if (roleservice != null)
             {
-                AM_Service newService = await _bTAMProviders.serviceProviders.Post(service);
-                AM_RoleService roleService = new AM_RoleService
-                {
-                    RoleID = roleID,
-                    ServiceID = newService.ServiceID
-                };
-
-                return await _bTAMProviders.roleServiceProviders.Post(roleService);
+                return await _bTAMProviders.roleServiceProviders.Post(roleservice);
             }
 
             return null;
         }
 
-        [HttpPut("{serviceID}")]
-        public async Task<AM_Service> Put([FromRoute]int serviceID, [FromBody] AM_Service service)
+        [HttpPut("{roleserviceID}")]
+        public async Task<AM_RoleService> Put([FromRoute]string roleserviceID, [FromBody] AM_RoleService roleservice)
         {
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
 
-            if (service != null)
+            if (roleservice != null)
             {
-                return await _bTAMProviders.serviceProviders.Put(serviceID.ToString(), service);
+                return await _bTAMProviders.roleServiceProviders.Put(roleserviceID.ToString(), roleservice);
 
             }
 
             return null;
         }
 
-        [HttpDelete("{serviceID}")]
-        public async Task<AM_Service> Delete([FromRoute]int serviceID)
+        [HttpDelete("{roleServiceID}")]
+        public async Task<AM_RoleService> Delete([FromRoute]int roleServiceID)
         {
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-            List<AM_RoleService> roleServices = (await _bTAMProviders.roleServiceProviders.get()).Where(x => x.ServiceID == serviceID).ToList();
 
-            foreach (var roleService in roleServices)
-            {
-                await _bTAMProviders.roleServiceProviders.Delete(roleService.RoleServiceID.ToString());
-            }
-
-            return await _bTAMProviders.serviceProviders.Delete(serviceID.ToString());
+            return await _bTAMProviders.roleServiceProviders.Delete(roleServiceID.ToString());
         }
     }
 }
