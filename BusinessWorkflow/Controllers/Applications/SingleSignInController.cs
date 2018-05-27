@@ -19,7 +19,6 @@ namespace BusinessWorkflow.Controllers
     [Route("api/SingleSignIn")]
     public class SingleSignInController : Controller
     {
-        #region PrivateVariables
         BTAMProviders _bTAMProviders;
         string _authorization;
         List<AM_Application> _allApps;
@@ -35,16 +34,12 @@ namespace BusinessWorkflow.Controllers
         List<ServiceDTO> _myServiceDTOs;
         UserAppRoleDTO _signedUser;
         List<UserAppRoleDTO> _allUsersDTO;
-        #endregion
 
         [Route("AppSignIn")]
         [HttpPost]
         public async Task<UserAppRoleDTO> AppSignIn([FromBody] AM_AppSignIn appSignIn)
         {
-            #region ProvidersInitialization
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-            #endregion
-            #region BTAMData
             //get all data that is needed
             _allApps = await _bTAMProviders.applicationProviders.get();
             _allUserApps = await _bTAMProviders.userAppProviders.get();
@@ -55,18 +50,18 @@ namespace BusinessWorkflow.Controllers
 
             List<AM_Role> roles = new List<AM_Role>();
             List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
-            #endregion
-            #region VerificationOfApplicationInBTAM
             try
             {
                 var app = _allApps.Find(x => x.AppUrl == appSignIn.AppURL);
                 if (app != null)
                 {
                     var userApps = _allUserApps.Where(x => x.AppID == app.AppID).ToList();
+                    var userID = _allUsers.Find(x => x.UserName.ToLower() == appSignIn.UserName.ToLower());
+                    var userApp = userApps.Find(x => x.UserID == userID.UserID);
+
                     var appRoleServices = _allAppRoleServices.Where(x => x.AppID == app.AppID).ToList();
 
                     //this will get the roles under app
-                    #region roles
                     foreach (AM_AppRoleService appRoleService in appRoleServices)
                     {
                         var tempRole = _allRoles.Find(x => x.RoleID == appRoleService.RoleID);
@@ -75,12 +70,10 @@ namespace BusinessWorkflow.Controllers
                             roles.Add(tempRole);
                         }
                     }
-                    #endregion
 
-                    #region userswithroles
-                    foreach (AM_UserApp userApp in userApps)
+
+                    if (userApp != null)
                     {
-                        //get user
                         var tempUser = _allUsers.Find(x => x.UserID == userApp.UserID);
                         //var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
                         if (tempUser != null)
@@ -103,13 +96,11 @@ namespace BusinessWorkflow.Controllers
                                         Role = tempRole.RoleName
                                     };
                                     //create a UserAppRoleDTO
-                                    users.Add(userAppRole);
+                                    return userAppRole;
                                 }
                             }
                         }
                     }
-                    #endregion
-                    _signedUser = users.Find(x => x.UserName == appSignIn.UserName.ToLower());
                 }
             }
             catch (Exception Ex)
@@ -117,7 +108,6 @@ namespace BusinessWorkflow.Controllers
                 _signedUser.UserName = Ex.ToString();
             }
 
-            #endregion
             return _signedUser;
         }
 
@@ -126,16 +116,11 @@ namespace BusinessWorkflow.Controllers
         public async Task<List<UserAppRoleDTO>> GetUsersInApp([FromBody] AM_AppSignIn appSignIn)
         {
             //lists of users, roles, and apps in btam
-            #region ListsInitialization
             List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
             List<AM_Application> apps = new List<AM_Application>();
             List<AM_Role> roles = new List<AM_Role>();
             UserAppRoleDTO signedUser = new UserAppRoleDTO();
-            #endregion
-            #region ProvidersInitialization
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-            #endregion
-            #region BTAMData
             //to see the user in every application 
             var userApps = await _bTAMProviders.userAppProviders.get();
             //to see the user app role services in all application
@@ -144,8 +129,6 @@ namespace BusinessWorkflow.Controllers
             var appRoleServices = await _bTAMProviders.appRoleServiceProviders.get();
             //get apps in btam
             var applications = await _bTAMProviders.applicationProviders.get();
-            #endregion
-            #region VerificationOfApplicationInBTAM
             try
             {
                 var app = applications.Where(x => x.AppUrl == appSignIn.AppURL).FirstOrDefault();
@@ -155,7 +138,6 @@ namespace BusinessWorkflow.Controllers
                     appRoleServices = appRoleServices.Where(x => x.AppID == app.AppID).ToList();
 
                     //this will get the roles under app
-                    #region roles
                     foreach (AM_AppRoleService appRoleService in appRoleServices)
                     {
                         var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
@@ -164,9 +146,7 @@ namespace BusinessWorkflow.Controllers
                             roles.Add(tempRole);
                         }
                     }
-                    #endregion
 
-                    #region userswithroles
                     foreach (AM_UserApp userApp in userApps)
                     {
                         //get user
@@ -199,7 +179,6 @@ namespace BusinessWorkflow.Controllers
                         }
                     }
 
-                    #endregion
                 }
             }
             catch
@@ -207,7 +186,6 @@ namespace BusinessWorkflow.Controllers
 
             }
 
-            #endregion
             return users;
         }
 
@@ -218,7 +196,6 @@ namespace BusinessWorkflow.Controllers
             AppToken appToken = new AppToken();
             appToken.TokenName = "Authentication";
 
-            #region Authentication
             //this area will provide jwt token.
             if (signedUser.Role != null && appSecurityKey != null)
             {
@@ -234,7 +211,6 @@ namespace BusinessWorkflow.Controllers
                 appToken.Token = myToken;
             }
             return appToken;
-            #endregion
         }
 
         [Route("AppSignIn2")]
@@ -242,10 +218,7 @@ namespace BusinessWorkflow.Controllers
         public async Task<UserAppRoleDTO> AppSignInWithServiceAttributes([FromBody] AM_AppSignIn appSignIn)
         {
             int applicationID = 0;
-            #region ProvidersInitialization
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-            #endregion
-            #region BTAMData
             //get all data that is needed
             _allApps = await _bTAMProviders.applicationProviders.get();
             _allUserApps = await _bTAMProviders.userAppProviders.get();
@@ -258,21 +231,18 @@ namespace BusinessWorkflow.Controllers
             //_allInheritedRoles = await _bTAMProviders.inheritedRolesProviders.get();
             //_allServiceAttributes = await _bTAMProviders.serviceAttributeProviders.get();
 
-            List<AM_Role> roles = new List<AM_Role>(); 
+            List<AM_Role> roles = new List<AM_Role>();
             List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
-            #endregion
-            #region VerificationOfApplicationInBTAM
             try
             {
                 var app = _allApps.Find(x => x.AppUrl == appSignIn.AppURL);
                 if (app != null)
                 {
                     applicationID = app.AppID;
-                    var userApps = _allUserApps.Where(x => x.AppID == app.AppID ).ToList();
+                    var userApps = _allUserApps.Where(x => x.AppID == app.AppID).ToList();
                     var appRoleServices = _allAppRoleServices.Where(x => x.AppID == app.AppID).ToList();
 
                     //this will get the roles under app
-                    #region roles
                     foreach (AM_AppRoleService appRoleService in appRoleServices)
                     {
                         var tempRole = _allRoles.Find(x => x.RoleID == appRoleService.RoleID);
@@ -281,9 +251,7 @@ namespace BusinessWorkflow.Controllers
                             roles.Add(tempRole);
                         }
                     }
-                    #endregion
 
-                    #region userswithroles
                     foreach (AM_UserApp userApp in userApps)
                     {
                         //get user
@@ -314,7 +282,6 @@ namespace BusinessWorkflow.Controllers
                             }
                         }
                     }
-                    #endregion
                     _signedUser = users.Find(x => x.UserName == appSignIn.UserName.ToLower());
                     //signedUser = await getServiceAttributes(applicationID, signedUser, HttpContext.Session.GetString("authorizationToken"));
                 }
@@ -324,7 +291,6 @@ namespace BusinessWorkflow.Controllers
                 _signedUser.UserName = Ex.ToString();
             }
 
-            #endregion
             return _signedUser;
         }
 

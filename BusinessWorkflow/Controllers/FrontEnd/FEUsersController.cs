@@ -37,11 +37,13 @@ namespace BusinessWorkflow.Controllers
             var appRoleServices = await _bTAMProviders.appRoleServiceProviders.get();
             //get apps in btam
             var applications = await _bTAMProviders.applicationProviders.get();
+            var allRoles = await _bTAMProviders.roleProviders.get();
+            var allUsers = await _bTAMProviders.userProviders.get();
             #endregion
             #region VerificationOfApplicationInBTAM
             try
             {
-                var app = applications.Where(x => x.AppID == appID).FirstOrDefault();
+                var app = applications.Find(x => x.AppID == appID);
                 if (app != null)
                 {
                     userApps = userApps.Where(x => x.AppID == app.AppID).ToList();
@@ -51,7 +53,8 @@ namespace BusinessWorkflow.Controllers
                     #region roles
                     foreach (AM_AppRoleService appRoleService in appRoleServices)
                     {
-                        var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
+                        //var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
+                        var tempRole = allRoles.Find(x => x.RoleID == appRoleService.RoleID);
                         if (tempRole != null)
                         {
                             roles.Add(tempRole);
@@ -63,15 +66,16 @@ namespace BusinessWorkflow.Controllers
                     foreach (AM_UserApp userApp in userApps)
                     {
                         //get user
-                        var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
+                        var tempUser = allUsers.Find(x => x.UserID == userApp.UserID);
+                        //var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
                         if (tempUser != null)
                         {
                             AM_Role tempRole = new AM_Role();
                             //get role of that user (using userapproleservices)
-                            var tempUserAppRoleService = userAppRoleServices.Where(x => x.UserAppID == userApp.UserAppID).FirstOrDefault();
+                            var tempUserAppRoleService = userAppRoleServices.Find(x => x.UserAppID == userApp.UserAppID);
                             if (tempUserAppRoleService != null)
                             {
-                                tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
+                                tempRole = roles.Find(x => x.RoleID == tempUserAppRoleService.RoleID);
                             }
 
                             UserAppRoleDTO userAppRole = new UserAppRoleDTO

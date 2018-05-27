@@ -28,11 +28,14 @@ namespace BusinessWorkflow.Controllers.FrontEnd
             List<InheritedRolesDTO> ir = new List<InheritedRolesDTO>();
 
             var userAppServices = await _bTAMProviders.appRoleServiceProviders.get();
+            var rolesList = await _bTAMProviders.roleProviders.get();
+
             userAppServices = userAppServices.Where(x => x.AppID == AppID).ToList();
 
             foreach (AM_AppRoleService appRoleService in userAppServices)
             {
-                var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
+                var tempRole = rolesList.Find(x => x.RoleID == appRoleService.RoleID);
+                //var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
                 if (tempRole != null)
                 {
                     allRoles.Add(tempRole);

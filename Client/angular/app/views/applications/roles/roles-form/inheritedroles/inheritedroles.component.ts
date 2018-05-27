@@ -17,9 +17,28 @@ export class InheritedrolesComponent implements OnInit {
   roleID:string;
   private appID : string;
   inheritedRoles:InheritedRoles[]=[];
-  async ngOnInit() {
-    this.appID =await this.activatedroute.snapshot.params['appID'];
-    this.roleID =await this.activatedroute.snapshot.params['roleID'];
+  ngOnInit() {
+    this.appID = this.activatedroute.snapshot.params['appID'];
+    this.roleID = this.activatedroute.snapshot.params['roleID'];
+    this.getDependencies();
+  }
+
+  async inheritRole(ir:InheritedRoles){
+    ir.IsChecked=!ir.IsChecked;
+    if(ir.IsChecked){
+      ir=await this.irSvc.postInheritedRole(ir)
+    }
+    else 
+    {
+      ir=await this.irSvc.deleteInheritedRole(ir.InheritedRolesID.toString())
+    }
+    // this.inheritedRoles=<InheritedRoles[]> await this.irSvc.getRoles(this.appID,this.roleID);
+    this.getDependencies();
+    console.log(this.inheritedRoles);
+    
+  }
+
+  async getDependencies(){
     this.inheritedRoles=<InheritedRoles[]> await this.irSvc.getRoles(this.appID,this.roleID);
     this.inheritedRoles.forEach(async element => {
       element.inHeritedRoles = (await this.irSvc.getRoles(this.appID,element.RoleID));
@@ -42,19 +61,5 @@ export class InheritedrolesComponent implements OnInit {
       }
     });
 
-  }
-
-  async inheritRole(ir:InheritedRoles){
-    ir.IsChecked=!ir.IsChecked;
-    // if(ir.IsChecked){
-    //   ir=await this.irSvc.postInheritedRole(ir)
-    // }
-    // else 
-    // {
-    //   ir=await this.irSvc.deleteInheritedRole(ir.InheritedRolesID.toString())
-    // }
-    // this.inheritedRoles=<InheritedRoles[]> await this.irSvc.getRoles(this.appID,this.roleID);
-    // console.log(this.inheritedRoles);
-    
   }
 }

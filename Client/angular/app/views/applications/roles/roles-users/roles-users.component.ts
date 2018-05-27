@@ -39,8 +39,9 @@ export class ApplicationsRolesUsersComponent implements OnInit {
       )
 
     });
-
     this.users = await this.users.filter(x=>x.RoleID=="0" || x.RoleID == this.roleID) ;
+    console.log(this.users)
+    
   }
   
   ngOnInit() {

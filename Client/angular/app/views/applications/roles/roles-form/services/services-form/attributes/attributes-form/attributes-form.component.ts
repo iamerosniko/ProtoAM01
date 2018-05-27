@@ -43,7 +43,7 @@ export class AttributesFormComponent implements OnInit {
 
   async getServices(){
     this.attributes =<ServiceAttributes[]> await this.attribSvc.getAttributes(this.serviceID);
-    this.attribute = <ServiceAttributes> await this.attributes.find(x=>x.ServiceAttributeID==this.attributeID);
+      this.attribute = <ServiceAttributes> await this.attributes.find(x=>x.ServiceAttributeID==this.attributeID);
 
     this.attributeForm = this.fb.group({
       ServiceAttributeID:[this.attribute.ServiceAttributeID],
