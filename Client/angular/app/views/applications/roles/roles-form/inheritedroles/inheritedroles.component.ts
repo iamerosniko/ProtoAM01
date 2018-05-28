@@ -34,7 +34,6 @@ export class InheritedrolesComponent implements OnInit {
     }
     // this.inheritedRoles=<InheritedRoles[]> await this.irSvc.getRoles(this.appID,this.roleID);
     this.getDependencies();
-    console.log(this.inheritedRoles);
     
   }
 
@@ -60,6 +59,7 @@ export class InheritedrolesComponent implements OnInit {
       
       }
     });
+    await console.log(this.inheritedRoles);
 
   }
 }

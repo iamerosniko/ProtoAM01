@@ -15,12 +15,14 @@ import { ClientApiService,ClientApiSettings,
 
 import { TopNavComponent } from './views/main/top-nav/top-nav.component';
 import { ApplicationsModule } from './views/applications/applications.module';
+import { TreeModule } from 'ng2-tree';
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
   ],
   imports: [
+    TreeModule,
     HttpModule,
     FormsModule,
     BrowserModule,

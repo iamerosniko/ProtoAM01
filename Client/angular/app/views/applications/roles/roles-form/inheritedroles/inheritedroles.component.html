@@ -25,9 +25,10 @@
               {{inheritedRole.RoleName}}
             </td>
             <td>
+              {{inheritedRole.inHeritedRoles | json}}
               <table class="table table-bordered table-hover table-striped input-sm">
                 <tr *ngFor="let ir of inheritedRole.inHeritedRoles">
-                  <th>{{ir.RoleName}}</th>
+                  <th>{{ir | json}}</th>
                 </tr>                
               </table>
             </td>
