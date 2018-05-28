@@ -226,10 +226,9 @@ namespace BusinessWorkflow.Controllers
             _allRoles = await _bTAMProviders.roleProviders.get();
             _allUsers = await _bTAMProviders.userProviders.get();
             _allUserAppRoleServices = await _bTAMProviders.userAppRoleServiceProviders.get();
-
-            //_allRoleServices = await _bTAMProviders.roleServiceProviders.get();
-            //_allInheritedRoles = await _bTAMProviders.inheritedRolesProviders.get();
-            //_allServiceAttributes = await _bTAMProviders.serviceAttributeProviders.get();
+            _allRoleServices = await _bTAMProviders.roleServiceProviders.get();
+            _allInheritedRoles = await _bTAMProviders.inheritedRolesProviders.get();
+            _allServiceAttributes = await _bTAMProviders.serviceAttributeProviders.get();
 
             List<AM_Role> roles = new List<AM_Role>();
             List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
@@ -282,8 +281,12 @@ namespace BusinessWorkflow.Controllers
                             }
                         }
                     }
+
                     _signedUser = users.Find(x => x.UserName == appSignIn.UserName.ToLower());
+                    _myServiceDTOs = new List<ServiceDTO>();
+                    GetInheritedRoles(_signedUser.RoleID);
                     //signedUser = await getServiceAttributes(applicationID, signedUser, HttpContext.Session.GetString("authorizationToken"));
+                    _signedUser.services = _myServiceDTOs;
                 }
             }
             catch (Exception Ex)
@@ -294,34 +297,50 @@ namespace BusinessWorkflow.Controllers
             return _signedUser;
         }
 
-        //public async void getServiceAttributes(int appID, UserAppRoleDTO userDetails)
-        //{
+        public void GetInheritedRoles(int roleID)
+        {
+            var inheritedRoles = _allInheritedRoles.Where(x => x.MainRoleID == roleID);
+            foreach(var inheritedRole in inheritedRoles)
+            {
+                GetInheritedRoles(inheritedRole.RoleID);
+            }
+            _myServiceDTOs.AddRange(GetRoleServices(roleID));
+        }
 
+        public List<ServiceDTO> GetRoleServices(int roleID)
+        {
+            List<ServiceDTO> serviceAttributes = new List<ServiceDTO>();
+            var roleServices = _allRoleServices.Where(x => x.RoleID == roleID);
+            foreach(var roleService in roleServices)
+            {
+                ServiceDTO serviceAttribute = new ServiceDTO
+                {
+                    ServiceName = roleService.ServiceName,
+                    ServiceDesc = roleService.ServiceDesc,
+                };
+                serviceAttribute.Attributes= GetAttributes(roleService.RoleServiceID);
+                serviceAttributes.Add(serviceAttribute);
+            }
+            return  serviceAttributes;
+        }
 
-        //}
+        public List<AttributesDTO> GetAttributes(int roleServiceID)
+        {
+            List<AttributesDTO> attributesDTO = new List<AttributesDTO>();
+            var attributes = _allServiceAttributes.Where(x => x.RoleServiceID == roleServiceID);
+            
+            foreach(var attribute in attributes)
+            {
+                attributesDTO.Add(new AttributesDTO
+                {
+                    AttribDesc=attribute.AttribDesc,
+                    AttribName=attribute.AttribName
+                });
+            }
 
-        //private async Task<ServiceDTO> getServiceAttributesDetails(FEAttributesController attributesController, AM_Service service, string authorization)
-        //{
-        //    List<AttributesDTO> attributes = new List<AttributesDTO>();
-        //    var tempAttributes = await attributesController.GetAttributes(service.ServiceID, authorization);
-
-        //    foreach (var attribute in tempAttributes)
-        //    {
-        //        attributes.Add(new AttributesDTO
-        //        {
-        //            AttribDesc = attribute.AttribDesc,
-        //            AttribName = attribute.AttribName
-        //        });
-        //    }
-        //    return new ServiceDTO
-        //    {
-        //        ServiceName = service.ServiceName,
-        //        ServiceID = service.ServiceID,
-        //        ServiceDesc = service.ServiceDesc,
-        //        Attributes = attributes
-        //    };
-        //}
-
+            return attributesDTO;
+        }
+        
         private List<Claim> GetCurrentClaims(UserAppRoleDTO currentUser)
         {
 
