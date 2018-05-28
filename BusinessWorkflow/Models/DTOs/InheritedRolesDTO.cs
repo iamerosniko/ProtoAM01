@@ -1,4 +1,6 @@
-﻿namespace BusinessWorkflow.Models.DTOs
+﻿using System.Collections.Generic;
+
+namespace BusinessWorkflow.Models.DTOs
 {
     public class InheritedRolesDTO
     {
@@ -9,5 +11,6 @@
         public string RoleName { get; set; }
         public bool IsChecked { get; set; }
         public bool IsEnabled { get; set; }
+        public List<InheritedRolesDTO> InheritedRoles { get; set; }
     }
 }

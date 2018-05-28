@@ -6,5 +6,5 @@ export interface InheritedRoles {
     RoleName?:string,    
     IsChecked?:boolean,
     IsEnabled?:boolean,
-    inHeritedRoles?:InheritedRoles[]
+    InHeritedRoles?:InheritedRoles[]
 }

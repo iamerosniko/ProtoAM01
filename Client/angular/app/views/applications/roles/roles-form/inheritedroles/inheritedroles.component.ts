@@ -41,16 +41,16 @@ export class InheritedrolesComponent implements OnInit {
   async getDependencies(){
     this.inheritedRoles=<InheritedRoles[]> await this.irSvc.getRoles(this.appID,this.roleID);
     this.inheritedRoles.forEach(async element => {
-      element.inHeritedRoles = (await this.irSvc.getRoles(this.appID,element.RoleID));
-      element.inHeritedRoles = await element.inHeritedRoles.filter(x=>x.IsChecked==true);
+      element.InHeritedRoles = (await this.irSvc.getRoles(this.appID,element.RoleID));
+      element.InHeritedRoles = await element.InHeritedRoles.filter(x=>x.IsChecked==true);
       element.IsEnabled=true;
       // console.log(element.inHeritedRoles.length);
-      if(element.inHeritedRoles.length>0){
-        var checkIfMeIsInherited = element.inHeritedRoles.find(x=>x.RoleID==this.roleID);
+      if(element.InHeritedRoles.length>0){
+        var checkIfMeIsInherited = element.InHeritedRoles.find(x=>x.RoleID==this.roleID);
         if(checkIfMeIsInherited!=null){
           element.IsEnabled=false;
         }
-        element.inHeritedRoles.forEach( irSub => {
+        element.InHeritedRoles.forEach( irSub => {
           var test = this.inheritedRoles.find(x=>x.RoleID==irSub.RoleID)
           // console.log(test)
           if(test!=null){
