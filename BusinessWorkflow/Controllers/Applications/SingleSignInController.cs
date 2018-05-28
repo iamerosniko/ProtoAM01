@@ -1,5 +1,4 @@
-﻿using BusinessWorkflow.Controllers.FrontEnd;
-using BusinessWorkflow.Models;
+﻿using BusinessWorkflow.Models;
 using BusinessWorkflow.Models.DTOs;
 using BusinessWorkflow.Services;
 using Microsoft.AspNetCore.Http;
@@ -50,15 +49,13 @@ namespace BusinessWorkflow.Controllers
 
             List<AM_Role> roles = new List<AM_Role>();
             List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
+
             try
             {
                 var app = _allApps.Find(x => x.AppUrl == appSignIn.AppURL);
                 if (app != null)
                 {
                     var userApps = _allUserApps.Where(x => x.AppID == app.AppID).ToList();
-                    var userID = _allUsers.Find(x => x.UserName.ToLower() == appSignIn.UserName.ToLower());
-                    var userApp = userApps.Find(x => x.UserID == userID.UserID);
-
                     var appRoleServices = _allAppRoleServices.Where(x => x.AppID == app.AppID).ToList();
 
                     //this will get the roles under app
@@ -71,9 +68,9 @@ namespace BusinessWorkflow.Controllers
                         }
                     }
 
-
-                    if (userApp != null)
+                    foreach (AM_UserApp userApp in userApps)
                     {
+                        //get user
                         var tempUser = _allUsers.Find(x => x.UserID == userApp.UserID);
                         //var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
                         if (tempUser != null)
@@ -96,11 +93,13 @@ namespace BusinessWorkflow.Controllers
                                         Role = tempRole.RoleName
                                     };
                                     //create a UserAppRoleDTO
-                                    return userAppRole;
+                                    users.Add(userAppRole);
                                 }
                             }
                         }
                     }
+
+                    _signedUser = users.Find(x => x.UserName == appSignIn.UserName.ToLower());
                 }
             }
             catch (Exception Ex)
@@ -116,31 +115,29 @@ namespace BusinessWorkflow.Controllers
         public async Task<List<UserAppRoleDTO>> GetUsersInApp([FromBody] AM_AppSignIn appSignIn)
         {
             //lists of users, roles, and apps in btam
-            List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
-            List<AM_Application> apps = new List<AM_Application>();
-            List<AM_Role> roles = new List<AM_Role>();
-            UserAppRoleDTO signedUser = new UserAppRoleDTO();
             _bTAMProviders = new BTAMProviders(HttpContext.Session.GetString("authorizationToken"));
-            //to see the user in every application 
-            var userApps = await _bTAMProviders.userAppProviders.get();
-            //to see the user app role services in all application
-            var userAppRoleServices = await _bTAMProviders.userAppRoleServiceProviders.get();
-            //to see the app role in all applications
-            var appRoleServices = await _bTAMProviders.appRoleServiceProviders.get();
-            //get apps in btam
-            var applications = await _bTAMProviders.applicationProviders.get();
+            //get all data that is needed
+            _allApps = await _bTAMProviders.applicationProviders.get();
+            _allUserApps = await _bTAMProviders.userAppProviders.get();
+            _allAppRoleServices = await _bTAMProviders.appRoleServiceProviders.get();
+            _allRoles = await _bTAMProviders.roleProviders.get();
+            _allUsers = await _bTAMProviders.userProviders.get();
+            _allUserAppRoleServices = await _bTAMProviders.userAppRoleServiceProviders.get();
+
+            List<AM_Role> roles = new List<AM_Role>();
+            List<UserAppRoleDTO> users = new List<UserAppRoleDTO>();
             try
             {
-                var app = applications.Where(x => x.AppUrl == appSignIn.AppURL).FirstOrDefault();
+                var app = _allApps.Find(x => x.AppUrl == appSignIn.AppURL);
                 if (app != null)
                 {
-                    userApps = userApps.Where(x => x.AppID == app.AppID).ToList();
-                    appRoleServices = appRoleServices.Where(x => x.AppID == app.AppID).ToList();
+                    var userApps = _allUserApps.Where(x => x.AppID == app.AppID).ToList();
+                    var appRoleServices = _allAppRoleServices.Where(x => x.AppID == app.AppID).ToList();
 
                     //this will get the roles under app
                     foreach (AM_AppRoleService appRoleService in appRoleServices)
                     {
-                        var tempRole = await _bTAMProviders.roleProviders.get(appRoleService.RoleID.ToString());
+                        var tempRole = _allRoles.Find(x => x.RoleID == appRoleService.RoleID);
                         if (tempRole != null)
                         {
                             roles.Add(tempRole);
@@ -150,11 +147,12 @@ namespace BusinessWorkflow.Controllers
                     foreach (AM_UserApp userApp in userApps)
                     {
                         //get user
-                        var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
+                        var tempUser = _allUsers.Find(x => x.UserID == userApp.UserID);
+                        //var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
                         if (tempUser != null)
                         {
                             //get role of that user (using userapproleservices)
-                            var tempUserAppRoleService = userAppRoleServices.Where(x => x.UserAppID == userApp.UserAppID).FirstOrDefault();
+                            var tempUserAppRoleService = _allUserAppRoleServices.Find(x => x.UserAppID == userApp.UserAppID);
                             if (tempUserAppRoleService != null)
                             {
                                 var tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
@@ -171,10 +169,8 @@ namespace BusinessWorkflow.Controllers
                                         Role = tempRole.RoleName
                                     };
                                     //create a UserAppRoleDTO
-
                                     users.Add(userAppRole);
                                 }
-
                             }
                         }
                     }
@@ -300,7 +296,7 @@ namespace BusinessWorkflow.Controllers
         public void GetInheritedRoles(int roleID)
         {
             var inheritedRoles = _allInheritedRoles.Where(x => x.MainRoleID == roleID);
-            foreach(var inheritedRole in inheritedRoles)
+            foreach (var inheritedRole in inheritedRoles)
             {
                 GetInheritedRoles(inheritedRole.RoleID);
             }
@@ -311,36 +307,36 @@ namespace BusinessWorkflow.Controllers
         {
             List<ServiceDTO> serviceAttributes = new List<ServiceDTO>();
             var roleServices = _allRoleServices.Where(x => x.RoleID == roleID);
-            foreach(var roleService in roleServices)
+            foreach (var roleService in roleServices)
             {
                 ServiceDTO serviceAttribute = new ServiceDTO
                 {
                     ServiceName = roleService.ServiceName,
                     ServiceDesc = roleService.ServiceDesc,
                 };
-                serviceAttribute.Attributes= GetAttributes(roleService.RoleServiceID);
+                serviceAttribute.Attributes = GetAttributes(roleService.RoleServiceID);
                 serviceAttributes.Add(serviceAttribute);
             }
-            return  serviceAttributes;
+            return serviceAttributes;
         }
 
         public List<AttributesDTO> GetAttributes(int roleServiceID)
         {
             List<AttributesDTO> attributesDTO = new List<AttributesDTO>();
             var attributes = _allServiceAttributes.Where(x => x.RoleServiceID == roleServiceID);
-            
-            foreach(var attribute in attributes)
+
+            foreach (var attribute in attributes)
             {
                 attributesDTO.Add(new AttributesDTO
                 {
-                    AttribDesc=attribute.AttribDesc,
-                    AttribName=attribute.AttribName
+                    AttribDesc = attribute.AttribDesc,
+                    AttribName = attribute.AttribName
                 });
             }
 
             return attributesDTO;
         }
-        
+
         private List<Claim> GetCurrentClaims(UserAppRoleDTO currentUser)
         {
 
