@@ -5,6 +5,6 @@ namespace BusinessWorkflow.Models.DTOs
     public class Treeview
     {
         public string value { get; set; }
-        public List<Treeview> children { get; set; }
+        public List<Treeview> Children { get; set; }
     }
 }
