@@ -19,7 +19,7 @@ namespace BusinessWorkflow.Controllers
     public class SingleSignInController : Controller
     {
         BTAMProviders _bTAMProviders;
-        string _authorization;
+        //string _authorization;
         List<AM_Application> _allApps;
         List<AM_Role> _allRoles;
         List<AM_User> _allUsers;
@@ -32,7 +32,7 @@ namespace BusinessWorkflow.Controllers
 
         List<ServiceDTO> _myServiceDTOs;
         UserAppRoleDTO _signedUser;
-        List<UserAppRoleDTO> _allUsersDTO;
+        //List<UserAppRoleDTO> _allUsersDTO;
 
         [Route("AppSignIn")]
         [HttpPost]
