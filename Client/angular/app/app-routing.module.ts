@@ -6,12 +6,6 @@ import { LoginComponent } from './views/others/login/login.component';
 import { LogoutComponent } from './views/others/logout/logout.component';
 import { RedirectingComponent } from './views/others/redirecting/redirecting.component';
 
-// import { ApplicationsComponent } from  './views/applications/applications.component';
-// import { ApplicationsAddComponent } from  './views/applications/applications-add/applications-add.component';
-// import { ApplicationsEditComponent } from  './views/applications/applications-edit/applications-edit.component';
-// import { ApplicationsDeleteComponent } from  './views/applications/applications-delete/applications-delete.component';
-// import { ApplicationsDetailsComponent } from './views/applications/applications-details/applications-details.component';
-
 import {
   ApplicationsComponent,ApplicationsDeleteComponent,ApplicationsFormComponent,ApplicationsRolesComponent,ApplicationsUsersComponent,
   ApplicationsRolesFormComponent,ApplicationsUsersFormComponent,ApplicationsRolesDeleteComponent,ApplicationsUsersDeleteComponent,
@@ -20,7 +14,7 @@ import {
 
 import { AuthGuard } from './auth-guard.services';
 const routes: Routes = [
-  { path: '', redirectTo:'/Login', pathMatch: "full" },
+  { path: '', redirectTo:'/Applications', pathMatch: "full" },
   { path: 'Login', component: LoginComponent},
   //applications
   { path: 'Applications', component : ApplicationsComponent},

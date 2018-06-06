@@ -7,7 +7,6 @@
         Back
       </a>
     </div>
-    
   </div>
   <br />
   <div class="row">
@@ -59,44 +58,14 @@
             <br />
             <app-services></app-services>
           </tab>
-          <tab heading="Roles inherited"  *ngIf="roleID!=null">
+          <!-- <tab heading="Roles inherited"  *ngIf="roleID!=null">
             <app-inheritedroles></app-inheritedroles>
-          </tab>
+          </tab> -->
         </tabset>
         
       </div>
     </div>
   </div>
-  <!-- <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h5>{{FormLabelState}} Role</h5>
-        </div>
-        <form [formGroup]="roleForm" (ngSubmit)="save()">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-10 col-md-offset-1">
-                <div class="form-group">
-                  <label>Role Name</label>
-                  <input type="text" class="form-control input-sm" formControlName="RoleName"/>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <button [disabled]="roleForm.status=='INVALID'" type="submit" class="btn btn-success btn-sm pull-right">
-                  <i class="fa fa-save"></i>
-                  Save
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div> -->
   <hr />
     
-  <!-- <div class="row" *ngIf="roleID!=null"> -->
   

@@ -6,65 +6,63 @@
         Back
       </a>
     </div>
-    <div class="col-md-6" *ngIf="FormLabelState!='New'">
-      <div class="btn-group pull-right">
-        <a class="btn btn-primary btn-sm" (click)="gotoAttributes()">
-          <i class="fa fa-universal-access"></i>
-          Attributes
-        </a>
-      </div>
-    </div>
   </div>
   <br />
   <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h5>{{FormLabelState}} Service</h5>
-        </div>
-        <form [formGroup]="serviceForm" (ngSubmit)="save()">
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-10 col-md-offset-1">
-                <div class="form-group">
-                  <label>Service Name</label>
-                  <input type="text" class="form-control input-sm" formControlName="ServiceName"/>
+    <div class="container">
+      <tabset>
+        <tab heading="services">
+          <div class="col-md-8 col-md-offset-2">
+            <br />
+            
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5>{{FormLabelState}} Service</h5>
+              </div>
+              <form [formGroup]="serviceForm" (ngSubmit)="save()">
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                      <div class="form-group">
+                        <label>Service Name</label>
+                        <input type="text" class="form-control input-sm" formControlName="ServiceName"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                      <div class="form-group">
+                        <label>Service Description</label>
+                        <input type="text" class="form-control input-sm" formControlName="ServiceDesc"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <button [disabled]="serviceForm.status=='INVALID'" type="submit" class="btn btn-success btn-sm pull-right" >
+                      <!-- <button [disabled]="appForm.pristine" type="submit" class="btn btn-success btn-sm pull-right" (click)="save()"> -->
+                        <i class="fa fa-save"></i>
+                        Save
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-10 col-md-offset-1">
-                <div class="form-group">
-                  <label>Service Description</label>
-                  <input type="text" class="form-control input-sm" formControlName="ServiceDesc"/>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <button [disabled]="serviceForm.status=='INVALID'" type="submit" class="btn btn-success btn-sm pull-right" >
-                <!-- <button [disabled]="appForm.pristine" type="submit" class="btn btn-success btn-sm pull-right" (click)="save()"> -->
-                  <i class="fa fa-save"></i>
-                  Save
-                </button>
-              </div>
+              </form>
             </div>
           </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <hr />
-    
-  <div class="row" *ngIf="serviceID!=null">
-    <div class="container">
-      
-      <tabset>
-        <tab heading="Attributes" id="tab1">
+        </tab>
+        <tab heading="Attributes" id="tab1"  *ngIf="serviceID!=null">
+          <div class="col-md-10" *ngIf="FormLabelState!='New'">
+            <div class="btn-group pull-right">
+              <a class="btn btn-primary btn-sm" (click)="gotoAttributes()">
+                <i class="fa fa-universal-access"></i>
+                Create Attributes
+              </a>
+            </div>
+          </div>
           <app-attributes></app-attributes>
         </tab>
       </tabset>
-      
     </div>
   </div>
 </div>
