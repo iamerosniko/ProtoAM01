@@ -1,0 +1,11 @@
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\bin\Release\netcoreapp2.0\ClientApplication.deps.json
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\bin\Release\netcoreapp2.0\ClientApplication.runtimeconfig.json
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\bin\Release\netcoreapp2.0\ClientApplication.runtimeconfig.dev.json
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\bin\Release\netcoreapp2.0\ClientApplication.dll
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\bin\Release\netcoreapp2.0\ClientApplication.pdb
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\obj\Release\netcoreapp2.0\ClientApplication.csprojResolveAssemblyReference.cache
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\obj\Release\netcoreapp2.0\ClientApplication.csproj.CoreCompileInputs.cache
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\obj\Release\netcoreapp2.0\ClientApplication.AssemblyInfoInputs.cache
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\obj\Release\netcoreapp2.0\ClientApplication.AssemblyInfo.cs
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\obj\Release\netcoreapp2.0\ClientApplication.dll
+C:\Users\alverer\Documents\GitHub\ProtoAM01\ClientApplication\obj\Release\netcoreapp2.0\ClientApplication.pdb

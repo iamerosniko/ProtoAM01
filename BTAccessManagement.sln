@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessWorkflow", "Busines
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BTAM_SSDT", "BTAM_SSDT\BTAM_SSDT.sqlproj", "{0573AAE6-9F4F-44CF-9A73-B9A57F5B948E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTAMClient", "BTAMClient\BTAMClient.csproj", "{F31281F7-41B5-46BC-8993-68F1A16B03A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{0573AAE6-9F4F-44CF-9A73-B9A57F5B948E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0573AAE6-9F4F-44CF-9A73-B9A57F5B948E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0573AAE6-9F4F-44CF-9A73-B9A57F5B948E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F31281F7-41B5-46BC-8993-68F1A16B03A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F31281F7-41B5-46BC-8993-68F1A16B03A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F31281F7-41B5-46BC-8993-68F1A16B03A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F31281F7-41B5-46BC-8993-68F1A16B03A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

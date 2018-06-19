@@ -1,0 +1,10 @@
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\bin\Any CPU\Release\netcoreapp2.0\BTAMClient.deps.json
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\bin\Any CPU\Release\netcoreapp2.0\BTAMClient.runtimeconfig.json
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\bin\Any CPU\Release\netcoreapp2.0\BTAMClient.runtimeconfig.dev.json
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\bin\Any CPU\Release\netcoreapp2.0\BTAMClient.dll
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\bin\Any CPU\Release\netcoreapp2.0\BTAMClient.pdb
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\obj\Any CPU\Release\netcoreapp2.0\BTAMClient.csproj.CoreCompileInputs.cache
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\obj\Any CPU\Release\netcoreapp2.0\BTAMClient.AssemblyInfoInputs.cache
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\obj\Any CPU\Release\netcoreapp2.0\BTAMClient.AssemblyInfo.cs
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\obj\Any CPU\Release\netcoreapp2.0\BTAMClient.dll
+C:\Users\alverer\Documents\GitHub\ProtoAM01\BTAMClient\obj\Any CPU\Release\netcoreapp2.0\BTAMClient.pdb

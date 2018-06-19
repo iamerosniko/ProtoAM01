@@ -12,7 +12,7 @@ import { HttpModule } from '@angular/http'
 import { ClientApiService,ClientApiSettings,
   ClientLoginService,
   ApplicationsService, UsersService, RolesService } from './services/client.services';
-
+import { EnvironmentSvc } from './services/environments.service';
 import { TopNavComponent } from './views/main/top-nav/top-nav.component';
 import { ApplicationsModule } from './views/applications/applications.module';
 @NgModule({
@@ -29,7 +29,7 @@ import { ApplicationsModule } from './views/applications/applications.module';
     ApplicationsModule
   ],
   providers: [AuthGuard, ClientApiService, ClientApiSettings, ClientLoginService,
-    ApplicationsService,UsersService,RolesService],
+    ApplicationsService,UsersService,RolesService,EnvironmentSvc],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
