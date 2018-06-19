@@ -8,18 +8,20 @@ export class AuthGuard implements CanActivate, CanActivateChild{
     constructor ( private router: Router) {}
 
     canActivate() : boolean {
-        // if (!this.userService.isAuthenticated) {
-        //     this.router.navigate(['/signin']);
-        // }
-        // return this.userService.isAuthenticated;
+      
         let isAllowed: boolean = false;
-        if(sessionStorage.getItem('Cache0')==null){
+        // if(sessionStorage.getItem('Cache0')==null){
+        //     this.router.navigate(['./Login']) 
+        // }
+        // else{
+        //     isAllowed=true;
+        // }
+        if(sessionStorage.getItem('BWAPI')==null){
             this.router.navigate(['./Login']) 
         }
         else{
             isAllowed=true;
         }
-        console.log('authguard activated');
         return isAllowed;
     }
 

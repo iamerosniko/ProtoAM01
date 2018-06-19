@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientLoginService } from '../../../services/client.services';
 import { Router } from '@angular/router';
+import { EnvironmentSvc } from '../../../services/environments.service';
 
 @Component({
   selector: 'app-login',
@@ -9,28 +10,28 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService :ClientLoginService,private router: Router) { }
-  a:string=";";
+  constructor(private environmentSvc:EnvironmentSvc,
+    private loginService :ClientLoginService,
+    private router: Router) { }
   ngOnInit() {
-    //this.Login();
+    this.Login();
   }
 
   async Login(){
-    var authenticationToken = await this.loginService.GetAuthenticationToken();
-    var authorizationToken = await this.loginService.GetAuthorizationToken();    
-    // var currentUser = await this.loginService.GetCurrentUser(authenticationToken);
-    await sessionStorage.setItem("Cache0",authenticationToken);
-    await sessionStorage.setItem("Cache1",authorizationToken);
+    var BW =await this.environmentSvc.getBWURL();
+    await sessionStorage.setItem("BWAPI",BW.URL)
+    console.log(BW.URL);
+    // var authenticationToken = await this.loginService.GetAuthenticationToken();
+    // var authorizationToken = await this.loginService.GetAuthorizationToken();    
+    // // var currentUser = await this.loginService.GetCurrentUser(authenticationToken);
+    // await sessionStorage.setItem("Cache0",authenticationToken);
+    // await sessionStorage.setItem("Cache1",authorizationToken);
     // await sessionStorage.setItem("Cache2",window.btoa(JSON.stringify(currentUser)));
 
 
-    setTimeout(() => {
+    setTimeout(async () => {
       this.router.navigate(['./Redirecting']) 
-    }, 3000);
+    }, 50);
   }
 
-  onClick(): void {
-    let link = ['/Applications'];
-    this.router.navigate(link);
-  }
 }

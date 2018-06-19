@@ -18,9 +18,7 @@ export class RedirectingComponent implements OnInit {
     //get all modules of the current user
     //iff null goto noaccess
     setTimeout(() => {
-      this.router.navigate(['./Survey']);
-    }, 2000);
-
-    
+      this.router.navigate(['./Applications']);
+    }, 50);
   }
 }

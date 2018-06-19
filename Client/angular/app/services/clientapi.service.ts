@@ -31,7 +31,7 @@ export class ClientApiService {
    return await this.http
     .get(this.apiUrl, {headers: this.headers})
     .toPromise()
-    .then(res=>res.json());
+    .then(res=>res.json())
   }
 
   async getOne(id:string){
@@ -39,14 +39,16 @@ export class ClientApiService {
     return this.http
       .get(apiurl, {headers: this.headers})
       .toPromise()
-      .then(res=>res.json());
+      .then(res=>res.json())
+      
   }  
 
   async postData(body:string){
     return this.http
       .post(this.apiUrl, body, {headers: this.headers})
       .toPromise()
-      .then(res=>res.json());
+      .then(res=>res.json())
+      
   }
 
   async putData(ID:string,body:string){
@@ -54,7 +56,8 @@ export class ClientApiService {
     return this.http
       .put(url, body, {headers: this.headers})
       .toPromise()
-      .then(res=>res.json());
+      .then(res=>res.json())
+
   }
 
   async deleteData(ID:string){
@@ -62,6 +65,7 @@ export class ClientApiService {
     return this.http
       .delete(url, {headers: this.headers})
       .toPromise()
-      .then(res=>res.json());
+      .then(res=>res.json())
+      
   }
 }

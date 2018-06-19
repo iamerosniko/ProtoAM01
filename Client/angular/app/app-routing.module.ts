@@ -14,38 +14,38 @@ import {
 
 import { AuthGuard } from './auth-guard.services';
 const routes: Routes = [
-  { path: '', redirectTo:'/Applications', pathMatch: "full" },
+  { path: '', redirectTo:'/Login', pathMatch: "full" },
   { path: 'Login', component: LoginComponent},
   //applications
-  { path: 'Applications', component : ApplicationsComponent},
-  { path: 'ApplicationsAdd', component : ApplicationsFormComponent},
-  { path: 'ApplicationsEdit/:id', component : ApplicationsFormComponent},
-  { path: 'ApplicationsDelete', component : ApplicationsDeleteComponent},
+  { path: 'Applications', component : ApplicationsComponent, canActivate:[AuthGuard]},
+  { path: 'ApplicationsAdd', component : ApplicationsFormComponent, canActivate:[AuthGuard]},
+  { path: 'ApplicationsEdit/:id', component : ApplicationsFormComponent, canActivate:[AuthGuard]},
+  { path: 'ApplicationsDelete', component : ApplicationsDeleteComponent, canActivate:[AuthGuard]},
   //users
-  { path: 'ApplicationsUsers/:appID', component: ApplicationsUsersComponent },
-  { path: 'ApplicationsUsersAdd/:appID', component: ApplicationsUsersFormComponent },
-  { path: 'ApplicationsUsersEdit/:userID/:appID', component: ApplicationsUsersFormComponent },
-  { path: 'ApplicationsUsersDelete/:appID', component: ApplicationsUsersDeleteComponent },
+  { path: 'ApplicationsUsers/:appID', component: ApplicationsUsersComponent, canActivate:[AuthGuard] },
+  { path: 'ApplicationsUsersAdd/:appID', component: ApplicationsUsersFormComponent , canActivate:[AuthGuard]},
+  { path: 'ApplicationsUsersEdit/:userID/:appID', component: ApplicationsUsersFormComponent, canActivate:[AuthGuard] },
+  { path: 'ApplicationsUsersDelete/:appID', component: ApplicationsUsersDeleteComponent, canActivate:[AuthGuard] },
   //roles
-  { path: 'ApplicationsRoles/:appID', component: ApplicationsRolesComponent },
-  { path: 'ApplicationsRolesAdd/:appID', component: ApplicationsRolesFormComponent },
-  { path: 'ApplicationsRolesEdit/:roleID/:appID', component: ApplicationsRolesFormComponent },
-  { path: 'ApplicationsRolesDelete/:appID', component: ApplicationsRolesDeleteComponent },
+  { path: 'ApplicationsRoles/:appID', component: ApplicationsRolesComponent, canActivate:[AuthGuard] },
+  { path: 'ApplicationsRolesAdd/:appID', component: ApplicationsRolesFormComponent, canActivate:[AuthGuard] },
+  { path: 'ApplicationsRolesEdit/:roleID/:appID', component: ApplicationsRolesFormComponent, canActivate:[AuthGuard] },
+  { path: 'ApplicationsRolesDelete/:appID', component: ApplicationsRolesDeleteComponent, canActivate:[AuthGuard] },
   //services
-  { path: 'ServicesAdd/:roleID/:appID', component:ServicesFormComponent},
-  { path: 'ServicesEdit/:roleID/:appID/:serviceID', component:ServicesFormComponent},
-  { path: 'ServicesDelete/:roleID/:appID/:serviceID',component:ServicesDeleteComponent},
+  { path: 'ServicesAdd/:roleID/:appID', component:ServicesFormComponent, canActivate:[AuthGuard]},
+  { path: 'ServicesEdit/:roleID/:appID/:serviceID', component:ServicesFormComponent, canActivate:[AuthGuard]},
+  { path: 'ServicesDelete/:roleID/:appID/:serviceID',component:ServicesDeleteComponent, canActivate:[AuthGuard]},
   //attributes
-  { path: 'AttributesAdd/:roleID/:appID/:serviceID',component:AttributesFormComponent},
-  { path: 'AttributesEdit/:roleID/:appID/:serviceID/:attributeID',component:AttributesFormComponent},
-  { path: 'AttributesDelete/:roleID/:appID/:serviceID/:attributeID',component:AttributesDeleteComponent},
+  { path: 'AttributesAdd/:roleID/:appID/:serviceID',component:AttributesFormComponent, canActivate:[AuthGuard]},
+  { path: 'AttributesEdit/:roleID/:appID/:serviceID/:attributeID',component:AttributesFormComponent, canActivate:[AuthGuard]},
+  { path: 'AttributesDelete/:roleID/:appID/:serviceID/:attributeID',component:AttributesDeleteComponent, canActivate:[AuthGuard]},
   // { path: 'Reports', component : ReportsComponent },
   // { path: 'Survey', component : SurveysComponent},
  
 
   // { path: '', redirectTo:'/Login', pathMatch:"full" },
   // { path: 'Login', component:LoginComponent},
-  // { path: 'Redirecting', component : RedirectingComponent},
+  { path: 'Redirecting', component : RedirectingComponent},
   // { path: 'Logout', component:LogoutComponent},
   // { path: 'Noaccess', component:NoaccessComponent},
   // { path: '**', redirectTo :'/Survey' },

@@ -1,10 +1,11 @@
 export class ClientApiSettings {
 
     //change the url according to client's url
+    // private static CLIENT_URL = "app/"
     private static CLIENT_URL = "app/"
     
     public static GETBWURL(controller:string):string{
-        var BW_URL = localStorage.getItem("BWAPI");
+        var BW_URL = sessionStorage.getItem("BWAPI");
         return BW_URL+controller;
     }
 

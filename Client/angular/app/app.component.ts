@@ -10,8 +10,7 @@ import { EnvironmentSvc } from './services/environments.service';
 export class AppComponent implements OnInit {
   
   async ngOnInit(){
-    var BW =await this.environmentSvc.getBWURL();
-    localStorage.setItem("BWAPI",BW.URL)
+    
   }
 
   constructor(private environmentSvc:EnvironmentSvc){
