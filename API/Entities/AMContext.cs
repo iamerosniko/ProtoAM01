@@ -6,7 +6,7 @@ namespace API.Entities
     {
         public AMContext(DbContextOptions<AMContext> options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
 
         public DbSet<AM_Application> Applications { get; set; }

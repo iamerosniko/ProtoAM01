@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientLoginService } from '../../../services/client.services';
 import { Router } from '@angular/router';
-import { EnvironmentSvc } from '../../../services/environments.service';
+import { EnvironmentSvc,EnvInfo } from '../../../services/environments.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   async Login(){
     var BW =await this.environmentSvc.getBWURL();
+    //var BW : EnvInfo = { URL : 'http://btaccessmanagementbw-dev.azurewebsites.net/api/'}
     await sessionStorage.setItem("BWAPI",BW.URL)
     console.log(BW.URL);
     // var authenticationToken = await this.loginService.GetAuthenticationToken();
