@@ -24,6 +24,7 @@
             <thead>
               <tr>
                 <th>Full Name</th>
+                <th>MFCGD ID</th>
                 <th>Role</th>
                 <th>&nbsp;</th>
               </tr>
@@ -34,6 +35,9 @@
                   <a role="button" (click)="openUser(user)">
                     {{user.FirstName + ' ' + user.LastName}}
                   </a>
+                </td>
+                <td>
+                  {{user.UserName}}
                 </td>
                 <td>
                   {{user.Role}}

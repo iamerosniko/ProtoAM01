@@ -57,6 +57,7 @@ export class ApplicationsUsersFormComponent implements OnInit {
 
   async save() {
     this.user=await this.userForm.value;
+    this.user.UserName=this.user.UserName.toLowerCase();
     var user:Users ={};
     if(this.user.UserID==null){
       user = <Users> await this.usrSvc.postUser(this.appID,this.user);

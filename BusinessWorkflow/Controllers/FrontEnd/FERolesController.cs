@@ -1,5 +1,6 @@
 ﻿using BusinessWorkflow.Models;
 using BusinessWorkflow.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
 {
+    [EnableCors("CORS")]
+
     [Produces("application/json")]
     [Route("api/FERoles")]
     public class FERolesController : Controller
@@ -94,7 +97,7 @@ namespace BusinessWorkflow.Controllers
                     var inheritedroles = (await _bTAMProviders.inheritedRolesProviders.get()).Where(x => x.RoleID == approleservice.RoleID);
                     //approleservices
                     await _bTAMProviders.appRoleServiceProviders.Delete(approleservice.AppRoleServiceID.ToString());
-     
+
                     foreach (var userapproleservice in userapproleservices)
                     {
                         //userapproleservices

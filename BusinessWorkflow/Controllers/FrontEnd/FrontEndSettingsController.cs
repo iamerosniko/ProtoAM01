@@ -1,9 +1,12 @@
 ﻿using BusinessWorkflow.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessWorkflow.Controllers.FrontEnd
 {
+    [EnableCors("CORS")]
+
     [Produces("application/json")]
     [Route("api/FrontEndSettings")]
     public class FrontEndSettingsController : Controller

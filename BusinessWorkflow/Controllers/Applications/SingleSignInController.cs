@@ -52,56 +52,109 @@ namespace BusinessWorkflow.Controllers
 
             try
             {
-                var app = _allApps.Find(x => x.AppUrl == appSignIn.AppURL);
-                if (app != null)
-                {
-                    var userApps = _allUserApps.Where(x => x.AppID == app.AppID).ToList();
-                    var appRoleServices = _allAppRoleServices.Where(x => x.AppID == app.AppID).ToList();
+                var user = _allUsers.Find(x => x.UserName == appSignIn.UserName.ToLower());
+                var app = _allApps.Find(x => x.AppUrl.ToLower() == appSignIn.AppURL.ToLower());
 
-                    //this will get the roles under app
+                if (user != null && app != null)
+                {
+                    //user and app
+                    var userApps = _allUserApps.Where(x => x.AppID == app.AppID).ToList();
+                    var userApp = userApps.Find(x => x.UserID == user.UserID);
+                    //app and roles
+                    var appRoleServices = _allAppRoleServices.Where(x => x.AppID == app.AppID).ToList();
+                    //get role
                     foreach (AM_AppRoleService appRoleService in appRoleServices)
                     {
-                        var tempRole = _allRoles.Find(x => x.RoleID == appRoleService.RoleID);
-                        if (tempRole != null)
+
+
+                        var myAppRole = _allRoles.Find(x => x.RoleID == appRoleService.RoleID);
+                        if (myAppRole != null)
                         {
-                            roles.Add(tempRole);
+                            roles.Add(myAppRole);
                         }
                     }
+                    //binding of user app and approleservices
+                    var tempUserAppRoleService = _allUserAppRoleServices.Find(x => x.UserAppID == userApp.UserID);
 
-                    foreach (AM_UserApp userApp in userApps)
+                    var tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
+
+                    if (tempRole != null)
                     {
-                        //get user
-                        var tempUser = _allUsers.Find(x => x.UserID == userApp.UserID);
-                        //var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
-                        if (tempUser != null)
+                        return new UserAppRoleDTO
                         {
-                            //get role of that user (using userapproleservices)
-                            var tempUserAppRoleService = _allUserAppRoleServices.Find(x => x.UserAppID == userApp.UserAppID);
-                            if (tempUserAppRoleService != null)
-                            {
-                                var tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
-                                if (tempRole != null)
-                                {
-                                    UserAppRoleDTO userAppRole = new UserAppRoleDTO
-                                    {
-                                        UserAppID = userApp.UserAppID,
-                                        UserID = tempUser.UserID,
-                                        UserName = tempUser.UserName,
-                                        FirstName = tempUser.FirstName,
-                                        LastName = tempUser.LastName,
-                                        RoleID = tempRole.RoleID,
-                                        Role = tempRole.RoleName
-                                    };
-                                    //create a UserAppRoleDTO
-                                    users.Add(userAppRole);
-                                }
-                            }
-                        }
+                            UserAppID = userApp.UserAppID,
+                            UserID = user.UserID,
+                            UserName = user.UserName,
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            RoleID = tempRole.RoleID,
+                            Role = tempRole.RoleName,
+                            services = new List<ServiceDTO>()
+                        };
                     }
-
-                    _signedUser = users.Find(x => x.UserName == appSignIn.UserName.ToLower());
+                    else
+                    {
+                        return new UserAppRoleDTO
+                        {
+                            Role = "NoAccess"
+                        };
+                    }
                 }
             }
+
+            //try
+            //{
+            //    var app = _allApps.Find(x => x.AppUrl == appSignIn.AppURL);
+            //    if (app != null)
+            //    {
+            //        var userApps = _allUserApps.Where(x => x.AppID == app.AppID).ToList();
+            //        var appRoleServices = _allAppRoleServices.Where(x => x.AppID == app.AppID).ToList();
+
+            //        //this will get the roles under app
+            //        foreach (AM_AppRoleService appRoleService in appRoleServices)
+            //        {
+            //            var tempRole = _allRoles.Find(x => x.RoleID == appRoleService.RoleID);
+            //            if (tempRole != null)
+            //            {
+            //                roles.Add(tempRole);
+            //            }
+            //        }
+
+            //        foreach (AM_UserApp userApp in userApps)
+            //        {
+            //            //get user
+            //            var tempUser = _allUsers.Find(x => x.UserID == userApp.UserID);
+            //            //var tempUser = await _bTAMProviders.userProviders.get(userApp.UserID.ToString());
+            //            if (tempUser != null)
+            //            {
+            //                //get role of that user (using userapproleservices)
+            //                var tempUserAppRoleService = _allUserAppRoleServices.Find(x => x.UserAppID == userApp.UserAppID);
+            //                if (tempUserAppRoleService != null)
+            //                {
+            //                    var tempRole = roles.Where(x => x.RoleID == tempUserAppRoleService.RoleID).FirstOrDefault();
+            //                    if (tempRole != null)
+            //                    {
+            //                        UserAppRoleDTO userAppRole = new UserAppRoleDTO
+            //                        {
+            //                            UserAppID = userApp.UserAppID,
+            //                            UserID = tempUser.UserID,
+            //                            UserName = tempUser.UserName,
+            //                            FirstName = tempUser.FirstName,
+            //                            LastName = tempUser.LastName,
+            //                            RoleID = tempRole.RoleID,
+            //                            Role = tempRole.RoleName,
+            //                            services = new List<ServiceDTO>()
+            //                        };
+            //                        //create a UserAppRoleDTO
+            //                        users.Add(userAppRole);
+            //                    }
+            //                }
+            //            }
+            //        }
+
+            //        _signedUser = users.Find(x => x.UserName == appSignIn.UserName.ToLower());
+            //    }
+            //}
             catch (Exception Ex)
             {
                 _signedUser.UserName = Ex.ToString();

@@ -32,6 +32,19 @@ namespace API
                     }
                 });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORS",
+                corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin()
+                // Apply CORS policy for any type of origin
+                .AllowAnyMethod()
+                // Apply CORS policy for any type of http methods
+                .AllowAnyHeader()
+                // Apply CORS policy for any headers
+                .AllowCredentials());
+                // Apply CORS policy for all users
+            });
+
             var connectionString = Configuration["ConnectionStrings:DefaultConnection"];
 
             services.AddDbContext<AMContext>(cfg =>
@@ -47,6 +60,8 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CORS");
 
             try
             {

@@ -1,5 +1,6 @@
 ﻿using BusinessWorkflow.Models;
 using BusinessWorkflow.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers.FrontEnd
 {
+    [EnableCors("CORS")]
+
     [Produces("application/json")]
     [Route("api/FEApplications")]
     public class FEApplicationsController : Controller

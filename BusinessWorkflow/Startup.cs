@@ -29,6 +29,18 @@ namespace BusinessWorkflow
                          castedResolver.NamingStrategy = null;
                      }
                  });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORS",
+                corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin()
+                // Apply CORS policy for any type of origin
+                .AllowAnyMethod()
+                // Apply CORS policy for any type of http methods
+                .AllowAnyHeader()
+                // Apply CORS policy for any headers
+                .AllowCredentials());
+                // Apply CORS policy for all users
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +52,8 @@ namespace BusinessWorkflow
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CORS");
 
             app.UseMvc();
         }

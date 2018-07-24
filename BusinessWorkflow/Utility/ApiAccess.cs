@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,7 +105,7 @@ namespace BusinessWorkflow.Utility
 
                 return null;
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }

@@ -1,6 +1,7 @@
 ﻿using BusinessWorkflow.Models;
 using BusinessWorkflow.Models.DTOs;
 using BusinessWorkflow.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -8,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace BusinessWorkflow.Controllers
 {
+    [EnableCors("CORS")]
+
     [Produces("application/json")]
     [Route("api/FERolesToUsers")]
     public class FERolesToUsersController : Controller

@@ -13,7 +13,7 @@
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "localdev"
+        "ASPNETCORE_ENVIRONMENT": "local"
       }
     },
     "BusinessWorkflow": {
