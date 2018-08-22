@@ -46,6 +46,8 @@ namespace API
             });
 
             var connectionString = Configuration["ConnectionStrings:DefaultConnection"];
+            //var connectionString = "Server=(localdb)\\mssqllocaldb;Database=BTAccessManagement;Trusted_Connection=True;MultipleActiveResultSets=true";
+
 
             services.AddDbContext<AMContext>(cfg =>
             {

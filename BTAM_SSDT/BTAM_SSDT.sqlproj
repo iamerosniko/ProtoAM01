@@ -68,7 +68,6 @@
     <Build Include="dbo\Tables\AM_AppRoleServices.sql" />
     <Build Include="dbo\Tables\AM_Roles.sql" />
     <Build Include="dbo\Tables\AM_ServiceAttributes.sql" />
-    <Build Include="dbo\Tables\AM_Services.sql" />
     <Build Include="dbo\Tables\AM_UserAppRoleServices.sql" />
     <Build Include="dbo\Tables\AM_UserApps.sql" />
     <Build Include="dbo\Tables\AM_Users.sql" />

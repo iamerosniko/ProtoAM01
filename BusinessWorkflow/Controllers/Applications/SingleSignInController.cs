@@ -52,9 +52,20 @@ namespace BusinessWorkflow.Controllers
 
             try
             {
-                var user = _allUsers.Find(x => x.UserName == appSignIn.UserName.ToLower());
                 var app = _allApps.Find(x => x.AppUrl.ToLower() == appSignIn.AppURL.ToLower());
+                var userstemp = _allUsers.Where(x => x.UserName == appSignIn.UserName.ToLower());
+                AM_User user = null;
+                foreach (var usertemp in userstemp)
+                {
+                    var tempuserapp = _allUserApps.Find(x => x.AppID == app.AppID && x.UserID == usertemp.UserID);
+                    if (tempuserapp != null)
+                    {
+                        user = _allUsers.Find(x => x.UserID == tempuserapp.UserID);
+                        break;
+                    }
+                }
 
+                //var user = _allUsers.Find(x => x.UserName == appSignIn.UserName.ToLower());
                 if (user != null && app != null)
                 {
                     //user and app
@@ -65,8 +76,6 @@ namespace BusinessWorkflow.Controllers
                     //get role
                     foreach (AM_AppRoleService appRoleService in appRoleServices)
                     {
-
-
                         var myAppRole = _allRoles.Find(x => x.RoleID == appRoleService.RoleID);
                         if (myAppRole != null)
                         {
