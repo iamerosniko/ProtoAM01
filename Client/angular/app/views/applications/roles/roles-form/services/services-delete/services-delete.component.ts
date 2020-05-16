@@ -33,7 +33,7 @@ export class ServicesDeleteComponent implements OnInit {
 
 
   goBack(): void {
-    this.router.navigate(['/ApplicationsRolesEdit',this.roleID, this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsRolesEdit',this.roleID, this.appID]);
   }
 
   async delete() {

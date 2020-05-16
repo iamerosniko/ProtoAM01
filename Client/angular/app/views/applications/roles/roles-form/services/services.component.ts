@@ -24,11 +24,11 @@ export class ServicesComponent implements OnInit {
   }
   
   openService(service:Services):void{
-    this.router.navigate(['/ServicesEdit',this.roleID,this.appID,service.RoleServiceID],{skipLocationChange:true});
+    this.router.navigate(['/ServicesEdit',this.roleID,this.appID,service.RoleServiceID]);
   }
   
   deleteService(service:Services):void{
-    this.router.navigate(['/ServicesDelete',this.roleID,this.appID,service.RoleServiceID],{skipLocationChange:true});
+    this.router.navigate(['/ServicesDelete',this.roleID,this.appID,service.RoleServiceID]);
   }
 
   async getDependencies(){

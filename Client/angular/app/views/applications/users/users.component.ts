@@ -36,19 +36,19 @@ export class ApplicationsUsersComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/ApplicationsEdit', this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsEdit', this.appID]);
   }
 
   addUser(): void {
-    this.router.navigate(['/ApplicationsUsersAdd',this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsUsersAdd',this.appID]);
   }
 
   deleteUser(user:Users): void {
-    this.router.navigate(['/ApplicationsUsersDelete',this.appID,user],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsUsersDelete',this.appID,user]);
   }
 
   openUser(user:Users): void {
-    this.router.navigate(['/ApplicationsUsersEdit',user.UserID,this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsUsersEdit',user.UserID,this.appID]);
   }
 
 }

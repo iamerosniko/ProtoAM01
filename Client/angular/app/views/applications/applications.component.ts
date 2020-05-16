@@ -20,19 +20,19 @@ export class ApplicationsComponent implements OnInit {
   }
 
   addApp(): void {
-    this.router.navigate(['/ApplicationsAdd'],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsAdd']);
   }
 
   //deleteApp(id: string): void {
   deleteApp(app:Applications): void {
-    this.router.navigate(['/ApplicationsDelete',app],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsDelete',app]);
     //this.router.navigate(['/ApplicationsDelete', id]);
   }
 
   //openApp(id: string): void {
   openApp(app:Applications): void {
     // this.router.navigate(['/ApplicationDetails']);
-    this.router.navigate(['/ApplicationsEdit',app.AppID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsEdit',app.AppID]);
     //this.router.navigate(['/ApplicationDetails', id]);
   }
 

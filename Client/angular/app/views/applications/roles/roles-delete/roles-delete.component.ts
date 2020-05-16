@@ -23,7 +23,7 @@ export class ApplicationsRolesDeleteComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/ApplicationsRoles', this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsRoles', this.appID]);
   }
 
   async delete() {

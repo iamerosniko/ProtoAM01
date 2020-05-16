@@ -28,11 +28,11 @@ export class AttributesComponent implements OnInit {
 
   openAttribute(attr:ServiceAttributes){
     console.log(attr.ServiceAttributeID)
-    this.router.navigate(['/AttributesEdit',this.roleID, this.appID,this.serviceID,attr.ServiceAttributeID],{skipLocationChange:true});
+    this.router.navigate(['/AttributesEdit',this.roleID, this.appID,this.serviceID,attr.ServiceAttributeID]);
 
   }
 
   deleteAttribute(attr:ServiceAttributes){
-    this.router.navigate(['/AttributesDelete',this.roleID, this.appID,this.serviceID,attr.ServiceAttributeID],{skipLocationChange:true});
+    this.router.navigate(['/AttributesDelete',this.roleID, this.appID,this.serviceID,attr.ServiceAttributeID]);
   }
 }

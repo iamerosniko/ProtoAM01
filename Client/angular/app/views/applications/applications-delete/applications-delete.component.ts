@@ -24,7 +24,7 @@ export class ApplicationsDeleteComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/Applications'],{skipLocationChange:true});
+    this.router.navigate(['/Applications']);
   }
 
   async delete() {

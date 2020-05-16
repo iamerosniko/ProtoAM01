@@ -14,7 +14,8 @@ export class EnvironmentSvc {
     constructor(private http: Http){}
 
     getBWURL(): Promise<EnvInfo> {
-        var apiUrl = ClientApiSettings.GETCLIENTAPIURL("getBW");
+        // var apiUrl = ClientApiSettings.GETCLIENTAPIURL("getBW");
+        var apiUrl = "https://btambwprod.azurewebsites.net/api/"
         return this.http
             .post(apiUrl, {headers: this.headers})
             .toPromise()

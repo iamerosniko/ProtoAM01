@@ -67,9 +67,9 @@ export class ServicesFormComponent implements OnInit {
     }  
   }
   goBack(): void {
-    this.router.navigate(['/ApplicationsRolesEdit',this.roleID, this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsRolesEdit',this.roleID, this.appID]);
   }
   gotoAttributes():void{
-    this.router.navigate(['/AttributesAdd',this.roleID, this.appID,this.serviceID],{skipLocationChange:true});
+    this.router.navigate(['/AttributesAdd',this.roleID, this.appID,this.serviceID]);
   }
 }

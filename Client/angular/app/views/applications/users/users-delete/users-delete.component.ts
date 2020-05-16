@@ -23,7 +23,7 @@ export class ApplicationsUsersDeleteComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/ApplicationsUsers', this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsUsers', this.appID]);
   }
 
   async delete() {

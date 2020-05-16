@@ -26,18 +26,18 @@ export class ApplicationsRolesComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/ApplicationsEdit', this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsEdit', this.appID]);
   }
 
   addRole(): void {
-    this.router.navigate(['/ApplicationsRolesAdd',this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsRolesAdd',this.appID]);
   }
 
   deleteRole(role:Roles): void {
-    this.router.navigate(['/ApplicationsRolesDelete',this.appID,role],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsRolesDelete',this.appID,role]);
   }
 
   openRole(role:Roles): void {
-    this.router.navigate(['/ApplicationsRolesEdit',role.RoleID,this.appID],{skipLocationChange:true});
+    this.router.navigate(['/ApplicationsRolesEdit',role.RoleID,this.appID]);
   }
 }

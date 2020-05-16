@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   }
 
   async Login(){
-    var BW =await this.environmentSvc.getBWURL();
-    // var BW : EnvInfo = { URL : 'https://btaccessmanagementbw-dev.azurewebsites.net/api/'}
+    // var BW =await this.environmentSvc.getBWURL();
+    var BW : EnvInfo = { URL : 'https://btambwprod.azurewebsites.net/api/'}
     await sessionStorage.setItem("BWAPI",BW.URL)
     console.log(BW.URL);
     // var authenticationToken = await this.loginService.GetAuthenticationToken();

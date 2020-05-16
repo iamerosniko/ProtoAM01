@@ -55,7 +55,7 @@ export class AttributesFormComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/ServicesEdit',this.roleID, this.appID,this.serviceID],{skipLocationChange:true});
+    this.router.navigate(['/ServicesEdit',this.roleID, this.appID,this.serviceID]);
   }
 
   async save(){
